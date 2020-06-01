@@ -1,0 +1,16 @@
+@font-face {
+	font-family: "spy-agency";
+	src: url("./consts/fonts/spyagency/3_2ital.woff") format("woff");
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Open Sans";
+	background-color: #dcdde1;
+	color: #353b48;
+
+	a:visited {
+		color: unset;
+	}
+}

@@ -4,6 +4,7 @@
         "stylelint-config-standard"
     ],
     "rules": {
-        "indentation": "tab"
+		"indentation": "tab",
+		"max-nesting-depth": 4
     }
 }
