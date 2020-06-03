@@ -4,22 +4,31 @@ import './StoryCard.scss';
 
 
 export interface IStoryCardProps {
-	location: string;
-	imageUrl: boolean;
-	role: string;
-	story: string;
+	className: string;
+	location?: string;
+	locationImgUrl?: string;
+	role?: string;
+	roleImgUrl?: string;
+	story?: string;
 }
 
 const cnStoryCard = cn('StoryCard')
-const StoryCard: React.FC<IStoryCardProps> = ({ location, imageUrl, role, story }) => {
+const StoryCard: React.FC<IStoryCardProps> = ({ className, location, locationImgUrl, role, roleImgUrl, story }) => {
 	return (
-		<div className={cnStoryCard()}>
-			<div className={cnStoryCard('Header', { 'Image' : Boolean(imageUrl) })}>
-				{ imageUrl ? <div className={cnStoryCard('Image')} /> : null }
-				<div className={cnStoryCard('Location')}>{ location }</div>
+		<div className={cnStoryCard(null, [ className ])}>
+			<div className={cnStoryCard('Header', { 'Image' : Boolean(locationImgUrl) })}>
+				<div className={cnStoryCard('HeaderThumb')}>
+					{ locationImgUrl ? <div className={cnStoryCard('Location-Image')} style={{ backgroundImage: "url('" + locationImgUrl + "')" }}/> : null }
+					{ roleImgUrl ? <div className={cnStoryCard('Role-Image')} style={{ backgroundImage: ("url('" + roleImgUrl + "')") }} /> : null }
+				</div>
+				<div className={cnStoryCard('HeaderTitle')}>
+					<div className={cnStoryCard('Location')}>{ location }</div>
+					<div className={cnStoryCard('Role')}>{'You are ' + role }</div>
+				</div>
 			</div>
-			<div className={cnStoryCard('Role')}>{ role }</div>
 			<div className={cnStoryCard('Story')}>{ story }</div>
 		</div>
 	);
 };
+
+export default StoryCard;

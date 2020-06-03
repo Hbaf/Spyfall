@@ -1,0 +1,13 @@
+.PlayerList {
+	height: 350px;
+	width: 150px;
+	overflow: auto;
+
+	&-Player {
+		width: 100%;
+		line-height: 30px;
+		font-size: 24px;
+		text-align: center;
+		border-bottom: 1px solid darkgrey;
+	}
+}

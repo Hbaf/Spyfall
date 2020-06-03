@@ -51,10 +51,13 @@
 				font-size: 20px;
 			}
 
-			&-Placeholder::before {
+			&-Placeholder {
+				position: absolute;
+				top: 50%;
+				left: 5px;
+				transform: translateY(-50%);
 				line-height: 24px;
 				font-size: 20px;
-				left: 5px;
 				color: grey;
 				transition: 0.3s;
 			}
@@ -62,7 +65,7 @@
 
 		&.Input_focus,
 		&.Input_filled {
-			.Input-Placeholder::before {
+			.Input-Placeholder {
 				top: -10px;
 			}
 		}

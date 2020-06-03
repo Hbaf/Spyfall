@@ -10,29 +10,27 @@ export interface IHeaderProps {
 
 const cnHeader = cn('Header');
 
-const Header: React.FC<IHeaderProps> = ({ isUserLogged }) => {
-	return (
-		<nav className={cnHeader()}>
-			<Link className={cnHeader('Logo')} to="/" >
-				<div className={cnHeader('Icon')} />
-				<span className={cnHeader('Title')}>Spyfall</span>
-			</Link>
-			{
-				isUserLogged ?
-					(
-						<div className={cnHeader('Links')}>
-							<Link className={cnHeader('Profile')} to="/profile">Profile</Link>
-							<Link className={cnHeader('SignOut')} to="/">Sign Out</Link>
-						</div>
-					) :
-					(
-						<div className={cnHeader('Links')}>
-							<Link className={cnHeader('SignIn')} to="/auth">Sign In</Link>
-						</div>
-					)
-			}
-		</nav>
-	);
-};
+const Header: React.FC<IHeaderProps> = ({ isUserLogged }) => (
+	<nav className={cnHeader()}>
+		<Link className={cnHeader('Logo')} to="/" >
+			<div className={cnHeader('Icon')} />
+			<span className={cnHeader('Title')}>Spyfall</span>
+		</Link>
+		{
+			isUserLogged ?
+				(
+					<div className={cnHeader('Links')}>
+						<Link className={cnHeader('Profile')} to="/profile">Profile</Link>
+						<Link className={cnHeader('SignOut')} to="/">Sign Out</Link>
+					</div>
+				) :
+				(
+					<div className={cnHeader('Links')}>
+						<Link className={cnHeader('SignIn')} to="/auth">Sign In</Link>
+					</div>
+				)
+		}
+	</nav>
+)
 
 export default Header;
