@@ -1,5 +1,5 @@
 .GameField {
-	width: 40vw;
+	width: 35vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -10,25 +10,44 @@
 		height: 100%;
 	}
 
-	&-ControlPanel {
+	&-Control {
 		width: 60%;
 		padding: 20px 10px 50px;
 		text-align: center;
 	}
 
+	&-Hint {
+		font-size: 24px;
+		line-height: 40px;
+	}
+
 	&-CreateButton,
-	&-JoinButton {
+	&-JoinButton,
+	&-JoinInput {
 		display: block;
 		margin: 40px 10% 0;
 
 		.Input {
 			width: 100%;
 			height: 50px;
-		}
-
-		.Input-Input {
 			border: none;
 			border-radius: 5px;
+			line-height: 40px;
+			font-size: 24px;
+		}
+	}
+
+	&-JoinInput {
+		.Input {
+			&_type_text {
+				padding: 10px;
+				width: 70%;
+			}
+
+			&_type_submit {
+				margin-left: 5%;
+				width: 25%;
+			}
 		}
 	}
 
@@ -36,7 +55,8 @@
 		height: 300px;
 		width: 100%;
 		background: url(../../images/spies.jpg) no-repeat center;
-		background-size: contain;
+		background-size: cover;
+		border-radius: 15px;
 	}
 
 	&-StartButton {
@@ -58,11 +78,6 @@
 		margin: 0 auto;
 	}
 
-	&-Hint {
-		font-size: 24px;
-		line-height: 30px;
-	}
-
 	&-Faq {
 		display: block;
 		margin: 30px auto 0;
@@ -77,6 +92,16 @@
 	&-Settings {
 		position: absolute;
 		top: 0;
-		right: -150px;
+		right: -300px;
+		// height: 400px;
+		overflow: auto;
+	}
+
+	&-Locations {
+		position: absolute;
+		top: 0;
+		right: -200px;
+		// height: 400px;
+		overflow: auto;
 	}
 }

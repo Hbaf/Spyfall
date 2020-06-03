@@ -5,6 +5,9 @@
     ],
     "rules": {
 		"indentation": "tab",
-		"max-nesting-depth": 4
+		"max-nesting-depth": 4,
+		"declaration-property-value-blacklist": {
+			"/^border/": []
+		}
     }
 }

@@ -22,4 +22,5 @@ export type location = {
 export type settingsState = {
 	groups: locationGroup[];
 	locations: location[];
+	selectedLocations: number;
 }

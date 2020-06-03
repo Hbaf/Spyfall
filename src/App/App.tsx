@@ -20,6 +20,7 @@ class App extends React.Component {
 					<Route path='/create'	component={ MainPage }		/>
 					<Route path='/credits'	component={ MainPage }		/>
 					<Route path='/settings'	component={ MainPage }		/>
+					<Route path='/faq'		component={ MainPage }		/>
 					<Redirect to="/" />
 				</Switch>
 				<Footer />

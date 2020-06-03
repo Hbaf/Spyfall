@@ -2,6 +2,7 @@ import * as types from 'store/actions/actionTypes/settings';
 import { actionType } from 'consts/types';
 import { settingsState } from 'store/types/settings';
 
+import { minLocationsAmount } from 'consts/consts';
 
 const initState: settingsState = {
 	groups: [
@@ -29,27 +30,27 @@ const initState: settingsState = {
 		{
 			group: 0,
 			name: 'Airplane',
-			selected: false,
+			selected: true,
 		},
 		{
 			group: 0,
 			name: 'Ship',
-			selected: false,
+			selected: true,
 		},
 		{
 			group: 0,
 			name: 'Library',
-			selected: false,
+			selected: true,
 		},
 		{
 			group: 0,
 			name: 'Bank',
-			selected: false,
+			selected: true,
 		},
 		{
 			group: 0,
 			name: 'Cinema',
-			selected: false,
+			selected: true,
 		},
 		{
 			group: 0,
@@ -64,7 +65,7 @@ const initState: settingsState = {
 		{
 			group: 1,
 			name: 'Casino',
-			selected: false,
+			selected: true,
 		},
 		{
 			group: 1,
@@ -87,6 +88,7 @@ const initState: settingsState = {
 			selected: false,
 		},
 	],
+	selectedLocations: 6,
 };
 
 
@@ -96,15 +98,26 @@ export default function settingsReducer(state: settingsState = initState, action
 			const locId = action.payload;
 			const groupId = state.locations[locId].group;
 
-			let tempLocs = state.locations.map((item, ind) => ind === locId ? { ...item, selected: !item.selected } : item );
+			let tempLocs = [...state.locations];
+			let tempSelectedAmount = state.selectedLocations;
+			if (tempLocs[locId].selected && (tempSelectedAmount - 1 < minLocationsAmount)) {
+				return state;
+			}
 			let tempGroups = [...state.groups];
 
+			tempSelectedAmount = tempLocs[locId].selected ? tempSelectedAmount - 1 : tempSelectedAmount + 1
+
+			tempLocs[locId].selected = !tempLocs[locId].selected;
+
 			tempGroups[groupId].selected = tempGroups[groupId].locationsIds.reduce((acc, item) => acc && tempLocs[item].selected, true)
+
+			console.log(tempLocs[locId].selected, tempSelectedAmount);
 
             return {
 				...state,
 				groups: tempGroups,
 				locations: tempLocs,
+				selectedLocations: tempSelectedAmount,
             };
 		}
 		
@@ -112,16 +125,27 @@ export default function settingsReducer(state: settingsState = initState, action
 			let tempLocs = [ ...state.locations ];
 			const groupId = action.payload;
 
+			let tempSelectedAmount = state.selectedLocations;
 			let tempGroups = [ ...state.groups ];
+			const locLength = tempGroups[groupId].locationsIds.length
+			const selectedLocAmount = tempGroups[groupId].locationsIds.reduce((acc, item)=> tempLocs[item].selected ? acc + 1 : acc, 0);
+			if (tempGroups[groupId].selected && (tempSelectedAmount - selectedLocAmount < minLocationsAmount)) {
+				return state;
+			}
+			tempSelectedAmount = tempGroups[groupId].selected ?
+				tempSelectedAmount - selectedLocAmount :
+				tempSelectedAmount + locLength - selectedLocAmount;
 			tempGroups[groupId].selected = !tempGroups[groupId].selected;
 
 			state.groups[ groupId ].locationsIds.forEach(id => {
 				tempLocs[ id ].selected = tempGroups[groupId].selected;
 			});
+			console.log(tempGroups[groupId].selected, tempSelectedAmount);
             return {
 				...state,
 				groups: tempGroups,
 				locations: tempLocs,
+				selectedLocations: tempSelectedAmount,
             };
         }
 
