@@ -61,10 +61,10 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 		return (
 			<div className={cnGameField(null, [ className ])}>
 				{
-					!id ?
+					id ?
 						<div className={cnGameField('Game')}>
 							{
-								!gameStarted ?
+								gameStarted ?
 									<React.Fragment>
 										<StoryCard className={cnGameField('StoryCard')} { ...props } />
 										<InGameLocations className={cnGameField('Locations')}/>

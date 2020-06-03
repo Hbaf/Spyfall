@@ -11,7 +11,7 @@
 	}
 
 	&-Control {
-		width: 60%;
+		width: 80%;
 		padding: 20px 10px 50px;
 		text-align: center;
 	}
@@ -45,6 +45,8 @@
 			}
 
 			&_type_submit {
+				background-color: darkgrey;
+				color: #fff;
 				margin-left: 5%;
 				width: 25%;
 			}

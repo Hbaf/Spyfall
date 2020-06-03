@@ -11,17 +11,17 @@ import './ControlPanel.scss';
 
 
 interface IStatePropsRedux {
-	groups: locationGroup[];
-	locations: location[];
+	readonly groups: locationGroup[];
+	readonly locations: location[];
 }
 
 interface IDispatchPropsRedux {
-	onLocationClick: (e: any) => void;
-	onLocationGroupClick: (e: any) => void;
+	readonly onLocationClick: (e: any) => void;
+	readonly onLocationGroupClick: (e: any) => void;
 }
 
 interface IOwnProps {
-	className: string;
+	readonly className: string;
 }
 
 interface IControlPanelProps extends IStatePropsRedux, IDispatchPropsRedux, IOwnProps {}

@@ -1,0 +1,31 @@
+.CreateRoom {
+	width: 35vw;
+	margin: 30px auto;
+
+	&-Setting {
+		margin: 10px auto;
+		display: flex;
+		justify-content: space-between;
+		line-height: 24px;
+		font-size: 18px;
+
+		label {
+			width: 40%;
+			margin: 5px 0 5px 5%;
+		}
+
+		.Input {
+			margin: 5px auto 5px;
+			padding: 0 10px;
+			border: none;
+			border-radius: 5px;
+		}
+	}
+
+	&-Submit {
+		width: 60%;
+		margin: 20px 20% 10px;
+		background-color: darkgrey;
+		color: #fff;
+	}
+}

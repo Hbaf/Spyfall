@@ -2,6 +2,12 @@ export type player = {
 	name: string;
 }
 
+export type roomCreate = {
+	name: string;
+	players: number;
+	password: string;
+}
+
 export type room = { 
 	id?: string;
 	gameStarted: boolean;
@@ -10,5 +16,5 @@ export type room = {
 }
 
 export type gameState = {
-	room: room;
+	readonly room: room;
 }

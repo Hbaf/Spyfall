@@ -6,6 +6,7 @@ import MainPage from 'pages/MainPage/MainPage';
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import AuthPage from 'pages/AuthPage/AuthPage';
 import Footer from 'components/Footer/Footer';
+import CreateRoom from 'components/CreateRoom/CreateRoom';
 
 class App extends React.Component {
 	render() {
@@ -16,8 +17,7 @@ class App extends React.Component {
 					<Route path='/' exact	component={ MainPage }		/>
 					<Route path='/profile'	component={ ProfilePage }	/>
 					<Route path='/auth'		component={ AuthPage }		/>
-					<Route path='/join'		component={ MainPage }		/>
-					<Route path='/create'	component={ MainPage }		/>
+					<Route path='/create'	component={ CreateRoom }	/>
 					<Route path='/credits'	component={ MainPage }		/>
 					<Route path='/settings'	component={ MainPage }		/>
 					<Route path='/faq'		component={ MainPage }		/>
