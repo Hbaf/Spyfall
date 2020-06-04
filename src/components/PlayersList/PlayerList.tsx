@@ -3,7 +3,7 @@ import * as React from 'react';
 import { cn } from '@bem-react/classname';
 
 import './PlayerList.scss';
-import { player } from 'consts/types';
+import { player } from 'store/types/room';
 
 interface IPlayerListProps {
 	className: string;

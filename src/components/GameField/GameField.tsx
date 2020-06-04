@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 
 import IState from 'store/types';
-import { createRoom, joinRoom } from 'store/actions/room';
+import { joinRoom } from 'store/actions/room';
 import { roomState } from 'store/types/room';
 
 import Input from 'components/Input/Input';
@@ -17,7 +17,9 @@ import InGameLocations from 'components/InGameLocations/InGameLocations';
 
 import './GameField.scss';
 
-interface IStatePropsRedux extends roomState {}
+interface IStatePropsRedux extends roomState {
+	gameStarted: boolean;
+}
 
 interface IDispatchPropsRedux {
 	onRoomJoin: (id: string) => void;
@@ -48,7 +50,11 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 		};
 	}
 
-	render () {
+	onRoomJoinHandler() {
+		this.props. onRoomJoin(this.state.roomId);
+	}
+
+	render() {
 		const { className, id, gameStarted, isGM, ...props } = this.props;
 
 		const onRoomId = (e: any) => {
@@ -82,7 +88,7 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 								this.state.joining ?
 									<div className={cnGameField('JoinInput')}>
 										<input className={cn('Input')({ type: 'text' })} type="text" value={this.state.roomId} placeholder="Enter room id" onChange={onRoomId}/>
-										<input className={cn('Input')({ type: 'submit' })} type="submit" value="Join" />
+										<input className={cn('Input')({ type: 'submit' })} type="submit" value="Join" onSubmit={this.onRoomJoinHandler}/>
 									</div>
 									:
 									<div className={cnGameField('JoinButton', { join: true })} >
@@ -101,13 +107,16 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 }
 
 const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return state.room;
+	return {
+		...state.room,
+		gameStarted: state.game.gameStarted,
+	};
 }
 
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {
 	return {
-		onRoomJoin: (e:any) => {
-			dispatch(joinRoom(''));
+		onRoomJoin: function(id: string) {
+			dispatch(joinRoom({id}));
 		},
 	}
 }

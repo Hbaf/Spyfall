@@ -1,19 +1,27 @@
 export type player = {
 	name: string;
+	ready?: boolean;
 }
 
-export type roomCreate = {
+export type roomCreateData = {
 	name: string;
-	players: number;
+	maxPlayers: number;
 	password: string;
 }
 
+export type roomJoinData = {
+	id: string;
+	players?: player[];
+	maxPlayers?: number;
+	password?: string;
+	isGM?: boolean;
+}
+
 export type roomState = { 
-	readonly id?: string;
-	readonly password?: string;
-	readonly gameStarted: boolean;
 	readonly userName: string;
 	readonly isGM: boolean;
 	readonly players: player[];
 	readonly maxPlayers: number;
+	readonly id?: string;
+	readonly password?: string;
 }

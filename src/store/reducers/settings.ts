@@ -111,8 +111,6 @@ export default function settingsReducer(state: settingsState = initState, action
 
 			tempGroups[groupId].selected = tempGroups[groupId].locationsIds.reduce((acc, item) => acc && tempLocs[item].selected, true)
 
-			console.log(tempLocs[locId].selected, tempSelectedAmount);
-
             return {
 				...state,
 				groups: tempGroups,
@@ -140,7 +138,7 @@ export default function settingsReducer(state: settingsState = initState, action
 			state.groups[ groupId ].locationsIds.forEach(id => {
 				tempLocs[ id ].selected = tempGroups[groupId].selected;
 			});
-			console.log(tempGroups[groupId].selected, tempSelectedAmount);
+
             return {
 				...state,
 				groups: tempGroups,

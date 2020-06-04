@@ -7,11 +7,12 @@ import { cn } from '@bem-react/classname';
 import './CreateRoom.scss';
 import Button from 'components/Button/Button';
 import { maxUserAmount, minUserAmount } from 'consts/consts';
-import { roomCreate } from 'store/types/room';
-import { createRoom } from 'store/actions/room';
+import { roomCreateData } from 'store/types/room';
+import { roomEndpoint } from 'api';
+import { setName } from 'store/actions/room';
 import IState from 'store/types';
 
-type IOwnState = roomCreate;
+type IOwnState = roomCreateData;
 
 interface IDispatchPropsRedux {
 	onRoomCreated: (data: IOwnState) => void;
@@ -19,7 +20,7 @@ interface IDispatchPropsRedux {
 
 interface IStatePropsRedux {
 	readonly name: string;
-	readonly players: number;
+	readonly maxPlayers: number;
 }
 
 interface IOwnProps {
@@ -35,7 +36,7 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 		super(props);
 		this.state = {
 			name: props.name,
-			players: props.players,
+			maxPlayers: props.maxPlayers,
 			password: '',
 		}
 	}
@@ -44,12 +45,9 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 		const { onRoomCreated } = this.props;
 		const data = this.state;
 
-		console.log(data);
-		//send data to back
-		if (true) {
-			onRoomCreated(data);
-			this.props.history.push('/')
-		}
+		roomEndpoint.createRoom(data);
+		onRoomCreated(data);
+		this.props.history.push('/')
 	}
 
 	render (){
@@ -68,8 +66,8 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 					<label>Max players</label>
 					<select
 						className={cn('Input')({ type: 'text' }) }
-						value={this.state.players}
-						onChange={(e)=>{this.setState({...this.state, players: +e.target.value})}}
+						value={this.state.maxPlayers}
+						onChange={(e)=>{this.setState({...this.state, maxPlayers: +e.target.value})}}
 					>
 						{Array(maxUserAmount - minUserAmount + 1).fill(0).map(
 							(item, index) => <option key={index}>{minUserAmount + index}</option>)
@@ -94,13 +92,15 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 const mapStateToProps = (state: IState): IStatePropsRedux => {
 	return ({
 		name: state.room.userName,
-		players: state.room.maxPlayers,
+		maxPlayers: state.room.maxPlayers,
 	})
 }
 
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {
 	return {
-		onRoomCreated: (data) => { dispatch(createRoom(data)) }
+		onRoomCreated: data => {
+			dispatch(setName(data.name))
+		}
 	}
 }
 
