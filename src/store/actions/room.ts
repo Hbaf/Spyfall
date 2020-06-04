@@ -13,7 +13,7 @@ export const joinRoom = (data: roomJoinData): actionType => ({
 })
 
 export const leaveRoom = (): actionType => ({
-	type: types.LEAVE_ROOM
+	type: types.LEAVE_ROOM,
 })
 
 export const addPlayer = (name: string): actionType => ({

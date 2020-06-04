@@ -26,7 +26,7 @@ const StoryCard: React.FC<IStoryCardProps> = ({ className, location, locationImg
 				</div>
 				<div className={cnStoryCard('HeaderTitle')}>
 					<div className={cnStoryCard('Location')}>{ location }</div>
-					<div className={cnStoryCard('Role')}>{'You are ' + role }</div>
+					<div className={cnStoryCard('Role')}>{`You are ${role}` }</div>
 				</div>
 			</div>
 			<div className={cnStoryCard('Story')}>{ story }</div>
