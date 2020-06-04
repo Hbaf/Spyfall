@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 
 import IState from 'store/types';
-import { createRoom, joinRoom } from 'store/actions/game';
-import { room } from 'store/types/game';
+import { createRoom, joinRoom } from 'store/actions/room';
+import { roomState } from 'store/types/room';
 
 import Input from 'components/Input/Input';
 import StoryCard from 'components/StoryCard/StoryCard';
@@ -17,9 +17,7 @@ import InGameLocations from 'components/InGameLocations/InGameLocations';
 
 import './GameField.scss';
 
-interface IStatePropsRedux {
-	room: room;
-}
+interface IStatePropsRedux extends roomState {}
 
 interface IDispatchPropsRedux {
 	onRoomJoin: (id: string) => void;
@@ -51,8 +49,7 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 	}
 
 	render () {
-		const { className, room, ...props } = this.props;
-		const { id, gameStarted, isGM } = room;
+		const { className, id, gameStarted, isGM, ...props } = this.props;
 
 		const onRoomId = (e: any) => {
 			this.setState({ roomId: e.target.value })
@@ -104,7 +101,7 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 }
 
 const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return state.game;
+	return state.room;
 }
 
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {

@@ -1,5 +1,5 @@
 import * as types from 'store/actions/actionTypes/settings';
-import { actionType } from 'consts/types';
+import { actionType } from 'store/types';
 import { settingsState } from 'store/types/settings';
 
 import { minLocationsAmount } from 'consts/consts';

@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
 import './StoryCard.scss';
+import { connect } from 'react-redux';
+import IState from 'store/types';
+import { gameState } from 'store/types/game';
 
 
-export interface IStoryCardProps {
-	className: string;
-	location?: string;
-	locationImgUrl?: string;
-	role?: string;
-	roleImgUrl?: string;
-	story?: string;
+interface IStatePropsRedux extends gameState {}
+
+interface IOwnProps {
+	readonly className: string;
 }
+
+interface IStoryCardProps extends IStatePropsRedux, IOwnProps {}
+
 
 const cnStoryCard = cn('StoryCard')
 const StoryCard: React.FC<IStoryCardProps> = ({ className, location, locationImgUrl, role, roleImgUrl, story }) => {
@@ -31,4 +34,8 @@ const StoryCard: React.FC<IStoryCardProps> = ({ className, location, locationImg
 	);
 };
 
-export default StoryCard;
+const mapStateToProps = (state: IState): IStatePropsRedux => {
+	return state.game;
+}
+
+export default connect(mapStateToProps)(StoryCard);

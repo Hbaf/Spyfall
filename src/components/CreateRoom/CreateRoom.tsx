@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 
 import { cn } from '@bem-react/classname';
 
 import './CreateRoom.scss';
 import Button from 'components/Button/Button';
 import { maxUserAmount, minUserAmount } from 'consts/consts';
-import { roomCreate } from 'store/types/game';
-import { createRoom } from 'store/actions/game';
+import { roomCreate } from 'store/types/room';
+import { createRoom } from 'store/actions/room';
 import IState from 'store/types';
 
 type IOwnState = roomCreate;
@@ -18,9 +19,14 @@ interface IDispatchPropsRedux {
 
 interface IStatePropsRedux {
 	readonly name: string;
+	readonly players: number;
 }
 
-interface ICreateRoomProps extends IStatePropsRedux, IDispatchPropsRedux {}
+interface IOwnProps {
+	history: any
+}
+
+interface ICreateRoomProps extends IStatePropsRedux, IDispatchPropsRedux, IOwnProps {}
 
 const cnCreateRoom = cn('CreateRoom');
 
@@ -29,7 +35,7 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 		super(props);
 		this.state = {
 			name: props.name,
-			players: minUserAmount,
+			players: props.players,
 			password: '',
 		}
 	}
@@ -40,9 +46,10 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 
 		console.log(data);
 		//send data to back
-		// if responce is ok {
-			// onRoomCreated();
-		// }
+		if (true) {
+			onRoomCreated(data);
+			this.props.history.push('/')
+		}
 	}
 
 	render (){
@@ -85,7 +92,10 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 }
 
 const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return {name: 'default'}
+	return ({
+		name: state.room.userName,
+		players: state.room.maxPlayers,
+	})
 }
 
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {
@@ -94,4 +104,4 @@ const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {
 	}
 }
 
-export default connect<IStatePropsRedux, IDispatchPropsRedux,{}>(mapStateToProps, mapDispatchToProps)(CreateRoom);
+export default withRouter(connect<IStatePropsRedux, IDispatchPropsRedux, IOwnProps>(mapStateToProps, mapDispatchToProps)(CreateRoom));

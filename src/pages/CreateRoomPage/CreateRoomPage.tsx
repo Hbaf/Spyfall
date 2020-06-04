@@ -16,3 +16,5 @@ class CreateRoomPage extends React.Component {
 		)
 	}
 }
+
+export default CreateRoomPage;

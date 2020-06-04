@@ -1,9 +1,17 @@
 import { settingsState } from "./settings";
-import { gameState } from './game';
+import { roomState } from './room';
+import { gameState } from "./game";
 
-interface IState {
+type IState = {
 	settings: settingsState;
+	room: roomState;
 	game: gameState;
+}
+
+export type actionType = {
+	type: string;
+	payload?: any;
+	meta?: any;
 }
 
 export default IState;

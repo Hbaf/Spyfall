@@ -1,7 +1,5 @@
 import * as types from 'store/actions/actionTypes/settings';
-import { actionType } from 'consts/types';
-
-
+import { actionType } from 'store/types';
 
 export const toggleLocation = (id: number): actionType => ({
 	type: types.TOGGLE_LOCATION,
