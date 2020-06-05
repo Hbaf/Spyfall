@@ -8,7 +8,7 @@ export type gameData = {
 
 export type startGameData = {
 	locations: number[];
-	timer: number;
+	timer?: number;
 }
 
 export type gameState = gameData & {

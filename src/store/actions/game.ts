@@ -2,6 +2,7 @@ import * as types from 'store/actions/actionTypes/game';
 import { actionType } from 'store/types';
 import { gameData } from 'store/types/game';
 
+
 export const resetGame = (): actionType => ({
 	type: types.RESET_GAME
 })

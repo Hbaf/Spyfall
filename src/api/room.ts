@@ -50,6 +50,14 @@ class RoomEndpointClass {
 	leaveRoom() {
 		this.socket.emit(socketConfig.LEAVE_ROOM);
 	}
+
+	ready(data: string) {
+		this.socket.emit(socketConfig.USER_READY, data);
+	}
+
+	notReady(data: string) {
+		this.socket.emit(socketConfig.USER_NOT_READY, data);
+	}
 }
 
 export default RoomEndpointClass;

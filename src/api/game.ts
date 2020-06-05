@@ -1,6 +1,8 @@
 import * as socketConfig from "configs/api/socketConfig.json";
 import * as gameActions from 'store/actions/game';
+import * as settingsAction from 'store/actions/settings';
 import { gameData, startGameData } from "store/types/game";
+import { settingsState } from "store/types/settings";
 
 class GameEndpointClass {
 	socket: any;
@@ -13,6 +15,9 @@ class GameEndpointClass {
 	}
 
 	subscribe() {
+		this.socket.on(socketConfig.APP_INITED, (data: settingsState) => {
+			this.store.dispatch(settingsAction.appInited(data));
+		})
 		this.socket.on(socketConfig.GAME_STARTED, (data: gameData) => {
 			this.store.dispatch(gameActions.initGame(data));
 		})

@@ -18,7 +18,7 @@ export const leaveRoom = (): actionType => ({
 
 export const addPlayer = (name: string): actionType => ({
 	type: types.ADD_PLAYER,
-	payload: name,
+	payload: { name, ready: false}
 })
 
 export const removePlayer = (name: string): actionType => ({

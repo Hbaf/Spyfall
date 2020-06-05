@@ -18,11 +18,13 @@ import ControlPanel from 'components/ControlPanel/ControlPanel';
 import InGameLocations from 'components/InGameLocations/InGameLocations';
 
 import { setName } from 'store/actions/room';
-import { roomEndpoint } from 'api';
+import { roomEndpoint, gameEndpoint } from 'api';
+import { baseLocation } from 'store/types/settings';
 
 interface IStatePropsRedux extends roomState {
 	gameStarted: boolean;
 	userName: string;
+	locations: baseLocation[];
 }
 
 interface IDispatchPropsRedux {
@@ -37,6 +39,7 @@ interface IOwnState {
 	phase: string;
 	roomId: string;
 	name: string;
+	ready: boolean;
 }
 
 interface IGameFieldProps extends IStatePropsRedux, IDispatchPropsRedux, IOwnProps {}
@@ -47,17 +50,36 @@ const cnGameField = cn('GameField');
 
 class GameField extends React.Component<IGameFieldProps, IOwnState> {
 
+	roomId: HTMLInputElement;
+
 	constructor(props: IGameFieldProps) {
 		super(props);
 		this.state = {
 			phase: '',
 			roomId: '',
 			name: props.userName,
+			ready: false,
 		};
 	}
 
 	render() {
 		const { className, id, gameStarted, isGM } = this.props;
+
+		const onStart = () => {
+			gameEndpoint.startGame({locations: this.props.locations
+				.map((item, index) => ({selected: item.selected, index}))
+				.filter(item => item.selected)
+				.map(item => item.index)});
+		}
+
+		const onReady = () => {
+			const ready = this.state.ready;
+			if (ready)
+				roomEndpoint.notReady(this.state.name);
+			else
+				roomEndpoint.ready(this.state.name);
+			this.setState({ready: !ready});
+		}
 
 		const onRoomId = (e: any) => {
 			this.setState({ roomId: e.target.value })
@@ -79,29 +101,46 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			this.setState({name: e.target.value});
 		}
 
+		const copyRoomId = () => {
+			const textArea = document.createElement('textarea');
+			textArea.value = id;
+			document.body.appendChild(textArea);
+			textArea.select();
+
+			try {
+				document.execCommand('copy');
+			} catch (err) {
+			}
+
+			document.body.removeChild(textArea);
+		}
+
 		return (
 			<div className={cnGameField(null, [ className ])}>
 				{
 					id ?
-						<div className={cnGameField('Game')}>
-							<div className={cnGameField('RoomId')} >
-								<div className={cnGameField('RoomId-Hint')}>Room id:</div>
-								<div className={cnGameField('RoomId-Id')}>{ id }</div>
-							</div>
-							{
-								gameStarted ?
-									<React.Fragment>
-										<StoryCard className={cnGameField('StoryCard')} />
-										<InGameLocations className={cnGameField('Locations')}/>
-									</React.Fragment>
-								:
-									<React.Fragment>
-										<div className={cnGameField('Start')}></div>
-										<Input className={cnGameField('StartButton')} type="submit" value="Start"/>
-										{ isGM ? <ControlPanel className={cnGameField('Settings')} /> : null }
-									</React.Fragment>
-							}
+						<div className={cnGameField('Content')}>
 							<PlayerList className={cnGameField('PlayersList')} />
+							<div className={cnGameField('Game')}>
+								{
+									gameStarted ?
+										<React.Fragment>
+											<StoryCard className={cnGameField('StoryCard')} />
+										</React.Fragment>
+									:
+										<React.Fragment>
+											<div className={cnGameField('Start')}></div>
+											<div className={cnGameField('StartHint')}>
+												<Button className={cnGameField('RoomId')} value={`Room Id: ${ id }`} onClick={copyRoomId} />
+												{ isGM ? <Button className={cnGameField('StartButton')} value="Start" onClick={onStart} /> : null }
+												<Button className={cnGameField('StartButton')} value={ !this.state.ready ? 'Ready' : 'Not Ready'} onClick={onReady} />
+											</div>
+										</React.Fragment>
+								}
+							</div>
+							{ gameStarted ?
+								<InGameLocations className={cnGameField('Locations')}/>
+							: isGM ? <ControlPanel className={cnGameField('Settings')} /> : <div className={cnGameField('Locations')} /> }
 						</div>
 					:
 						<div className={cnGameField('Control')}>
@@ -123,20 +162,28 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 						</div>			
 				}
 				<Link className={cnGameField('Faq', { faq: true })} to="/faq">How to play?</Link>
-				{this.state.phase === 'password' ? <Popup>
-					<div className={cnGameField('JoinPass')}>
-						<div className={cnGameField('JoinPassHint')} >Enter password</div>
-						<input type="text" className={cnGameField('JoinPassInput', { type: "text" })} />
-						<Button className={cnGameField('JoinPassInput')} value="Submit"/>
-					</div>
-				</Popup> : null}
-				{this.state.phase === 'name' ? <Popup>
-					<div className={cnGameField('JoinName')}>
-						<div className={cnGameField('JoinNameHint')} >Enter your name</div>
-						<input type="text" className={cnGameField('JoinNameInput', { type: "text" })} value={this.state.name} onChange={onName} />
-						<Button className={cnGameField('JoinNameInput')} value="Submit" onClick={onNameEnterHandler}/>
-					</div>
-				</Popup> : null}
+				{
+					this.state.phase === 'password' ? 
+						<Popup>
+							<div className={cnGameField('JoinPass')}>
+								<div className={cnGameField('JoinPassHint')} >Enter password</div>
+								<input type="text" className={cnGameField('JoinPassInput', { type: "text" })} />
+								<Button className={cnGameField('JoinPassInput')} value="Submit"/>
+							</div>
+						</Popup> 
+					: null
+				}
+				{
+					this.state.phase === 'name' ?
+						<Popup>
+							<div className={cnGameField('JoinName')}>
+								<div className={cnGameField('JoinNameHint')} >Enter your name</div>
+								<input type="text" className={cnGameField('JoinNameInput', { type: "text" })} value={this.state.name} onChange={onName} />
+								<Button className={cnGameField('JoinNameInput')} value="Submit" onClick={onNameEnterHandler}/>
+							</div>
+						</Popup>
+					: null
+				}
 			</div>
 		);
 	}
@@ -146,6 +193,7 @@ const mapStateToProps = (state: IState): IStatePropsRedux => {
 	return {
 		...state.room,
 		gameStarted: state.game.gameStarted,
+		locations: state.settings.locations,
 	};
 }
 

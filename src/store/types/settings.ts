@@ -6,21 +6,22 @@ export type locationGroup = {
 
 export type role = {
 	name: string;
-	story?: string;
-	imgUrl?: string;
+	story: string;
+	imgUrl: string;
 }
-
-export type location = {
+export type baseLocation = {
 	group: number;
 	name: string;
 	selected: boolean;
-	imgUrl?: string;
-	//TODO make roles required
-	roles?: role[];
+}
+
+export type location = baseLocation & {
+	imgUrl: string;
+	roles: role[];
 }
 
 export type settingsState = {
 	groups: locationGroup[];
-	locations: location[];
+	locations: baseLocation[];
 	selectedLocations: number;
 }

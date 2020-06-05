@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 import { cn } from '@bem-react/classname';
 
-import { location } from 'store/types/settings';
+import { baseLocation } from 'store/types/settings';
 import IState from 'store/types';
 
 import './InGameLocations.scss';
 
 
 interface IStatePropsRedux {
-	locations: location[];
+	locations: baseLocation[];
 }
 
 interface IOwnProps {

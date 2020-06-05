@@ -1,6 +1,4 @@
 .PlayerList {
-	height: 350px;
-	width: 150px;
 	overflow: auto;
 
 	&-Player {
@@ -9,5 +7,12 @@
 		font-size: 24px;
 		text-align: center;
 		border-bottom: 1px solid darkgrey;
+		border-radius: 5px;
+		background-color: darkgrey;
+		margin-bottom: 5px;
+
+		&_ready {
+			background-color: #2ecc71;
+		}
 	}
 }

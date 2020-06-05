@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { cn } from '@bem-react/classname';
 
-import { locationGroup, location } from 'store/types/settings';
+import { locationGroup, baseLocation } from 'store/types/settings';
 import { toggleLocation, toggleGroupLocation} from 'store/actions/settings';
 import IState from 'store/types';
 
@@ -12,7 +12,7 @@ import './ControlPanel.scss';
 
 interface IStatePropsRedux {
 	readonly groups: locationGroup[];
-	readonly locations: location[];
+	readonly locations: baseLocation[];
 }
 
 interface IDispatchPropsRedux {

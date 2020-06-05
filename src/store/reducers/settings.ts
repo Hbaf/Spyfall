@@ -5,95 +5,21 @@ import { settingsState } from 'store/types/settings';
 import { minLocationsAmount } from 'consts/consts';
 
 const initState: settingsState = {
-	groups: [
-		{
-			name: 'Spyfall',
-			selected: false,
-			locationsIds: [
-				0,1,2,3,4,5,
-			],
-		},
-		{
-			name: 'Spyfall 2',
-			selected: false,
-			locationsIds: [
-				6,7,8,9,10,11
-			],
-		},
-		{
-			name: 'Custom',
-			selected: false,
-			locationsIds: [],
-		}
-	],
-	locations: [
-		{
-			group: 0,
-			name: 'Airplane',
-			selected: true,
-		},
-		{
-			group: 0,
-			name: 'Ship',
-			selected: true,
-		},
-		{
-			group: 0,
-			name: 'Library',
-			selected: true,
-		},
-		{
-			group: 0,
-			name: 'Bank',
-			selected: true,
-		},
-		{
-			group: 0,
-			name: 'Cinema',
-			selected: true,
-		},
-		{
-			group: 0,
-			name: 'Beach',
-			selected: false,
-		},
-		{
-			group: 1,
-			name: 'Space Station',
-			selected: false,
-		},
-		{
-			group: 1,
-			name: 'Casino',
-			selected: true,
-		},
-		{
-			group: 1,
-			name: 'Theatre',
-			selected: false,
-		},
-		{
-			group: 1,
-			name: 'Aqua Park',
-			selected: false,
-		},
-		{
-			group: 1,
-			name: 'Kreml',
-			selected: false,
-		},
-		{
-			group: 1,
-			name: 'Disneyland',
-			selected: false,
-		},
-	],
-	selectedLocations: 6,
+	groups: [],
+	locations: [],
+	selectedLocations: 0,
 };
 
 
 export default function settingsReducer(state: settingsState = initState, action: actionType): settingsState {
     switch (action.type) {
+		case types.APP_INITED: {
+			return {
+				...state,
+				...action.payload,
+			}
+		}
+
         case types.TOGGLE_LOCATION: {
 			const locId = action.payload;
 			const groupId = state.locations[locId].group;

@@ -1,13 +1,27 @@
 .GameField {
-	width: 35vw;
+	width: 85vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	position: relative;
 
-	&-Game {
+	&-Content {
 		width: 100%;
-		height: 100%;
+		min-width: 1200px;
+		height: 80vh;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&-Game {
+		width: 50%;
+	}
+
+	&-PlayersList,
+	&-Settings,
+	&-Locations {
+		width: 280px;
+		// height: 400px;
 	}
 
 	&-Control {
@@ -80,18 +94,6 @@
 		}
 	}
 
-	&-RoomId {
-		margin: 10px 20px;
-		display: flex;
-		justify-content: right;
-		line-height: 40px;
-		font-size: 32px;
-
-		&-Id {
-			margin-left: 10px;
-		}
-	}
-
 	&-Start {
 		height: 300px;
 		width: 100%;
@@ -100,18 +102,31 @@
 		border-radius: 15px;
 	}
 
-	&-StartButton {
-		margin: 20px auto 50px;
-		width: 50%;
-		height: 50px;
+	&-StartHint {
+		display: flex;
+		justify-content: space-between;
+		margin: 40px auto 50px;
+		padding: 0 20px;
+	}
 
-		.Input-Input {
-			background-color: darkgrey;
-			border: none;
-			border-radius: 15px;
-			font-size: 30px;
-			line-height: 50px;
-			color: #fff;
+	&-RoomId {
+		width: 40%;
+	}
+
+	&-StartButton {
+		width: 25%;
+	}
+
+	&-RoomId,
+	&-StartButton {
+		border: none;
+		background-color: darkgrey;
+		color: #fff;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #fff;
+			color: darkgrey;
 		}
 	}
 
@@ -124,25 +139,23 @@
 		margin: 30px auto 0;
 	}
 
-	&-PlayersList {
-		position: absolute;
-		top: 0;
-		left: -150px;
+	::-webkit-scrollbar {
+		width: 7px;
+		background-color: unset;
 	}
 
-	&-Settings {
-		position: absolute;
-		top: 0;
-		right: -300px;
-		// height: 400px;
-		overflow: auto;
+	* {
+		scrollbar-color: darkgrey unset;
+		scrollbar-width: thin;
 	}
 
-	&-Locations {
-		position: absolute;
-		top: 0;
-		right: -200px;
-		// height: 400px;
-		overflow: auto;
+	::-webkit-scrollbar-track {
+		border: solid 1px darkgrey;
+		border-radius: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 5px;
+		background-color: darkgrey;
 	}
 }

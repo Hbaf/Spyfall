@@ -9,7 +9,7 @@ interface IButtonProps {
 	mods?: Record<string, string | number | boolean>;
 	disabled?: boolean;
 	value?: string;
-	onClick?: () => void;
+	onClick?: (e: any) => void;
 }
 
 const cnButton = cn('Button');
