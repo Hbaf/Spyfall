@@ -11,7 +11,7 @@ const initState: gameState = {
 	story: '',
 }
 
-export default function gameReducerstate (state: gameState = initState, action: actionType): gameState {
+export default function gameReducer(state: gameState = initState, action: actionType): gameState {
 	switch (action.type) {
 		case types.RESET_GAME: {
 			return {

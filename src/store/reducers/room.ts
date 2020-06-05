@@ -4,10 +4,9 @@ import { roomState } from 'store/types/room';
 import { maxUserAmount } from 'consts/consts';
 
 const initState: roomState = {
-	userName: '',
-	maxPlayers: maxUserAmount,
 	isGM: false,
 	players: [],
+	maxPlayers: maxUserAmount,
 }
 
 export default function roomReducer(state: roomState = initState, action: actionType): roomState {

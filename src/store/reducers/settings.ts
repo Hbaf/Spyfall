@@ -1,7 +1,6 @@
 import * as types from 'store/actions/actionTypes/settings';
 import { actionType } from 'store/types';
 import { settingsState } from 'store/types/settings';
-
 import { minLocationsAmount } from 'consts/consts';
 
 const initState: settingsState = {
@@ -9,7 +8,6 @@ const initState: settingsState = {
 	locations: [],
 	selectedLocations: 0,
 };
-
 
 export default function settingsReducer(state: settingsState = initState, action: actionType): settingsState {
     switch (action.type) {

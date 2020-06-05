@@ -18,7 +18,6 @@ export type roomJoinData = {
 }
 
 export type roomState = { 
-	readonly userName: string;
 	readonly isGM: boolean;
 	readonly players: player[];
 	readonly maxPlayers: number;
