@@ -3,7 +3,7 @@ export type appDO = {
 	editions: editionDO[];
 	groups: locationGroupDO[];
 	locations: baseLocationDO[];
-	selectedLocations: number;
+	selectedLocationsAmount: number;
 }
 
 export type roleDO = {
@@ -22,6 +22,14 @@ export type baseLocationDO = {
 export type locationDO = baseLocationDO & {
 	role: roleDO;
 	imgUrl: string;
+}
+
+export type locationToggleDO = {
+	id: number;
+}
+
+export type editionToggleDO = {
+	id: number
 }
 
 export type locationGroupDO = {

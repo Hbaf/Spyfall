@@ -14,4 +14,24 @@ body {
 	a:visited {
 		color: unset;
 	}
+
+	::-webkit-scrollbar {
+		width: 7px;
+		background-color: unset;
+	}
+
+	* {
+		scrollbar-color: darkgrey #dcdde1;
+		scrollbar-width: thin;
+	}
+
+	::-webkit-scrollbar-track {
+		border: solid 1px darkgrey;
+		border-radius: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 5px;
+		background-color: darkgrey;
+	}
 }

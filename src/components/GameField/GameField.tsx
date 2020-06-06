@@ -7,7 +7,7 @@ import { cn } from '@bem-react/classname';
 import './GameField.scss';
 
 import IState from 'store/types';
-import { roomState } from 'store/types/room';
+import { roomState, player } from 'store/types/room';
 
 import Popup from 'components/Popup/Popup';
 import Button from 'components/Button/Button';
@@ -16,18 +16,24 @@ import PlayerList from 'components/PlayersList/PlayerList';
 import ControlPanel from 'components/ControlPanel/ControlPanel';
 import InGameLocations from 'components/InGameLocations/InGameLocations';
 
-import { setName } from 'store/actions/room';
+import { setName, playerReady, playerNotReady } from 'store/actions/room';
 import { roomEndpoint, gameEndpoint } from 'api';
 import { baseLocation } from 'store/types/app';
+import { minLocationsAmount, minUserAmount } from 'consts/consts';
+import Tooltip from 'components/Tooltip/Tooltip';
 
 interface IStatePropsRedux extends roomState {
 	gameStarted: boolean;
 	userName: string;
 	locations: baseLocation[];
+	selectedLocationsAmount: number;
+	players: player[];
 }
 
 interface IDispatchPropsRedux {
-	onNameEnter: (name: string) => void;
+	onNameSet: (name: string) => void;
+	onPlayerReady: (name: string) => void;
+	onPlayerNotReady: (name: string) => void;
 }
 
 interface IOwnProps {
@@ -35,9 +41,10 @@ interface IOwnProps {
 }
 
 interface IOwnState {
-	phase: string;
+	joining: boolean;
 	roomId: string;
-	name: string;
+	userName: string;
+	password: string;
 	ready: boolean;
 }
 
@@ -54,15 +61,26 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 	constructor(props: IGameFieldProps) {
 		super(props);
 		this.state = {
-			phase: '',
+			joining: false,
 			roomId: '',
-			name: props.userName,
+			userName: props.userName,
+			password: '',
 			ready: false,
 		};
 	}
 
 	render() {
-		const { className, roomId: id, gameStarted, isGM } = this.props;
+		const { className, roomId: id, gameStarted, isGM, selectedLocationsAmount, players } = this.props;
+
+		const startDisabled =
+			selectedLocationsAmount < minLocationsAmount
+			|| players.length < minUserAmount
+			|| !players.reduce((acc, player) => acc && player.ready, true);
+		const startDisabledHintText = [
+			(selectedLocationsAmount < minLocationsAmount) ? `Select at least ${minLocationsAmount} locations` : '',
+			(players.length < minUserAmount) ? `Not enough players (${players.length}/${minUserAmount})` : '',
+			(!players.reduce((acc, player) => acc && player.ready, true)) ? 'Not all players are ready' : '',
+		];
 
 		const onStart = () => {
 			gameEndpoint.startGame({locations: this.props.locations
@@ -73,10 +91,14 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 
 		const onReady = () => {
 			const ready = this.state.ready;
-			if (ready)
-				roomEndpoint.notReady({userName: this.state.name});
-			else
-				roomEndpoint.ready({userName: this.state.name});
+			const userName = this.state.userName
+			if (ready) {
+				roomEndpoint.notReady({ userName });
+				this.props.onPlayerNotReady(userName);
+			} else {
+				roomEndpoint.ready({ userName });
+				this.props.onPlayerReady(userName)
+			}
 			this.setState({ready: !ready});
 		}
 
@@ -84,22 +106,22 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			this.setState({ roomId: e.target.value })
 		}
 
+		const onUserName = (e: any) => {
+			this.setState({userName: e.target.value});
+		}
+
+		const onPassword = (e: any) => {
+			this.setState({password: e.target.value});
+		}
+
 		const onRoomJoinHandler = () => {
-			this.setState({ phase: 'name'});
-			// roomEndpoint.joinRoom({ id: this.state.roomId, name: this.state.name });
+			const { userName, roomId, password } = this.state;
+			if (this.props.userName !== userName) {
+				this.props.onNameSet(name);
+			}
+			roomEndpoint.joinRoom({ roomId, userName, password });
 		}
-
-		const onNameEnterHandler = () => {
-			const { name, roomId } = this.state;
-			this.setState({phase: ''});
-			this.props.onNameEnter(name);
-			roomEndpoint.joinRoom({ roomId, userName: name})
-		}
-
-		const onName = (e: any) => {
-			this.setState({name: e.target.value});
-		}
-
+		
 		const copyRoomId = () => {
 			const textArea = document.createElement('textarea');
 			textArea.value = id;
@@ -130,29 +152,92 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 										<React.Fragment>
 											<div className={cnGameField('Start')}></div>
 											<div className={cnGameField('StartHint')}>
-												<Button className={cnGameField('RoomId')} value={`Room Id: ${ id }`} onClick={copyRoomId} />
-												{ isGM ? <Button className={cnGameField('StartButton')} value="Start" onClick={onStart} /> : null }
-												<Button className={cnGameField('StartButton')} value={ !this.state.ready ? 'Ready' : 'Not Ready'} onClick={onReady} />
+												<Button
+													className={cnGameField('RoomId')}
+													text={`Room: ${ id }`}
+													onClick={copyRoomId}
+												>
+													<Tooltip
+														className={cnGameField('RoomIdTooltip')}
+														text={['Click to copy']}
+														type="bottom"
+													/>
+												</Button>
+												{ isGM ?
+													<React.Fragment>
+														<Button
+															className={cnGameField('StartButton')}
+															text="Start"
+															disabled={startDisabled}
+															onClick={onStart}
+														>
+															<Tooltip
+																className={cnGameField('StartButtonTooltip')}
+																text={startDisabledHintText}
+																type="bottom"
+															/>
+														</Button>
+													</React.Fragment> : null
+												}
+												<Button
+													className={cnGameField('StartButton')}
+													text={ !this.state.ready ? 'Ready' : 'Not Ready'}
+													onClick={onReady}
+												/>
 											</div>
 										</React.Fragment>
 								}
 							</div>
-							{ gameStarted ?
-								<InGameLocations className={cnGameField('Locations')}/>
-							: isGM ? <ControlPanel className={cnGameField('Settings')} /> : <div className={cnGameField('Locations')} /> }
+							{
+								isGM ?
+									gameStarted ?
+										<InGameLocations className={cnGameField('Locations')} />
+									:
+										<ControlPanel className={cnGameField('Settings')} />
+								:
+									<InGameLocations className={cnGameField('Locations')} />
+							}
 						</div>
 					:
 						<div className={cnGameField('Control')}>
 							<span className={cnGameField('Hint')}>Join the room or create a new one</span>
 							{
-								this.state.phase === 'joining' ?
+								this.state.joining ?
 									<div className={cnGameField('JoinInput')}>
-										<input className={cn('Input')({ type: 'text' })} type="text" value={this.state.roomId} placeholder="Enter room id" onChange={onRoomId}/>
-										<input className={cn('Input')({ type: 'submit' })} type="submit" value="Join" onClick={onRoomJoinHandler}/>
+										<input
+											type="text"
+											className={cn('Input')({ type: 'text' })}
+											value={this.state.roomId}
+											placeholder="Enter room id"
+											onChange={onRoomId}
+										/>
+										<input
+											type="text"
+											className={cn('Input')({ type: 'text' })}
+											value={this.state.userName}
+											placeholder="Enter your name"
+											onChange={onUserName}
+										/>
+										<input
+											type="text"
+											className={cn('Input')({ type: 'text' })}
+											value={this.state.password}
+											placeholder="Enter room password"
+											onChange={onPassword}
+										/>
+										<Button
+											className={cn('Input')({ type: 'submit' })}
+											text="Join"
+											onClick={onRoomJoinHandler}
+										/>
 									</div>
 									:
 									<div className={cnGameField('JoinButton', { join: true })} >
-										<input className={cn('Input')({ type: 'submit' })}  type="submit" value="Join room" onClick={() => this.setState({ phase: 'joining' })}/>
+										<Button
+											className={cn('Input')({ type: 'submit' })}
+											text="Join room"
+											onClick={() => this.setState({ joining: true })}
+										/>
 									</div>
 							}
 							<Link className={cnGameField('CreateButton', { create: true })} to="/create">
@@ -161,28 +246,6 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 						</div>			
 				}
 				<Link className={cnGameField('Faq', { faq: true })} to="/faq">How to play?</Link>
-				{
-					this.state.phase === 'password' ? 
-						<Popup>
-							<div className={cnGameField('JoinPass')}>
-								<div className={cnGameField('JoinPassHint')} >Enter password</div>
-								<input type="text" className={cnGameField('JoinPassInput', { type: "text" })} />
-								<Button className={cnGameField('JoinPassInput')} value="Submit"/>
-							</div>
-						</Popup> 
-					: null
-				}
-				{
-					this.state.phase === 'name' ?
-						<Popup>
-							<div className={cnGameField('JoinName')}>
-								<div className={cnGameField('JoinNameHint')} >Enter your name</div>
-								<input type="text" className={cnGameField('JoinNameInput', { type: "text" })} value={this.state.name} onChange={onName} />
-								<Button className={cnGameField('JoinNameInput')} value="Submit" onClick={onNameEnterHandler}/>
-							</div>
-						</Popup>
-					: null
-				}
 			</div>
 		);
 	}
@@ -194,14 +257,21 @@ const mapStateToProps = (state: IState): IStatePropsRedux => {
 		gameStarted: state.game.gameStarted,
 		locations: state.app.locations,
 		userName: state.app.userName,
+		selectedLocationsAmount: state.app.selectedLocationsAmount,
 	};
 }
 
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => (
 	{
-		onNameEnter: (name: string) => {
+		onNameSet: (name: string) => {
 			dispatch(setName(name));
 		},
+		onPlayerReady: (name: string) => {
+			dispatch(playerReady({userName: name}));
+		},
+		onPlayerNotReady: (name: string) => {
+			dispatch(playerNotReady({userName: name}));
+		}
 	}
 )
 

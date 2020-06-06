@@ -9,7 +9,7 @@ const initState: appState = {
 	editions: [],
 	groups: [],
 	locations: [],
-	selectedLocations: 0,
+	selectedLocationsAmount: 0,
 }
 
 export default function appReducer (state: appState = initState, action: actionType): appState {
@@ -33,20 +33,17 @@ export default function appReducer (state: appState = initState, action: actionT
 			const editionId = state.locations[locId].editionId;
 
 			let tempLocs = [...state.locations];
-			let tempSelectedAmount = state.selectedLocations;
-			if (tempLocs[locId].selected && (tempSelectedAmount - 1 < minLocationsAmount)) {
-				return state;
-			}
+			let tempSelectedAmount = state.selectedLocationsAmount;
 			let tempEditions = [...state.editions];
-			tempSelectedAmount = tempLocs[locId].selected ? tempSelectedAmount - 1 : tempSelectedAmount + 1
+			tempSelectedAmount = tempLocs[locId].selected ? tempSelectedAmount - 1 : tempSelectedAmount + 1;
 			tempLocs[locId].selected = !tempLocs[locId].selected;
-			tempEditions[editionId].selected = tempEditions[editionId].locationIds.reduce((acc, item) => acc && tempLocs[item].selected, true)
+			tempEditions[editionId].selected = tempEditions[editionId].locationIds.reduce((acc, item) => acc && tempLocs[item].selected, true);
 
             return {
 				...state,
 				editions: tempEditions,
 				locations: tempLocs,
-				selectedLocations: tempSelectedAmount,
+				selectedLocationsAmount: tempSelectedAmount,
             };
 		}
 		
@@ -54,16 +51,16 @@ export default function appReducer (state: appState = initState, action: actionT
 			let tempLocs = [ ...state.locations ];
 			const editionId = action.payload;
 
-			let tempSelectedAmount = state.selectedLocations;
+			let tempSelectedAmount = state.selectedLocationsAmount;
 			let tempEditions = [ ...state.editions ];
-			const locLength = tempEditions[editionId].locationIds.length
-			const selectedLocAmount = tempEditions[editionId].locationIds.reduce((acc, locationId) => tempLocs[locationId].selected ? acc + 1 : acc, 0);
-			if (tempEditions[editionId].selected && (tempSelectedAmount - selectedLocAmount < minLocationsAmount)) {
-				return state;
-			}
+			const locLength = tempEditions[editionId].locationIds.length;
+			const inEditionselectedLocsAmount =
+				tempEditions[editionId].locationIds.reduce(
+					(acc, locationId) => tempLocs[locationId].selected ? acc + 1 : acc, 0
+				);
 			tempSelectedAmount = tempEditions[editionId].selected ?
-				tempSelectedAmount - selectedLocAmount :
-				tempSelectedAmount + locLength - selectedLocAmount;
+				tempSelectedAmount - inEditionselectedLocsAmount :
+				tempSelectedAmount + locLength - inEditionselectedLocsAmount;
 			tempEditions[editionId].selected = !tempEditions[editionId].selected;
 
 			state.editions[ editionId ].locationIds.forEach(id => {
@@ -74,7 +71,7 @@ export default function appReducer (state: appState = initState, action: actionT
 				...state,
 				editions: tempEditions,
 				locations: tempLocs,
-				selectedLocations: tempSelectedAmount,
+				selectedLocationsAmount: tempSelectedAmount,
             };
         }
 

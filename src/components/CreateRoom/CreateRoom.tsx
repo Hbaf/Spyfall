@@ -83,7 +83,7 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 						onChange={(e)=>{this.setState({...this.state, password: e.target.value})}}
 					/>
 				</div>
-				<Button className={cnCreateRoom('Submit')} value="Create room" onClick={ this.onRoomCreate }/>
+				<Button className={cnCreateRoom('Submit')} text="Create room" onClick={ this.onRoomCreate }/>
 			</div>
 		);
 	}

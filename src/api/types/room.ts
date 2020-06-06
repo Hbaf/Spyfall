@@ -9,6 +9,7 @@ export type roomCreateDO = playerDO & {
 
 export type joinRoomDO = playerDO & {
 	roomId: string,
+	password: string;
 }
 
 export type roomDO = {

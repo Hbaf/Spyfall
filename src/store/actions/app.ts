@@ -19,7 +19,7 @@ export const toggleLocation = (id: number): actionType => ({
 });
 
 
-export const toggleGroupLocation = (groupId: number): actionType => ({
+export const toggleEdition = (groupId: number): actionType => ({
 	type: types.TOGGLE_ALL_LOCATIONS,
 	payload: groupId,
 });

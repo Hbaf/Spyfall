@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { cn } from '@bem-react/classname';
 
 import { locationGroup, baseLocation, edition } from 'store/types/app';
-import { toggleLocation, toggleGroupLocation} from 'store/actions/app';
+import { toggleLocation, toggleEdition} from 'store/actions/app';
 import IState from 'store/types';
 
 import './ControlPanel.scss';
+import { appEndpoint } from 'api';
 
 
 interface IStatePropsRedux {
@@ -83,10 +84,14 @@ const mapStateToProps = (state: IState): IStatePropsRedux => {
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {
 	return {
 	  	onLocationClick: (e:any) => {
-			dispatch(toggleLocation(+e.target.name));
+			const id = +e.target.name;
+			appEndpoint.toggleLocation({id});
+			dispatch(toggleLocation(id));
 		},
 		onLocationGroupClick: (e:any) => {
-			dispatch(toggleGroupLocation(+e.target.name));
+			const id = +e.target.name;
+			appEndpoint.toggleEdition({id});
+			dispatch(toggleEdition(id));
 		},
 	}
 }

@@ -52,17 +52,21 @@
 	}
 
 	&-JoinInput {
+		display: flex;
+		flex-direction: column;
+
 		.Input {
+			margin: 10px 0;
+
 			&_type_text {
 				padding: 10px;
-				width: 70%;
+				width: 100%;
 			}
 
 			&_type_submit {
 				background-color: darkgrey;
 				color: #fff;
-				margin-left: 5%;
-				width: 25%;
+				width: 100%;
 			}
 		}
 	}
@@ -103,22 +107,17 @@
 	}
 
 	&-StartHint {
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		margin: 40px auto 50px;
-		padding: 0 20px;
-	}
-
-	&-RoomId {
-		width: 40%;
-	}
-
-	&-StartButton {
-		width: 25%;
+		padding: 0 10px;
 	}
 
 	&-RoomId,
 	&-StartButton {
+		position: relative;
+		width: 32%;
 		border: none;
 		background-color: darkgrey;
 		color: #fff;
@@ -128,6 +127,18 @@
 			background-color: #fff;
 			color: darkgrey;
 		}
+
+		&:disabled,
+		&:disabled:hover {
+			background-color: unset;
+			color: darkgrey;
+			cursor: default;
+		}
+	}
+
+	&-RoomId:hover &-RoomIdTooltip,
+	&-StartButton:hover &-StartButtonTooltip {
+		visibility: visible;
 	}
 
 	&-StoryCard {
@@ -137,25 +148,5 @@
 	&-Faq {
 		display: block;
 		margin: 30px auto 0;
-	}
-
-	::-webkit-scrollbar {
-		width: 7px;
-		background-color: unset;
-	}
-
-	* {
-		scrollbar-color: darkgrey unset;
-		scrollbar-width: thin;
-	}
-
-	::-webkit-scrollbar-track {
-		border: solid 1px darkgrey;
-		border-radius: 10px;
-	}
-
-	::-webkit-scrollbar-thumb {
-		border-radius: 5px;
-		background-color: darkgrey;
 	}
 }

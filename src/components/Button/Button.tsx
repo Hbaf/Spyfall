@@ -9,14 +9,19 @@ interface IButtonProps {
 	mods?: Record<string, string | number | boolean>;
 	disabled?: boolean;
 	value?: string;
+	text?: string;
 	onClick?: (e: any) => void;
+	onSubmit?: (e: any) => void;
 }
 
 const cnButton = cn('Button');
 
-const Button: React.FC<IButtonProps> = ({ name, className, mods, disabled, value, onClick}) => {
+const Button: React.FC<IButtonProps> = ({ name, className, mods, disabled, value, text, onClick, onSubmit, children}) => {
 	return (
-		<input className={cnButton({type: "submit", ...mods}, [ className ])} type="submit" name={name} value={value} disabled={disabled} onClick={onClick}/>
+		<button className={cnButton({type: "submit", ...mods}, [ className ])} type="submit" name={name} value={value} disabled={disabled} onClick={onClick} onSubmit={onSubmit}>
+			<span>{ text }</span>
+			{ children }
+		</button>
 	);
 }
 
