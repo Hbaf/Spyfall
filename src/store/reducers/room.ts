@@ -72,6 +72,13 @@ export default function roomReducer(state: roomState = initState, action: action
 			}
 		}
 
+		case types.NEW_GM: {
+			return {
+				...state,
+				isGM: true,
+			}
+		}
+
 		default: return state;
 	}
 };

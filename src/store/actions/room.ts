@@ -37,6 +37,10 @@ export const playerNotReady = (data: playerDO): actionType => ({
 	payload: data,
 })
 
+export const newGM = (): actionType => ({
+	type: types.NEW_GM,
+})
+
 export const setName = (name: string): actionType => ({
 	type: types.SET_NAME,
 	payload: name,

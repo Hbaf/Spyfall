@@ -13,3 +13,5 @@ export const PLAYER_READY = 'PLAYER_READY';
 export const PLAYER_NOT_READY = 'PLAYER_NOT_READY';
 
 export const SET_NAME = 'SET_NAME';
+
+export const NEW_GM = 'NEW_GM';

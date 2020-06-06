@@ -145,6 +145,13 @@
 		margin: 0 auto;
 	}
 
+	&-GameEndButton {
+		display: block;
+		margin: 20px auto;
+		width: 40%;
+		background-color: rgba(255, 36, 0, 0.6);
+	}
+
 	&-Faq {
 		display: block;
 		margin: 30px auto 0;

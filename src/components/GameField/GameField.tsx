@@ -76,11 +76,10 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			selectedLocationsAmount < minLocationsAmount
 			|| players.length < minUserAmount
 			|| !players.reduce((acc, player) => acc && player.ready, true);
-		const startDisabledHintText = [
-			(selectedLocationsAmount < minLocationsAmount) ? `Select at least ${minLocationsAmount} locations` : '',
-			(players.length < minUserAmount) ? `Not enough players (${players.length}/${minUserAmount})` : '',
-			(!players.reduce((acc, player) => acc && player.ready, true)) ? 'Not all players are ready' : '',
-		];
+		const startDisabledHintText = [];
+		if (selectedLocationsAmount < minLocationsAmount) startDisabledHintText.push(`Select at least ${minLocationsAmount} locations`);
+		if (players.length < minUserAmount) startDisabledHintText.push(`Not enough players (${players.length}/${minUserAmount})`);
+		if (!players.reduce((acc, player) => acc && player.ready, true)) startDisabledHintText.push('Not all players are ready');
 
 		const onStart = () => {
 			gameEndpoint.startGame({locations: this.props.locations
@@ -136,6 +135,10 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			document.body.removeChild(textArea);
 		}
 
+		const endGame = () => {
+			gameEndpoint.resetGame();
+		}
+
 		return (
 			<div className={cnGameField(null, [ className ])}>
 				{
@@ -171,21 +174,34 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 															disabled={startDisabled}
 															onClick={onStart}
 														>
-															<Tooltip
-																className={cnGameField('StartButtonTooltip')}
-																text={startDisabledHintText}
-																type="bottom"
-															/>
+															{
+																startDisabledHintText.length ? 
+																	<Tooltip
+																		className={cnGameField('StartButtonTooltip')}
+																		text={startDisabledHintText}
+																		type="bottom"
+																	/>
+																: null
+															}
 														</Button>
 													</React.Fragment> : null
 												}
 												<Button
 													className={cnGameField('StartButton')}
-													text={ !this.state.ready ? 'Ready' : 'Not Ready'}
+													text={ !this.state.ready ? 'Ready' : 'Not Ready' }
 													onClick={onReady}
 												/>
 											</div>
 										</React.Fragment>
+								}
+								{
+									gameStarted && isGM ?
+										<Button
+											className={cnGameField('GameEndButton')}
+											text='End game'
+											onClick={endGame}
+										/>
+										: null
 								}
 							</div>
 							{

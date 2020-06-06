@@ -35,8 +35,11 @@ class RoomEndpointClass {
 		this.socket.on(socketConfig.USER_READY, (data: playerDO) => {
 			this.store.dispatch(roomActions.playerReady(data));
 		})
-		this.socket.on(socketConfig.USER_NOT_READY, (data: playerDO) =>{
+		this.socket.on(socketConfig.USER_NOT_READY, (data: playerDO) => {
 			this.store.dispatch(roomActions.playerNotReady(data));
+		})
+		this.socket.on(socketConfig.NEW_GM, () => {
+			this.store.dispatch(roomActions.newGM());
 		})
 	}
 
