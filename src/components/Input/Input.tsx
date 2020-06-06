@@ -9,44 +9,50 @@ export interface IInputProps {
 	mods?: Record<string, string | number | boolean>;
 	value?: string | number | string[];
 	name?: string;
-	placeHolderText?: string;
 	checked?: boolean;
-	onfocus?: any;
-	onblur?: any;
-	onclick?: any;
-	onchange?: any;
+	placeholder?: string;
+	onFocus?: any;
+	onBlur?: any;
+	onClick?: any;
+	onChange?: any;
+	required?: boolean;
 }
 
 const cnInput = cn('Input');
 
-// TODO Too complicated. Simplify as possible. Keep <input> only?
 const TextInput: React.FC<IInputProps> = (props) => {
-	const { type = "text", className, mods, value, name, placeHolderText, onfocus, checked, onblur, onclick, onchange, children } = props;
+	const { type='text', className, mods, value, name, checked, placeholder, onFocus, onBlur, onClick, onChange,required } = props;
 	const [focus, setFocus] = React.useState(false);
 	const [filled, setFilled] = React.useState(false);
 
 	const onFocusHandle = () => {
 		setFocus(true);
-		if (onfocus) onfocus();
+		if (onFocus) onFocus();
 	}
-	
+
 	const onBlurHandle = (e:any) => {
 		setFocus(false);
-		if (e.target.value !== '' && type !== 'submit') setFilled(true);
-		else setFilled(false);
-		if (onblur) onblur();
+		if (e.target.value !== '')
+			setFilled(true);
+		else
+			setFilled(false);
+		if (onBlur) onBlur();
 	}
 
 	return (
-		<div className={cnInput({ type: type, focus: focus, filled: filled, ...mods }, [ className ])}>
-			<div className={cnInput('Body')}>
-				<input className={cnInput("Input")} type={ type } value={value} name={ name } checked={ checked } onFocus={ onFocusHandle } onBlur={ onBlurHandle } onClick={ onclick } onChange={onchange}/>
-				{ placeHolderText? <span className={cnInput("Placeholder")}> { placeHolderText } </span> : null}
-			</div>
-			{ children ? <div className={cnInput("Content")}>
-				{ children }
-			</div> : null }
-		</div>
+		<input
+			className={cnInput({ type: type, focus: focus, filled: filled, ...mods }, [ className ])}
+			type = { type }
+			value={ value }
+			name={ name }
+			checked={ checked }
+			placeholder = { placeholder }
+			onFocus={ onFocusHandle }
+			onBlur={ onBlurHandle }
+			onClick={ onClick }
+			onChange={ onChange }
+			required={ required }
+		/>
 	);
 }
 

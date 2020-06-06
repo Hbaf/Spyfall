@@ -1,0 +1,518 @@
+{
+	"editions": [
+		{
+			"name": "Spyfall",
+			"locations": [
+				{
+					"name": "Airplane",
+					"roles": [
+						{ "name": "1st Class Passenger" },
+						{ "name": "Air Marshal" },
+						{ "name": "Mechanic" },
+						{ "name": "Coach Passenger" },
+						{ "name": "Flight Attendant" },
+						{ "name":"Co-Pilot" },
+						{ "name":"Captain" }
+					]
+				},
+				{
+					"name": "Bank",
+					"roles": [
+						{ "name": "Armored Car Driver" },
+						{ "name": "Bank Manager" },
+						{ "name": "Loan Consultant" },
+						{ "name": "Bank Robber" },
+						{ "name": "Customer" },
+						{ "name":"Security Guard" },
+						{ "name":"Bank Teller" }
+					]
+				},
+				{
+					"name": "Beach",
+					"roles": [
+						{ "name": "Beach Bartender" },
+						{ "name": "Kite Surfer" },
+						{ "name": "Lifeguard" },
+						{ "name": "Thief" },
+						{ "name": "Beach Goer" },
+						{ "name":"Beach Photographer" },
+						{ "name":"Ice Cream Man" }
+					]
+				},
+				{
+					"name": "Casino",
+					"roles": [
+						{ "name": "Bartender" },
+						{ "name": "Head Of Security" },
+						{ "name": "Bouncer" },
+						{ "name": "Pit Boss" },
+						{ "name": "Hustler" },
+						{ "name": "Dealer" },
+						{ "name": "Gambler" }
+					]
+				},
+				{
+					"name": "Cathedral",
+					"roles": [
+						{ "name": "Priest" },
+						{ "name": "Beggar" },
+						{ "name": "Sinner" },
+						{ "name": "Parishioner" },
+						{ "name": "Tourist" },
+						{ "name": "Deacon" },
+						{ "name": "Choir Singer" }
+					]
+				},
+				{
+					"name": "Circus Tent",
+					"roles": [
+						{ "name": "Acrobat" },
+						{ "name": "Animal Tamer" },
+						{ "name": "Magician" },
+						{ "name": "Audience Member" },
+						{ "name": "Fire Eater" },
+						{ "name": "Clown" },
+						{ "name": "Juggler" }
+					]
+				},
+				{
+					"name": "Corporate Party",
+					"roles": [
+						{ "name": "Ententainer" },
+						{ "name": "Manager" },
+						{ "name": "Party Crasher" },
+						{ "name": "Owner/CEO" },
+						{ "name": "Admin Assistant" },
+						{ "name": "Accountant" },
+						{ "name": "Delivery Boy" }
+					]
+				},
+				{
+					"name": "Drusader Army",
+					"roles": [
+						{ "name": "Monk" },
+						{ "name": "Imprisoned Arab" },
+						{ "name": "Servant" },
+						{ "name": "Bishop" },
+						{ "name": "Squire" },
+						{ "name": "Archer" },
+						{ "name": "Knight" }
+					]
+				},
+				{
+					"name": "Day Spa",
+					"roles": [
+						{ "name": "Customer" },
+						{ "name": "Stylist" },
+						{ "name": "Massage Tech" },
+						{ "name": "Manicurist" },
+						{ "name": "Makeup Artist" },
+						{ "name": "Dematologist" },
+						{ "name": "Beautician" }
+					]
+				},
+				{
+					"name": "Embassy",
+					"roles": [
+						{ "name": "Security Guard" },
+						{ "name": "Admin Assistant" },
+						{ "name": "Ambassador" },
+						{ "name": "Government Official" },
+						{ "name": "Tourist" },
+						{ "name": "Refugee" },
+						{ "name": "Diplomant" }
+					]
+				},
+				{
+					"name": "Hospital",
+					"roles": [
+						{ "name": "Nurse" },
+						{ "name": "Doctor" },
+						{ "name": "Anesthesiologist" },
+						{ "name": "Intern" },
+						{ "name": "Patient" },
+						{ "name": "Therapist" },
+						{ "name": "Surgeon" }
+					]
+				},
+				{
+					"name": "Hotel",
+					"roles": [
+						{ "name": "Doorman" },
+						{ "name": "Security Guard" },
+						{ "name": "Hotel Manager" },
+						{ "name": "Housekeeper" },
+						{ "name": "Hotel Guest" },
+						{ "name": "Bartender" },
+						{ "name": "Valet" }
+					]
+				},
+				{
+					"name": "Military Base",
+					"roles": [
+						{ "name": "Deserter" },
+						{ "name": "Colonel" },
+						{ "name": "Medic" },
+						{ "name": "Soldier" },
+						{ "name": "Sniper" },
+						{ "name": "XO (Exec/ Officier)" },
+						{ "name": "Tank Commander" }
+					]
+				},
+				{
+					"name": "Movie Studio",
+					"roles": [
+						{ "name": "Stuntman" },
+						{ "name": "Sound Engineer" },
+						{ "name": "Cameraman" },
+						{ "name": "Director" },
+						{ "name": "Costume Artist" },
+						{ "name": "Actor" },
+						{ "name": "Producer" }
+					]
+				},
+				{
+					"name": "Ocean Liner",
+					"roles": [
+						{ "name": "Rich Passenger" },
+						{ "name": "Cook" },
+						{ "name": "Captain" },
+						{ "name": "Bartender" },
+						{ "name": "Musician" },
+						{ "name": "Waiter" },
+						{ "name": "Ship's Mechanic" }
+					]
+				},
+				{
+					"name": "Passenger Train",
+					"roles": [
+						{ "name": "Mechanic" },
+						{ "name": "Border Patrol" },
+						{ "name": "Chef" },
+						{ "name": "Engineer" },
+						{ "name": "Steward" },
+						{ "name": "Ticket Taker" },
+						{ "name": "Passenger" }
+					]
+				},
+				{
+					"name": "Pirate Ship",
+					"roles": [
+						{ "name": "Cook" },
+						{ "name": "Sailor" },
+						{ "name": "Slave" },
+						{ "name": "Cannoneer" },
+						{ "name": "Bound Prisoner" },
+						{ "name": "Cabin Boy" },
+						{ "name": "Pirate Captain" }
+					]
+				},
+				{
+					"name": "Polar Station",
+					"roles": [
+						{ "name": "Medic" },
+						{ "name": "Geologist" },
+						{ "name": "Expedition Leader" },
+						{ "name": "Biologist" },
+						{ "name": "Radioman" },
+						{ "name": "Hydrologist" },
+						{ "name": "Meteorologist" }
+					]
+				},
+				{
+					"name": "Police Station",
+					"roles": [
+						{ "name": "Detective" },
+						{ "name": "Lawyer" },
+						{ "name": "Journalist" },
+						{ "name": "Forensic Scientist" },
+						{ "name": "Evidence Archivist" },
+						{ "name": "Patrol Officer" },
+						{ "name": "Criminal" }
+					]
+				},
+				{
+					"name": "Restaurant",
+					"roles": [
+						{ "name": "Musician" },
+						{ "name": "Customer" },
+						{ "name": "Table Busser" },
+						{ "name": "Host" },
+						{ "name": "Head Chef" },
+						{ "name": "Food Critic" },
+						{ "name": "Server" }
+					]
+				},
+				{
+					"name": "School",
+					"roles": [
+						{ "name": "Gym Teacher" },
+						{ "name": "Student" },
+						{ "name": "Principal" },
+						{ "name": "Security Guard" },
+						{ "name": "Janitor" },
+						{ "name": "Lunch Lady" },
+						{ "name": "Maintenance Man" }
+					]
+				},
+				{
+					"name": "Service Station",
+					"roles": [
+						{ "name": "Manager" },
+						{ "name": "Tire Specialist" },
+						{ "name": "Motorcyclist" },
+						{ "name": "Car Owner" },
+						{ "name": "Car Washer" },
+						{ "name": "Diagnostic Tech" },
+						{ "name": "Auto Mechanic" }
+					]
+				},
+				{
+					"name": "Space Station",
+					"roles": [
+						{ "name": "Engineer" },
+						{ "name": "Alien" },
+						{ "name": "Tourist" },
+						{ "name": "Pilot" },
+						{ "name": "Mission Commander" },
+						{ "name": "Scientist" },
+						{ "name": "Doctor" }
+					]
+				},
+				{
+					"name": "Submarine",
+					"roles": [
+						{ "name": "Cook" },
+						{ "name": "Captain" },
+						{ "name": "Sonar Operator" },
+						{ "name": "Weapons Technician" },
+						{ "name": "Sailor" },
+						{ "name": "Radioman" },
+						{ "name": "Navigator" }
+					]
+				},
+				{
+					"name": "Supermarket",
+					"roles": [
+						{ "name": "Customer" },
+						{ "name": "Cashier" },
+						{ "name": "Butcher" },
+						{ "name": "Janitor" },
+						{ "name": "Produce Manager" },
+						{ "name": "Food Sample Demo" },
+						{ "name": "Shelf Stocker" }
+					]
+				},
+				{
+					"name": "Theater",
+					"roles": [
+						{ "name": "Coat Check" },
+						{ "name": "Cue Card Prompter" },
+						{ "name": "Ticket Office Cashier" },
+						{ "name": "Theater Visitor" },
+						{ "name": "Director" },
+						{ "name": "Actor" },
+						{ "name": "Crewman" }
+					]
+				},
+				{
+					"name": "University",
+					"roles": [
+						{ "name": "Graduate Student" },
+						{ "name": "Professor" },
+						{ "name": "Dean" },
+						{ "name": "Psychologist" },
+						{ "name": "Maintenance Man" },
+						{ "name": "Student" },
+						{ "name": "Advisor" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Spyfall-2",
+			"locations": [
+				{
+					"name": "Amusement Park",
+					"roles": [
+						{ "name": "Ride Operator" },
+						{ "name": "Parent" },
+						{ "name": "Food Vendor" },
+						{ "name": "Cashier" },
+						{ "name": "Happy Child" },
+						{ "name": "Annoying Child" },
+						{ "name": "Teenager" },
+						{ "name": "Janitor" },
+						{ "name": "Security Guard" },
+						{ "name": "Parent" }
+					]
+				},
+				{
+					"name": "Art Museum",
+					"roles": [
+						{ "name": "Ticker Seller" },
+						{ "name": "Student" },
+						{ "name": "Visitor" },
+						{ "name": "Teacher" },
+						{ "name": "Security Guard" },
+						{ "name": "Painter" },
+						{ "name": "Art Collector" },
+						{ "name": "Art Critic" },
+						{ "name": "Photographer" },
+						{ "name": "Tourist" }
+					]
+				},
+				{
+					"name": "Candy Factory",
+					"roles": [
+						{ "name": "Madcap Redhead" },
+						{ "name": "Pastry Chef" },
+						{ "name": "Visitor" },
+						{ "name": "Taster" },
+						{ "name": "Truffle Maker" },
+						{ "name": "Taster" },
+						{ "name": "Supply Worker" },
+						{ "name": "Oompa Loompa" },
+						{ "name": "Inspector" },
+						{ "name": "Machine Operator" }
+					]
+				},
+				{
+					"name": "Cat Show",
+					"roles": [
+						{ "name": "Judge" },
+						{ "name": "Cat Handler" },
+						{ "name": "Veterinarian" },
+						{ "name": "Security Guard" },
+						{ "name": "Cat Trainer" },
+						{ "name": "Crazy Cat Lady" },
+						{ "name": "Animal Lover" },
+						{ "name": "Cat Owner" },
+						{ "name": "Cat" },
+						{ "name": "Cat" }
+					]
+				},
+				{
+					"name": "Cemetery",
+					"roles": [
+						{ "name": "Priest" },
+						{ "name": "Gothic Girl" },
+						{ "name": "Grave Robber" },
+						{ "name": "Poet" },
+						{ "name": "Mourning Person" },
+						{ "name": "Gatekeeper" },
+						{ "name": "Dead Person" },
+						{ "name": "Relative" },
+						{ "name": "Flower Seller" },
+						{ "name": "Grave Digger" }
+					]
+				},
+				{
+					"name": "Coal Mine",
+					"roles": [
+						{ "name": "Safety Inspector" },
+						{ "name": "Miner" },
+						{ "name": "Overseer" },
+						{ "name": "Dump Truck Operator" },
+						{ "name": "Driller" },
+						{ "name": "Coordinator" },
+						{ "name": "Blasting Engineer" },
+						{ "name": "Miner" },
+						{ "name": "Solid Waste Engineer" },
+						{ "name": "Worker" }
+					]
+				},
+				{
+					"name": "Construction Site",
+					"roles": [
+						{ "name": "Free-Roaming Toddler" },
+						{ "name": "Contractor" },
+						{ "name": "Crane Driver" },
+						{ "name": "Trespasser" },
+						{ "name": "Safety Officer" },
+						{ "name": "Electrician" },
+						{ "name": "Engineer" },
+						{ "name": "Architect" },
+						{ "name": "Construction Worker" },
+						{ "name": "Construction Worker" }
+					]
+				},
+				{
+					"name": "Gaming Convention",
+					"roles": [
+						{ "name": "Blogger" },
+						{ "name": "Cosplayer" },
+						{ "name": "Gamer" },
+						{ "name": "Exhibitor" },
+						{ "name": "Collector" },
+						{ "name": "Child" },
+						{ "name": "Security Guard" },
+						{ "name": "Geek" },
+						{ "name": "Shy Person" },
+						{ "name": "Famous Person" }
+					]
+				},
+				{
+					"name": "Gas Station",
+					"roles": [
+						{ "name": "Car Enthusiast" },
+						{ "name": "Service Attendant" },
+						{ "name": "Shopkeeper" },
+						{ "name": "Customer" },
+						{ "name": "Car Washer" },
+						{ "name": "Cashier" },
+						{ "name": "Customer" },
+						{ "name": "Climate Change Activist" },
+						{ "name": "Service Attendant" },
+						{ "name": "Manager" }
+					]
+				},
+				{
+					"name": "Harbor Docks",
+					"roles": [
+						{ "name": "Loader" },
+						{ "name": "Salty Old Pirate" },
+						{ "name": "Captain" },
+						{ "name": "Sailor" },
+						{ "name": "Loader" },
+						{ "name": "Fisherman" },
+						{ "name": "Exporter" },
+						{ "name": "Cargo Overseer" },
+						{ "name": "Cargo Inspector" },
+						{ "name": "Smuggler" }
+					]
+				},
+				{
+					"name": "Ice Hockey Stadium",
+					"roles": [
+						{ "name": "Hockey Fan" },
+						{ "name": "Medic" },
+						{ "name": "Hockey Player" },
+						{ "name": "Food Vendor" },
+						{ "name": "Security Guard" },
+						{ "name": "Goaltender" },
+						{ "name": "Coach" },
+						{ "name": "Referee" },
+						{ "name": "Spectator" },
+						{ "name": "Hockey Player" }
+					]
+				},
+				{
+					"name": "Jail",
+					"roles": [
+						{ "name": "Wrongly Accused Man" },
+						{ "name": "CCTV Operator" },
+						{ "name": "Guard" },
+						{ "name": "Visitor" },
+						{ "name": "Lawyer" },
+						{ "name": "Janitor" },
+						{ "name": "JailKeeper" },
+						{ "name": "Criminal" },
+						{ "name": "Correctional Officer" },
+						{ "name": "Maniac" }
+					]
+				}
+			]
+		}
+	]
+}

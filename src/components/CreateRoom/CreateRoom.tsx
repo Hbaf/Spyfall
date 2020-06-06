@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom'
 import { cn } from '@bem-react/classname';
 
 import './CreateRoom.scss';
+
+import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 import { maxUserAmount, minUserAmount } from 'consts/consts';
 import { roomCreateDO } from 'api/types/room';
@@ -41,7 +43,8 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 		}
 	}
 
-	onRoomCreate = () => {
+	onRoomCreate = (e: any) => {
+		e.preventDefault();
 		const { onRoomCreated } = this.props;
 		const data = this.state;
 
@@ -50,16 +53,24 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 		this.props.history.push('/')
 	}
 
+	onNameEnter = (e: any) => {
+		this.setState({ userName: e.target.value });
+	}
+
+	onPassEnter = (e: any) => {
+		this.setState({ password: e.target.value });
+	}
+
 	render (){
 		return (
-			<div className={cnCreateRoom()}>
+			<form className={cnCreateRoom()} onSubmit={ this.onRoomCreate }>
 				<div className={cnCreateRoom('Setting', { type: 'name' })}>
 					<label>Your name</label>
-					<input 
+					<Input 
 						className={cn('Input')({ type: 'text' })}
-						type="text"
 						value={this.state.userName}
-						onChange={(e)=>{this.setState({...this.state, userName: e.target.value})}}
+						onChange={this.onNameEnter}
+						required
 					/>
 				</div>
 				<div className={cnCreateRoom('Setting', { type: 'players-amount' })}>
@@ -67,7 +78,7 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 					<select
 						className={cn('Input')({ type: 'text' }) }
 						value={this.state.maxPlayers}
-						onChange={(e)=>{this.setState({...this.state, maxPlayers: +e.target.value})}}
+						onChange={(e)=>{this.setState({ maxPlayers: +e.target.value })}}
 					>
 						{Array(maxUserAmount - minUserAmount + 1).fill(0).map(
 							(item, index) => <option key={index}>{minUserAmount + index}</option>)
@@ -76,15 +87,15 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 				</div>
 				<div className={cnCreateRoom('Setting', { type: 'password' })}>
 					<label>Password (Not required)</label>
-					<input
+					<Input
 						className={cn('Input')({ type: 'text' })}
 						type="text"
 						value={this.state.password}
-						onChange={(e)=>{this.setState({...this.state, password: e.target.value})}}
+						onChange={this.onPassEnter}
 					/>
 				</div>
-				<Button className={cnCreateRoom('Submit')} text="Create room" onClick={ this.onRoomCreate }/>
-			</div>
+				<Button className={cnCreateRoom('Submit')} text="Create room" />
+			</form>
 		);
 	}
 }

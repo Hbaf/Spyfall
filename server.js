@@ -13,22 +13,21 @@ const instance = webpackDevMiddleware(compiler, {
 app.use(instance);
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!\n');
+	console.log('Example app listening on port 3000!\n');
 });
 
 // Stub to make things work
 // There was a problem, when going to url like '/route' causes 'Cannot GET /route'
-// and 'devSever.historyApiFallback: true' didn't help
 //
 // !Important! That page we sending here is not rendered. It's empty template.
-// Probably will need to fix if bundles config changes
+// Needs to be fixed, if bundles config changes
 //
 // TODO fix that (find better solution)
 app.get('/*', function(req, res) {
 	instance.invalidate();
 	res.sendFile(path.join(config.output.path, 'index.html'), function(err) {
-	  if (err) {
-		res.status(500).send(err)
-	  }
+		if (err) {
+			res.status(500).send(err)
+		}
 	})
-  })
+})

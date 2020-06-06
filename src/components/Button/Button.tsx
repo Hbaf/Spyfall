@@ -18,7 +18,7 @@ const cnButton = cn('Button');
 
 const Button: React.FC<IButtonProps> = ({ name, className, mods, disabled, value, text, onClick, onSubmit, children}) => {
 	return (
-		<button className={cnButton({type: "submit", ...mods}, [ className ])} type="submit" name={name} value={value} disabled={disabled} onClick={onClick} onSubmit={onSubmit}>
+		<button className={cnButton({...mods}, [ className ])} name={name} value={value} disabled={disabled} onClick={onClick} onSubmit={onSubmit}>
 			<span>{ text }</span>
 			{ children }
 		</button>

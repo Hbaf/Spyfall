@@ -41,14 +41,14 @@ export default function roomReducer(state: roomState = initState, action: action
 		case types.ADD_PLAYER: {
 			return {
 				...state,
-				players: [...state.players, { userName: action.payload.userName, ready: false } ]
+				players: [...state.players, { userName: action.payload.userName, userId: action.payload.userId, ready: false } ]
 			}
 		}
 
 		case types.REMOVE_PLAYER: {
 			return {
 				...state,
-				players: state.players.filter(item => item.userName !== action.payload.userName)
+				players: state.players.filter(item => item.userId !== action.payload.userId)
 			}
 		}
 
@@ -56,7 +56,7 @@ export default function roomReducer(state: roomState = initState, action: action
 			return {
 				...state,
 				players: state.players.map(
-					player => player.userName === action.payload.userName ?
+					player => player.userId === action.payload.userId ?
 						{...player, ready: true } : player
 				)
 			}
@@ -66,7 +66,7 @@ export default function roomReducer(state: roomState = initState, action: action
 			return {
 				...state,
 				players: state.players.map(
-					player => player.userName === action.payload.userName ?
+					player => player.userId === action.payload.userId ?
 						{...player, ready: false } : player
 				)
 			}

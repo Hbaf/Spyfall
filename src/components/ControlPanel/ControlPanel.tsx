@@ -6,9 +6,11 @@ import { cn } from '@bem-react/classname';
 import { locationGroup, baseLocation, edition } from 'store/types/app';
 import { toggleLocation, toggleEdition} from 'store/actions/app';
 import IState from 'store/types';
+import { appEndpoint } from 'api';
 
 import './ControlPanel.scss';
-import { appEndpoint } from 'api';
+
+import Input from 'components/Input/Input';
 
 
 interface IStatePropsRedux {
@@ -43,7 +45,7 @@ const ControlPanel: React.FC<IControlPanelProps> = (props) =>
 				return locationIds.length ? (
 					<div className={ cnControlPanel('Group') } key = { index } >
 						<div className={ cnControlPanel('GroupHeader')}>
-							<input
+							<Input
 								className={ cnControlPanel('GroupCheck') }
 								type = "checkbox"
 								name = { index.toString() }
@@ -58,7 +60,7 @@ const ControlPanel: React.FC<IControlPanelProps> = (props) =>
 
 								return (
 									<div className={ cnControlPanel('Location') } key = { locationId } >
-										<input
+										<Input
 											className = { cnControlPanel('LocationCheck') }
 											type = "checkbox"
 											name = { locationId.toString() }

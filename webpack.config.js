@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
@@ -11,11 +10,14 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/',
 	},
+	devServer: {
+		contentBase: './dist',
+		historyApiFallback: true,
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './dist/index.html',
 			favicon: "./src/images/Spy_favicon.ico",
-			title: 'Spyfall',
 		}),
 	],
 	module: {

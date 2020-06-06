@@ -1,13 +1,17 @@
-export type playerDO = {
+export type playerBaseDO = {
 	userName: string;
 }
 
-export type roomCreateDO = playerDO & {
+export type playerDO = playerBaseDO & {
+	userId: string;
+}
+
+export type roomCreateDO = playerBaseDO & {
 	maxPlayers: number;
 	password: string;
 }
 
-export type joinRoomDO = playerDO & {
+export type joinRoomDO = playerBaseDO & {
 	roomId: string,
 	password: string;
 }

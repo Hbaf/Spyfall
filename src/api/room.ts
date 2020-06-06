@@ -24,6 +24,7 @@ class RoomEndpointClass {
 			this.store.dispatch();
 		})
 		this.socket.on(socketConfig.ROOM_DOESNT_EXIST, () => {
+			console.log('Hi');
 			this.store.dispatch();
 		})
 		this.socket.on(socketConfig.USER_JOINED, (data: playerDO) => {

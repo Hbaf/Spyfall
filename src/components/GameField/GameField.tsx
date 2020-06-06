@@ -9,7 +9,7 @@ import './GameField.scss';
 import IState from 'store/types';
 import { roomState, player } from 'store/types/room';
 
-import Popup from 'components/Popup/Popup';
+import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 import StoryCard from 'components/StoryCard/StoryCard';
 import PlayerList from 'components/PlayersList/PlayerList';
@@ -25,6 +25,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 interface IStatePropsRedux extends roomState {
 	gameStarted: boolean;
 	userName: string;
+	userId: string;
 	locations: baseLocation[];
 	selectedLocationsAmount: number;
 	players: player[];
@@ -32,8 +33,8 @@ interface IStatePropsRedux extends roomState {
 
 interface IDispatchPropsRedux {
 	onNameSet: (name: string) => void;
-	onPlayerReady: (name: string) => void;
-	onPlayerNotReady: (name: string) => void;
+	onPlayerReady: (userName: string, userId: string) => void;
+	onPlayerNotReady: (userName: string, userId: string) => void;
 }
 
 interface IOwnProps {
@@ -77,9 +78,12 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			|| players.length < minUserAmount
 			|| !players.reduce((acc, player) => acc && player.ready, true);
 		const startDisabledHintText = [];
-		if (selectedLocationsAmount < minLocationsAmount) startDisabledHintText.push(`Select at least ${minLocationsAmount} locations`);
-		if (players.length < minUserAmount) startDisabledHintText.push(`Not enough players (${players.length}/${minUserAmount})`);
-		if (!players.reduce((acc, player) => acc && player.ready, true)) startDisabledHintText.push('Not all players are ready');
+		if (selectedLocationsAmount < minLocationsAmount)
+			startDisabledHintText.push(`Not enough locations (${selectedLocationsAmount}/${minLocationsAmount})`);
+		if (players.length < minUserAmount)
+			startDisabledHintText.push(`Not enough players (${players.length}/${minUserAmount})`);
+		if (!players.reduce((acc, player) => acc && player.ready, true))
+			startDisabledHintText.push('Not all players are ready');
 
 		const onStart = () => {
 			gameEndpoint.startGame({locations: this.props.locations
@@ -90,13 +94,14 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 
 		const onReady = () => {
 			const ready = this.state.ready;
-			const userName = this.state.userName
+			const userName = this.state.userName;
+			const userId = this.props.userId;
 			if (ready) {
-				roomEndpoint.notReady({ userName });
-				this.props.onPlayerNotReady(userName);
+				roomEndpoint.notReady({ userName, userId });
+				this.props.onPlayerNotReady(userName, userId);
 			} else {
-				roomEndpoint.ready({ userName });
-				this.props.onPlayerReady(userName)
+				roomEndpoint.ready({ userName, userId });
+				this.props.onPlayerReady(userName, userId);
 			}
 			this.setState({ready: !ready});
 		}
@@ -113,7 +118,8 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			this.setState({password: e.target.value});
 		}
 
-		const onRoomJoinHandler = () => {
+		const onRoomJoinHandler = (e: any) => {
+			e.preventDefault();
 			const { userName, roomId, password } = this.state;
 			if (this.props.userName !== userName) {
 				this.props.onNameSet(name);
@@ -219,45 +225,43 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 							<span className={cnGameField('Hint')}>Join the room or create a new one</span>
 							{
 								this.state.joining ?
-									<div className={cnGameField('JoinInput')}>
-										<input
-											type="text"
-											className={cn('Input')({ type: 'text' })}
+									<form className={cnGameField('JoinInput')} onSubmit={onRoomJoinHandler}>
+										<Input
+											className={cnGameField('JoinInputItem')}
 											value={this.state.roomId}
 											placeholder="Enter room id"
 											onChange={onRoomId}
+											required
 										/>
-										<input
-											type="text"
-											className={cn('Input')({ type: 'text' })}
+										<Input
+											className={cnGameField('JoinInputItem')}
 											value={this.state.userName}
 											placeholder="Enter your name"
 											onChange={onUserName}
+											required
 										/>
-										<input
-											type="text"
-											className={cn('Input')({ type: 'text' })}
+										<Input
+											className={cnGameField('JoinInputItem')}
 											value={this.state.password}
 											placeholder="Enter room password"
 											onChange={onPassword}
 										/>
 										<Button
-											className={cn('Input')({ type: 'submit' })}
+											className={cnGameField('JoinInputSubmit')}
 											text="Join"
-											onClick={onRoomJoinHandler}
 										/>
-									</div>
+									</form>
 									:
-									<div className={cnGameField('JoinButton', { join: true })} >
+									<div className={cnGameField('JoinButtonContainer')}>
 										<Button
-											className={cn('Input')({ type: 'submit' })}
+											className={cnGameField('JoinButton')}
 											text="Join room"
 											onClick={() => this.setState({ joining: true })}
 										/>
 									</div>
 							}
-							<Link className={cnGameField('CreateButton', { create: true })} to="/create">
-								<input className={cn('Input')({ type: 'submit' })} type="submit" value="Create room" />
+							<Link className={cnGameField('CreateLink')} to="/create">
+								<Button className={cnGameField('CreateButton')} text="Create room" />
 							</Link>
 						</div>			
 				}
@@ -273,6 +277,7 @@ const mapStateToProps = (state: IState): IStatePropsRedux => {
 		gameStarted: state.game.gameStarted,
 		locations: state.app.locations,
 		userName: state.app.userName,
+		userId: state.app.userId,
 		selectedLocationsAmount: state.app.selectedLocationsAmount,
 	};
 }
@@ -282,11 +287,11 @@ const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => (
 		onNameSet: (name: string) => {
 			dispatch(setName(name));
 		},
-		onPlayerReady: (name: string) => {
-			dispatch(playerReady({userName: name}));
+		onPlayerReady: (userName: string, userId: string) => {
+			dispatch(playerReady({userName, userId}));
 		},
-		onPlayerNotReady: (name: string) => {
-			dispatch(playerNotReady({userName: name}));
+		onPlayerNotReady: (userName: string, userId: string) => {
+			dispatch(playerNotReady({userName, userId}));
 		}
 	}
 )

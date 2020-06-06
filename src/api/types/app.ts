@@ -1,5 +1,6 @@
-export type appDO = {
-	userName: string;
+import { playerBaseDO, playerDO } from "./room";
+
+export type appDO = playerBaseDO & playerDO &{
 	editions: editionDO[];
 	groups: locationGroupDO[];
 	locations: baseLocationDO[];

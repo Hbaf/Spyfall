@@ -6,6 +6,7 @@ import { minLocationsAmount } from 'consts/consts';
 const initState: appState = {
 	// TODO add local storage
 	userName: '',
+	userId: '',
 	editions: [],
 	groups: [],
 	locations: [],
