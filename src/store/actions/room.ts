@@ -1,13 +1,14 @@
 import * as types from 'store/actions/actionTypes/room';
 import { actionType } from 'store/types';
-import { roomCreateData, roomJoinData } from 'store/types/room';
+import {  roomDO } from 'api/types/room';
+import { playerDO } from 'api/types/room';
 
-export const createRoom = (data: roomCreateData): actionType => ({
+export const createRoom = (data: roomDO): actionType => ({
 	type: types.CREATE_ROOM,
 	payload: data,
 })
 
-export const joinRoom = (data: roomJoinData): actionType => ({
+export const joinRoom = (data: roomDO): actionType => ({
 	type: types.JOIN_ROOM,
 	payload: data,
 })
@@ -16,24 +17,24 @@ export const leaveRoom = (): actionType => ({
 	type: types.LEAVE_ROOM,
 })
 
-export const addPlayer = (name: string): actionType => ({
+export const addPlayer = (data: playerDO): actionType => ({
 	type: types.ADD_PLAYER,
-	payload: { name, ready: false}
+	payload: data,
 })
 
-export const removePlayer = (name: string): actionType => ({
+export const removePlayer = (data: playerDO): actionType => ({
 	type: types.REMOVE_PLAYER,
-	payload: name,
+	payload: data,
 })
 
-export const playerReady = (name: string): actionType => ({
+export const playerReady = (data: playerDO): actionType => ({
 	type: types.PLAYER_READY,
-	payload: name,
+	payload: data,
 })
 
-export const playerNotReady = (name: string): actionType => ({
+export const playerNotReady = (data: playerDO): actionType => ({
 	type: types.PLAYER_NOT_READY,
-	payload: name,
+	payload: data,
 })
 
 export const setName = (name: string): actionType => ({

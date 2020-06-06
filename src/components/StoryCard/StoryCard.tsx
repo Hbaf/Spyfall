@@ -9,7 +9,7 @@ import { gameState } from 'store/types/game';
 interface IStatePropsRedux extends gameState {}
 
 interface IOwnProps {
-	readonly className: string;
+	className: string;
 }
 
 interface IStoryCardProps extends IStatePropsRedux, IOwnProps {}

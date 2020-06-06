@@ -11,17 +11,18 @@ interface IStatePropsRedux {
 	players: player[];
 }
 
-interface IPlayerListProps {
+interface IOwnProps {
 	className: string;
-	players?: player[];
 }
+
+interface IPlayerListProps extends IStatePropsRedux, IOwnProps {}
 
 const cnPlayerList = cn('PlayerList');
 
 const PlayerList: React.FC<IPlayerListProps> = ({ className, players = [] }) => {
 	return (
 		<div className={ cnPlayerList(null, [className]) }>
-			{ players.map((player, ind) => <div className={ cnPlayerList('Player', { ready: player.ready}) } key={ ind }>{ player.name }</div>) }
+			{ players.map((player, ind) => <div className={ cnPlayerList('Player', { ready: player.ready}) } key={ ind }>{ player.userName }</div>) }
 		</div>
 	)
 }

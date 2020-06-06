@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { cn } from '@bem-react/classname';
 
-import { baseLocation } from 'store/types/settings';
+import { baseLocation } from 'store/types/app';
 import IState from 'store/types';
 
 import './InGameLocations.scss';
@@ -29,7 +29,7 @@ const InGameLocations: React.FC<IInGameLocationsProps> = (props) =>
 	return (
 		<div className={ cnInGameLocations(null, [ className ]) }>
 			{locations.map((location, index) => location.selected ?
-				<div className={cnInGameLocations('Location')} key={index}> {location.name} </div> :
+				<div className={cnInGameLocations('Location')} key={index}> {location.locName} </div> :
 				null
 			)}
 		</div>
@@ -37,7 +37,7 @@ const InGameLocations: React.FC<IInGameLocationsProps> = (props) =>
 }
 
 const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return state.settings;
+	return state.app;
 }
 
 export default connect<IStatePropsRedux,{},IOwnProps>(mapStateToProps)(InGameLocations);

@@ -1,6 +1,6 @@
-import { settingsState } from "./settings";
 import { roomState } from './room';
 import { gameState } from "./game";
+import { appState } from "./app";
 
 export type actionType = {
 	type: string;
@@ -9,7 +9,7 @@ export type actionType = {
 }
 
 type IState = {
-	settings: settingsState;
+	app: appState;
 	room: roomState;
 	game: gameState;
 }

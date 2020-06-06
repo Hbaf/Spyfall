@@ -1,16 +1,5 @@
-export type gameData = {
-	readonly location: string;
-	readonly role: string;
-	readonly story?: string;
-	readonly locationImgUrl?: string | undefined;
-	readonly roleImgUrl?: string | undefined;
-}
+import { gameDO } from "api/types/game";
 
-export type startGameData = {
-	locations: number[];
-	timer?: number;
-}
-
-export type gameState = gameData & {
-	readonly gameStarted: boolean;
+export type gameState = gameDO & {
+	gameStarted: boolean;
 }

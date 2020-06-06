@@ -3,25 +3,26 @@ import { connect } from 'react-redux';
 
 import { cn } from '@bem-react/classname';
 
-import { locationGroup, baseLocation } from 'store/types/settings';
-import { toggleLocation, toggleGroupLocation} from 'store/actions/settings';
+import { locationGroup, baseLocation, edition } from 'store/types/app';
+import { toggleLocation, toggleGroupLocation} from 'store/actions/app';
 import IState from 'store/types';
 
 import './ControlPanel.scss';
 
 
 interface IStatePropsRedux {
-	readonly groups: locationGroup[];
-	readonly locations: baseLocation[];
+	editions: edition[]
+	groups: locationGroup[];
+	locations: baseLocation[];
 }
 
 interface IDispatchPropsRedux {
-	readonly onLocationClick: (e: any) => void;
-	readonly onLocationGroupClick: (e: any) => void;
+	onLocationClick: (e: any) => void;
+	onLocationGroupClick: (e: any) => void;
 }
 
 interface IOwnProps {
-	readonly className: string;
+	className: string;
 }
 
 interface IControlPanelProps extends IStatePropsRedux, IDispatchPropsRedux, IOwnProps {}
@@ -32,13 +33,13 @@ const cnControlPanel = cn('ControlPanel');
 
 const ControlPanel: React.FC<IControlPanelProps> = (props) =>
 {
-	const { className, groups, locations, onLocationClick, onLocationGroupClick } = props;
+	const { className, editions, groups, locations, onLocationClick, onLocationGroupClick } = props;
 
 	return (
 		<div className={ cnControlPanel(null, [ className ]) }>
-			{ groups.map((locationsGroup: locationGroup, index: number) => {
-				const { name, selected, locationsIds } = locationsGroup;
-				return locationsIds.length ? (
+			{ editions.map((edition: edition, index: number) => {
+				const { editionName, selected, locationIds } = edition;
+				return locationIds.length ? (
 					<div className={ cnControlPanel('Group') } key = { index } >
 						<div className={ cnControlPanel('GroupHeader')}>
 							<input
@@ -48,11 +49,11 @@ const ControlPanel: React.FC<IControlPanelProps> = (props) =>
 								checked = { selected }
 								onChange = { onLocationGroupClick }
 							/>
-							<span className={cnControlPanel("GroupPlaceholder")}>{ name }</span>
+							<span className={cnControlPanel("GroupPlaceholder")}>{ editionName }</span>
 						</div>
 						<div className={ cnControlPanel('GroupBody') }>
-							{locationsIds.map((locationId: number) => {
-								const { name: locName, selected: locSelected } = locations[locationId];
+							{locationIds.map((locationId: number) => {
+								const { locName: locName, selected: locSelected } = locations[locationId];
 
 								return (
 									<div className={ cnControlPanel('Location') } key = { locationId } >
@@ -76,7 +77,7 @@ const ControlPanel: React.FC<IControlPanelProps> = (props) =>
 }
 
 const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return state.settings;
+	return state.app;
 }
 
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {

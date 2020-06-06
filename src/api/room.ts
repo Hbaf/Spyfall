@@ -1,6 +1,7 @@
 import * as socketConfig from "configs/api/socketConfig.json";
-import * as gameActions from 'store/actions/room';
-import { roomJoinData, roomCreateData } from "store/types/room";
+import * as roomActions from 'store/actions/room';
+import { roomDO } from "api/types/room";
+import { roomCreateDO, joinRoomDO, playerDO } from './types/room';
 
 class RoomEndpointClass {
 	socket: any;
@@ -13,11 +14,11 @@ class RoomEndpointClass {
 	}
 
 	subscribe() {
-		this.socket.on(socketConfig.ROOM_CREATED, (data: any) => {
-			this.store.dispatch(gameActions.createRoom(data));
+		this.socket.on(socketConfig.ROOM_CREATED, (data: roomDO) => {
+			this.store.dispatch(roomActions.createRoom(data));
 		})
-		this.socket.on(socketConfig.ROOM_CONNECTED, (data: roomJoinData) => {
-			this.store.dispatch(gameActions.joinRoom(data));
+		this.socket.on(socketConfig.ROOM_CONNECTED, (data: roomDO) => {
+			this.store.dispatch(roomActions.joinRoom(data));
 		})
 		this.socket.on(socketConfig.ROOM_IS_FULL, () => {
 			this.store.dispatch();
@@ -25,25 +26,25 @@ class RoomEndpointClass {
 		this.socket.on(socketConfig.ROOM_DOESNT_EXIST, () => {
 			this.store.dispatch();
 		})
-		this.socket.on(socketConfig.USER_JOINED, (data: string) => {
-			this.store.dispatch(gameActions.addPlayer(data));
+		this.socket.on(socketConfig.USER_JOINED, (data: playerDO) => {
+			this.store.dispatch(roomActions.addPlayer(data));
 		})
-		this.socket.on(socketConfig.USER_CAME_OUT, (data: string) => {
-			this.store.dispatch(gameActions.removePlayer(data));
+		this.socket.on(socketConfig.USER_CAME_OUT, (data: playerDO) => {
+			this.store.dispatch(roomActions.removePlayer(data));
 		})
-		this.socket.on(socketConfig.USER_READY, (data: string) => {
-			this.store.dispatch(gameActions.playerReady(data));
+		this.socket.on(socketConfig.USER_READY, (data: playerDO) => {
+			this.store.dispatch(roomActions.playerReady(data));
 		})
-		this.socket.on(socketConfig.USER_NOT_READY, (data: string) =>{
-			this.store.dispatch(gameActions.playerNotReady(data));
+		this.socket.on(socketConfig.USER_NOT_READY, (data: playerDO) =>{
+			this.store.dispatch(roomActions.playerNotReady(data));
 		})
 	}
 
-	createRoom(data: roomCreateData) {
+	createRoom(data: roomCreateDO) {
 		this.socket.emit(socketConfig.CREATE_ROOM, data);
 	}
 
-	joinRoom(data: { id: string, name: string }) {
+	joinRoom(data: joinRoomDO) {
 		this.socket.emit(socketConfig.CONNECT_TO_ROOM, data);
 	}
 
@@ -51,11 +52,11 @@ class RoomEndpointClass {
 		this.socket.emit(socketConfig.LEAVE_ROOM);
 	}
 
-	ready(data: string) {
+	ready(data: playerDO) {
 		this.socket.emit(socketConfig.USER_READY, data);
 	}
 
-	notReady(data: string) {
+	notReady(data: playerDO) {
 		this.socket.emit(socketConfig.USER_NOT_READY, data);
 	}
 }

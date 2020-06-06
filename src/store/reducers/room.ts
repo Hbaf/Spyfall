@@ -4,9 +4,11 @@ import { roomState } from 'store/types/room';
 import { maxUserAmount } from 'consts/consts';
 
 const initState: roomState = {
+	roomId: '',
 	isGM: false,
 	players: [],
 	maxPlayers: maxUserAmount,
+	password: '',
 }
 
 export default function roomReducer(state: roomState = initState, action: actionType): roomState {
@@ -15,7 +17,6 @@ export default function roomReducer(state: roomState = initState, action: action
 			return {
 				...state,
 				...action.payload,
-				isGM: true,
 			};
 		}
 
@@ -32,7 +33,7 @@ export default function roomReducer(state: roomState = initState, action: action
 				isGM: false,
 				players: [],
 				maxPlayers: maxUserAmount,
-				id: undefined,
+				roomId: undefined,
 				password: '',
 			}
 		}
@@ -40,14 +41,14 @@ export default function roomReducer(state: roomState = initState, action: action
 		case types.ADD_PLAYER: {
 			return {
 				...state,
-				players: [...state.players, action.payload ]
+				players: [...state.players, { userName: action.payload.userName, ready: false } ]
 			}
 		}
 
 		case types.REMOVE_PLAYER: {
 			return {
 				...state,
-				players: state.players.filter(item => item.name !== action.payload)
+				players: state.players.filter(item => item.userName !== action.payload.userName)
 			}
 		}
 
@@ -55,8 +56,8 @@ export default function roomReducer(state: roomState = initState, action: action
 			return {
 				...state,
 				players: state.players.map(
-					item => item.name === action.payload ?
-						{...item, ready: true } : item
+					player => player.userName === action.payload.userName ?
+						{...player, ready: true } : player
 				)
 			}
 		}
@@ -65,16 +66,9 @@ export default function roomReducer(state: roomState = initState, action: action
 			return {
 				...state,
 				players: state.players.map(
-					item => item.name === action.payload ?
-						{...item, ready: false } : item
+					player => player.userName === action.payload.userName ?
+						{...player, ready: false } : player
 				)
-			}
-		}
-
-		case types.SET_NAME: {
-			return {
-				...state,
-				userName: action.payload,
 			}
 		}
 

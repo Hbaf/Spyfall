@@ -10,7 +10,6 @@ import IState from 'store/types';
 import { roomState } from 'store/types/room';
 
 import Popup from 'components/Popup/Popup';
-import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 import StoryCard from 'components/StoryCard/StoryCard';
 import PlayerList from 'components/PlayersList/PlayerList';
@@ -19,7 +18,7 @@ import InGameLocations from 'components/InGameLocations/InGameLocations';
 
 import { setName } from 'store/actions/room';
 import { roomEndpoint, gameEndpoint } from 'api';
-import { baseLocation } from 'store/types/settings';
+import { baseLocation } from 'store/types/app';
 
 interface IStatePropsRedux extends roomState {
 	gameStarted: boolean;
@@ -63,7 +62,7 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 	}
 
 	render() {
-		const { className, id, gameStarted, isGM } = this.props;
+		const { className, roomId: id, gameStarted, isGM } = this.props;
 
 		const onStart = () => {
 			gameEndpoint.startGame({locations: this.props.locations
@@ -75,9 +74,9 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 		const onReady = () => {
 			const ready = this.state.ready;
 			if (ready)
-				roomEndpoint.notReady(this.state.name);
+				roomEndpoint.notReady({userName: this.state.name});
 			else
-				roomEndpoint.ready(this.state.name);
+				roomEndpoint.ready({userName: this.state.name});
 			this.setState({ready: !ready});
 		}
 
@@ -94,7 +93,7 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			const { name, roomId } = this.state;
 			this.setState({phase: ''});
 			this.props.onNameEnter(name);
-			roomEndpoint.joinRoom({id: roomId, name})
+			roomEndpoint.joinRoom({ roomId, userName: name})
 		}
 
 		const onName = (e: any) => {
@@ -193,7 +192,8 @@ const mapStateToProps = (state: IState): IStatePropsRedux => {
 	return {
 		...state.room,
 		gameStarted: state.game.gameStarted,
-		locations: state.settings.locations,
+		locations: state.app.locations,
+		userName: state.app.userName,
 	};
 }
 

@@ -1,8 +1,7 @@
 import * as socketConfig from "configs/api/socketConfig.json";
 import * as gameActions from 'store/actions/game';
-import * as settingsAction from 'store/actions/settings';
-import { gameData, startGameData } from "store/types/game";
-import { settingsState } from "store/types/settings";
+import { gameDO } from "api/types/game";
+import { startGameDO } from './types/game';
 
 class GameEndpointClass {
 	socket: any;
@@ -15,10 +14,7 @@ class GameEndpointClass {
 	}
 
 	subscribe() {
-		this.socket.on(socketConfig.APP_INITED, (data: settingsState) => {
-			this.store.dispatch(settingsAction.appInited(data));
-		})
-		this.socket.on(socketConfig.GAME_STARTED, (data: gameData) => {
+		this.socket.on(socketConfig.GAME_STARTED, (data: gameDO) => {
 			this.store.dispatch(gameActions.initGame(data));
 		})
 		this.socket.on(socketConfig.GAME_RESET, () => {
@@ -26,7 +22,7 @@ class GameEndpointClass {
 		})
 	}
 
-	startGame(data: startGameData) {
+	startGame(data: startGameDO) {
 		this.socket.emit(socketConfig.START_GAME, data);
 	}
 

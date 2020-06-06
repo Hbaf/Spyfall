@@ -7,20 +7,20 @@ import { cn } from '@bem-react/classname';
 import './CreateRoom.scss';
 import Button from 'components/Button/Button';
 import { maxUserAmount, minUserAmount } from 'consts/consts';
-import { roomCreateData } from 'store/types/room';
+import { roomCreateDO } from 'api/types/room';
 import { roomEndpoint } from 'api';
 import { setName } from 'store/actions/room';
 import IState from 'store/types';
 
-type IOwnState = roomCreateData;
+type IOwnState = roomCreateDO;
 
 interface IDispatchPropsRedux {
 	onRoomCreated: (data: IOwnState) => void;
 }
 
 interface IStatePropsRedux {
-	readonly name: string;
-	readonly maxPlayers: number;
+	userName: string;
+	maxPlayers: number;
 }
 
 interface IOwnProps {
@@ -35,7 +35,7 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 	constructor(props: ICreateRoomProps){
 		super(props);
 		this.state = {
-			name: props.name,
+			userName: props.userName,
 			maxPlayers: props.maxPlayers,
 			password: '',
 		}
@@ -58,8 +58,8 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 					<input 
 						className={cn('Input')({ type: 'text' })}
 						type="text"
-						value={this.state.name}
-						onChange={(e)=>{this.setState({...this.state, name: e.target.value})}}
+						value={this.state.userName}
+						onChange={(e)=>{this.setState({...this.state, userName: e.target.value})}}
 					/>
 				</div>
 				<div className={cnCreateRoom('Setting', { type: 'players-amount' })}>
@@ -91,7 +91,7 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 
 const mapStateToProps = (state: IState): IStatePropsRedux => {
 	return ({
-		name: state.room.userName,
+		userName: state.app.userName,
 		maxPlayers: state.room.maxPlayers,
 	})
 }
@@ -99,7 +99,7 @@ const mapStateToProps = (state: IState): IStatePropsRedux => {
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {
 	return {
 		onRoomCreated: data => {
-			dispatch(setName(data.name))
+			dispatch(setName(data.userName))
 		}
 	}
 }

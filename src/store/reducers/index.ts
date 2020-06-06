@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
-import settingsReducer from "./settings";
+import appReducer from './app';
 import roomReducer from './room';
 import gameReducer from './game';
 
 
 const reducers = combineReducers({
-	settings: settingsReducer,
+	app: appReducer,
 	room: roomReducer,
 	game: gameReducer,
 });
