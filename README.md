@@ -1,8 +1,9 @@
 # Spyfall
 Simple Spyfall game implementation for practice
+React+Redux + Socket.IO
 
 ## Setup
-npm ci
+npm ci  
 npm run demo
 
 

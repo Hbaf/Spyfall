@@ -18,7 +18,7 @@ class App extends React.Component {
 						<Route path='/' exact	component={ MainPage }		/>
 						<Route path='/profile'	component={ ProfilePage }	/>
 						<Route path='/auth'		component={ AuthPage }		/>
-						<Route path='/create'	component={ CreateRoomPage }	/>
+						<Route path='/create'	component={ CreateRoomPage }/>
 						<Route path='/credits'	component={ MainPage }		/>
 						<Route path='/settings'	component={ MainPage }		/>
 						<Route path='/faq'		component={ MainPage }		/>

@@ -23,7 +23,7 @@ const cnInput = cn('Input');
 const TextInput: React.FC<IInputProps> = (props) => {
 	const { type='text', className, mods, value, name, checked, placeholder, onFocus, onBlur, onClick, onChange,required } = props;
 	const [focus, setFocus] = React.useState(false);
-	const [filled, setFilled] = React.useState(false);
+	const [filled, setFilled] = React.useState(value !== '');
 
 	const onFocusHandle = () => {
 		setFocus(true);

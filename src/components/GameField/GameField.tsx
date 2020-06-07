@@ -32,7 +32,7 @@ interface IStatePropsRedux extends roomState {
 }
 
 interface IDispatchPropsRedux {
-	onNameSet: (name: string) => void;
+	onSetName: (name: string) => void;
 	onPlayerReady: (userName: string, userId: string) => void;
 	onPlayerNotReady: (userName: string, userId: string) => void;
 }
@@ -122,7 +122,8 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			e.preventDefault();
 			const { userName, roomId, password } = this.state;
 			if (this.props.userName !== userName) {
-				this.props.onNameSet(name);
+				this.props.onSetName(name);
+				localStorage.setItem('userName', name);
 			}
 			roomEndpoint.joinRoom({ roomId, userName, password });
 		}
@@ -284,7 +285,7 @@ const mapStateToProps = (state: IState): IStatePropsRedux => {
 
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => (
 	{
-		onNameSet: (name: string) => {
+		onSetName: (name: string) => {
 			dispatch(setName(name));
 		},
 		onPlayerReady: (userName: string, userId: string) => {
@@ -296,4 +297,4 @@ const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => (
 	}
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameField);
+export default connect<IStatePropsRedux, IDispatchPropsRedux, IOwnProps>(mapStateToProps, mapDispatchToProps)(GameField);

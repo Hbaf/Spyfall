@@ -17,7 +17,7 @@ import IState from 'store/types';
 type IOwnState = roomCreateDO;
 
 interface IDispatchPropsRedux {
-	onRoomCreated: (data: IOwnState) => void;
+	onSetName: (userName: string) => void;
 }
 
 interface IStatePropsRedux {
@@ -45,11 +45,14 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 
 	onRoomCreate = (e: any) => {
 		e.preventDefault();
-		const { onRoomCreated } = this.props;
 		const data = this.state;
 
 		roomEndpoint.createRoom(data);
-		onRoomCreated(data);
+		const { userName } = data;
+		if (this.props.userName !== userName) {
+			this.props.onSetName(userName);
+			localStorage.setItem('userName', userName);
+		}
 		this.props.history.push('/')
 	}
 
@@ -101,16 +104,17 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 }
 
 const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return ({
+	console.log(state.app.userName);
+	return {
 		userName: state.app.userName,
 		maxPlayers: state.room.maxPlayers,
-	})
+	}
 }
 
 const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {
 	return {
-		onRoomCreated: data => {
-			dispatch(setName(data.userName))
+		onSetName: userName => {
+			dispatch(setName(userName))
 		}
 	}
 }

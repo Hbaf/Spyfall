@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+
 import { cn } from '@bem-react/classname';
 
 import './Auth.scss';
 
+import IState from 'store/types';
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 
@@ -17,13 +20,19 @@ interface IOwnState {
 	displayPass: boolean;
 }
 
-class Auth extends React.Component<{}, IOwnState> {
+interface IStatePropsRedux {
+	userName: string;
+}
 
-	constructor(props: {}) {
+interface IAuthProps extends IStatePropsRedux {}
+
+class Auth extends React.Component<IAuthProps, IOwnState> {
+
+	constructor(props: IAuthProps) {
 		super(props);
 		this.state = {
 			login: true,
-			userName: '',
+			userName: props.userName,
 			password: '',
 			email: '',
 			confirmEmail: '',
@@ -107,7 +116,7 @@ class Auth extends React.Component<{}, IOwnState> {
 					<div className={cnAuth('Input')}>
 						<Input
 							className={cnAuth('TextInput')}
-							type={ this.state.displayPass ? 'password' : 'text' }
+							type={ this.state.displayPass ? 'text' : 'password' }
 							value={this.state.password}
 							onChange={onPassChange}
 						/>
@@ -120,4 +129,11 @@ class Auth extends React.Component<{}, IOwnState> {
 	}
 }
 
-export default Auth;
+const mapStateToProps = (state: IState): IStatePropsRedux => {
+	console.log(state.app.userName);
+	return {
+		userName: state.app.userName,
+	}
+}
+
+export default connect<IStatePropsRedux, {}, {}>(mapStateToProps)(Auth);

@@ -4,8 +4,7 @@ import { appState } from 'store/types/app';
 import { minLocationsAmount } from 'consts/consts';
 
 const initState: appState = {
-	// TODO add local storage
-	userName: '',
+	userName: localStorage.getItem('userName') || '',
 	userId: '',
 	editions: [],
 	groups: [],
@@ -26,6 +25,7 @@ export default function appReducer (state: appState = initState, action: actionT
 			return {
 				...state,
 				...action.payload,
+				userName: action.payload.userName || state.userName,
 			}
 		}
 

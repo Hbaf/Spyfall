@@ -25,7 +25,7 @@ app.listen(3000, function () {
 // TODO fix that (find better solution)
 app.get('/*', function(req, res) {
 	instance.invalidate();
-	res.sendFile(path.join(config.output.path, 'index.html'), function(err) {
+	res.sendFile(path.join(config.output.path, 'stub.index.html'), function(err) {
 		if (err) {
 			res.status(500).send(err)
 		}
