@@ -1,6 +1,7 @@
 {
 	"env": {
-		"es6": true
+		"es6": true,
+		"browser": true
 	},
 	"globals": {
 		"Atomics": "readonly",
@@ -22,7 +23,8 @@
 	"extends": [
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:jsx-a11y/recommended"
+		"plugin:jsx-a11y/recommended",
+		"plugin:compat/recommended"
 	],
 	"rules": {
 		"for-direction": "error",
