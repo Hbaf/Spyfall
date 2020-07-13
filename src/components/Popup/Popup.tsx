@@ -20,8 +20,9 @@ class Popup extends React.Component {
 
 		return (
 			<div className={cnPopup()}>
-				<div className={cnPopup('Paranja')} onClick={this.handleClose}>
-					<div className={cnPopup('Body')} onClick={this.handleClickPreventer}>
+				<div className={cnPopup('Paranja')} onClick={this.handleClose} onKeyPress={this.handleClose} role='alertdialog'>
+					{ /* eslint-disable-next-line jsx-a11y/click-events-have-key-events */ }
+					<div className={cnPopup('Body')} onClick={this.handleClickPreventer} role='alertdialog'>
 						{children}
 					</div>
 				</div>

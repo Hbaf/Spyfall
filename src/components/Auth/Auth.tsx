@@ -69,15 +69,15 @@ class Auth extends React.Component<IAuthProps, IOwnState> {
 			<form className={cnAuth()} onSubmit={onSubmit}>
 				<div className={cnAuth('Tabs')}>
 					<div className={cnAuth('Tab')}>
-						<label className={cnAuth('TabPlaceholder')}>
+						<span className={cnAuth('TabPlaceholder')}>
 							Sign In
-						</label>
+						</span>
 						<Input className={cnAuth('TabContent')} type='radio' name='in' onChange={onChangeHandler} checked={this.state.login} />
 					</div>
 					<div className={cnAuth('Tab')}>
-						<label className={cnAuth('TabPlaceholder')}>
+						<span className={cnAuth('TabPlaceholder')}>
 							Sign Up
-						</label>
+						</span>
 						<Input className={cnAuth('TabContent')} type='radio' name='up' onChange={onChangeHandler} checked={!this.state.login} />
 					</div>
 				</div>

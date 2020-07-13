@@ -70,9 +70,9 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 		return (
 			<form className={cnCreateRoom()} onSubmit={this.handleRoomCreate}>
 				<div className={cnCreateRoom('Setting', { type: 'name' })}>
-					<label>
+					<span>
 						Your name
-					</label>
+					</span>
 					<Input
 						className={cn('Input')({ type: 'text' })}
 						value={this.state.userName}
@@ -81,13 +81,13 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 					/>
 				</div>
 				<div className={cnCreateRoom('Setting', { type: 'players-amount' })}>
-					<label>
+					<span>
 						Max players
-					</label>
+					</span>
 					<select
 						className={cn('Input')({ type: 'text' })}
 						value={this.state.maxPlayers}
-						onChange={
+						onBlur={
 							(event: React.ChangeEvent<HTMLSelectElement>) => {
 								this.setState({ maxPlayers: Number(event.target.value) });
 							}
@@ -106,9 +106,9 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 					</select>
 				</div>
 				<div className={cnCreateRoom('Setting', { type: 'password' })}>
-					<label>
+					<span>
 						Password (Not required)
-					</label>
+					</span>
 					<Input
 						className={cn('Input')({ type: 'text' })}
 						type='text'

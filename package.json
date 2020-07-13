@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "demo": "concurrently \"webpack-dev-server --open\" \"node ./back_stub/server.js\"",
-    "eslint": "eslint ./**"
+	"eslint": "eslint ./**",
+	"stylelint": "npx stylelint \"**/*.scss\""
   },
   "keywords": [],
   "author": "",
@@ -26,7 +27,7 @@
     "eslint-import-resolver-webpack": "^0.12.1",
     "eslint-module-utils": "^2.6.0",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
     "express": "^4.17.1",

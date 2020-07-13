@@ -1,28 +1,30 @@
 {
-    "env": {
-        "es6": true
-    },
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 11,
-        "sourceType": "module"
+	"env": {
+		"es6": true
 	},
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 11,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"react",
+		"@typescript-eslint",
+		"jsx-a11y"
+	],
 	"extends": [
 		"plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+		"plugin:@typescript-eslint/recommended",
+		"plugin:jsx-a11y/recommended"
 	],
-    "plugins": [
-        "react",
-        "@typescript-eslint"
-	],
-    "rules": {
+	"rules": {
 		"for-direction": "error",
 		"getter-return": "error",
 		"no-async-promise-executor": "error",
@@ -204,9 +206,9 @@
 		"id-length": "error",
 		"id-match": "off",
 		"implicit-arrow-linebreak": "error",
-        "indent": [
-            "error",
-            "tab"
+		"indent": [
+			"error",
+			"tab"
 		],
 		"jsx-quotes": [
 			"error",
@@ -333,12 +335,12 @@
 			"as-needed"
 		],
 		"quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
+			"error",
+			"single"
+		],
+		"semi": [
+			"error",
+			"always"
 		],
 		"semi-spacing": "error",
 		"semi-style": "error",
@@ -570,7 +572,8 @@
 		"react/jsx-uses-vars": 2,
 		"react/jsx-wrap-multilines": 2,
 		"@typescript-eslint/no-explicit-any": "error",
-		"@typescript-eslint/explicit-module-boundary-types": "off"
+		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"jsx-a11y/no-noninteractive-element-interactions": "off"
 	},
 	"settings": {
 		"import/resolver": {
