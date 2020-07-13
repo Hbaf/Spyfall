@@ -23,21 +23,23 @@ interface IInGameLocationsProps extends IStatePropsRedux, IOwnProps {}
 const cnInGameLocations = cn('InGameLocations');
 
 
-const InGameLocations: React.FC<IInGameLocationsProps> = (props) =>
-{
+const InGameLocations: React.FC<IInGameLocationsProps> = props => {
 	const { className, locations } = props;
+
 	return (
-		<div className={ cnInGameLocations(null, [ className ]) }>
-			{locations.map((location, index) => location.selected ?
-				<div className={cnInGameLocations('Location')} key={index}> {location.locName} </div> :
-				null
-			)}
+		<div className={cnInGameLocations(null, [ className ])}>
+			{
+				locations.map((location, index) => location.selected ?
+					<div className={cnInGameLocations('Location')} key={index}>
+						{location.locName}
+					</div> :
+					null)
+			}
 		</div>
-	)
-}
+	);
+};
 
-const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return state.app;
-}
+const mapStateToProps = (state: IState): IStatePropsRedux => state.app;
 
-export default connect<IStatePropsRedux,{},IOwnProps>(mapStateToProps)(InGameLocations);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default connect<IStatePropsRedux, any, IOwnProps>(mapStateToProps)(InGameLocations);

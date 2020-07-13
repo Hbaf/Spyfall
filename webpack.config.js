@@ -17,7 +17,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './dist/index.html',
-			favicon: "./src/images/Spy_favicon.ico",
+			favicon: './src/images/Spy_favicon.ico',
 		}),
 	],
 	module: {
@@ -28,11 +28,7 @@ module.exports = {
 			},
 			{
 				test: /\.s[ac]ss$/i,
-				use: [
-					'style-loader',
-					'css-loader',
-					'sass-loader',
-				],
+				use: ['style-loader', 'css-loader', 'sass-loader'],
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
@@ -41,22 +37,19 @@ module.exports = {
 			{
 				test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
 				use: [
-				  {
-					loader: 'file-loader',
-					options: {
-					  name: '[name].[ext]',
-					  outputPath: 'fonts/'
-					}
-				  }
-				]
-			}
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+							outputPath: 'fonts/',
+						},
+					},
+				],
+			},
 		],
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js'],
-		modules: [
-			path.resolve(__dirname, './src'),
-			path.resolve(__dirname, './node_modules'),
-		],
+		modules: [path.resolve(__dirname, './src'), path.resolve(__dirname, './node_modules')],
 	},
 };

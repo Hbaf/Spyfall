@@ -12,25 +12,33 @@ const cnHeader = cn('Header');
 
 const Header: React.FC<IHeaderProps> = ({ isUserLogged }) => (
 	<nav className={cnHeader()}>
-		<Link className={cnHeader('Logo')} to="/" >
+		<Link className={cnHeader('Logo')} to='/' >
 			<div className={cnHeader('Icon')} />
-			<span className={cnHeader('Title')}>Spyfall</span>
+			<span className={cnHeader('Title')}>
+				Spyfall
+			</span>
 		</Link>
 		{
 			isUserLogged ?
 				(
 					<div className={cnHeader('Links')}>
-						<Link className={cnHeader('Profile')} to="/profile">Profile</Link>
-						<Link className={cnHeader('SignOut')} to="/">Sign Out</Link>
+						<Link className={cnHeader('Profile')} to='/profile'>
+							Profile
+						</Link>
+						<Link className={cnHeader('SignOut')} to='/'>
+							Sign Out
+						</Link>
 					</div>
 				) :
 				(
 					<div className={cnHeader('Links')}>
-						<Link className={cnHeader('SignIn')} to="/auth">Sign In</Link>
+						<Link className={cnHeader('SignIn')} to='/auth'>
+							Sign In
+						</Link>
 					</div>
 				)
 		}
 	</nav>
-)
+);
 
 export default Header;

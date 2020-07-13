@@ -1,40 +1,51 @@
 .Tooltip {
-	visibility: hidden;
 	position: absolute;
+
+	visibility: hidden;
+
 	width: 100%;
-	text-align: center;
+
 	padding: 5px;
+
 	border-radius: 5px;
+
 	background-color: #2f3640;
+
 	color: #fff;
+	text-align: center;
 
 	&_type_bottom {
 		top: 110%;
 		left: 50%;
+
 		transform: translateX(-50%);
 	}
 
 	&_type_left {
-		right: 110%;
 		top: 50%;
+		right: 110%;
+
 		transform: translate(-50%, -50%);
 	}
 
 	&_type_right {
-		left: 110%;
 		top: 50%;
+		left: 110%;
+
 		transform: translate(-50%, -50%);
 	}
 
 	&_type_top {
 		bottom: 110%;
 		left: 50%;
+
 		transform: translate(-50%, -50%);
 	}
 
 	&-Hint {
-		line-height: 20px;
-		font-size: 16px;
 		padding: 0 5px;
+
+		font-size: 16px;
+		line-height: 20px;
 	}
 }

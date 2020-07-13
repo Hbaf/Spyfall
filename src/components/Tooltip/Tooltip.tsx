@@ -12,15 +12,22 @@ interface ITooltipProps {
 
 const cnTooltip = cn('Tooltip');
 
-const Tooltip: React.FC<ITooltipProps> = ({ className, mods, text, type, children }) => {
-	return (
-		<div className={cnTooltip({type: type, ...mods}, [ className ])} >
-			<div className={cnTooltip('Body')}>
-				{text?.filter(item => item).map((item, index) => <div className={cnTooltip('Hint')} key={index} >{item}</div>)}
-				{ children }
-			</div>
+const Tooltip: React.FC<ITooltipProps> = ({ className, mods, text, type, children }) => (
+	<div className={cnTooltip({ type, ...mods }, [ className ])} >
+		<div className={cnTooltip('Body')}>
+			{
+				text?.filter(item => item)
+				.map(
+					(item, index) => (
+						<div className={cnTooltip('Hint')} key={index} >
+							{item}
+						</div>
+					)
+				)
+			}
+			{ children }
 		</div>
-	);
-}
+	</div>
+);
 
 export default Tooltip;

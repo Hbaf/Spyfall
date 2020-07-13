@@ -1,16 +1,18 @@
 .GameField {
-	width: 85vw;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	position: relative;
 
+	display: flex;
+	align-items: center;
+
+	width: 85vw;
+
 	&-Content {
+		display: flex;
+		justify-content: space-between;
+
 		width: 100%;
 		min-width: 1200px;
 		height: 80vh;
-		display: flex;
-		justify-content: space-between;
 	}
 
 	&-Game {
@@ -25,7 +27,9 @@
 
 	&-Control {
 		width: 20vw;
+
 		padding: 20px 10px 50px;
+
 		text-align: center;
 	}
 
@@ -38,8 +42,9 @@
 	&-JoinInput,
 	&-JoinButtonContainer {
 		display: block;
-		margin: 40px 10% 0;
+
 		box-sizing: border-box;
+		margin: 40px 10% 0;
 	}
 
 	&-JoinInput {
@@ -52,12 +57,15 @@
 	&-JoinButton,
 	&-CreateButton {
 		width: 100%;
+
 		border: none;
 	}
 
 	&-JoinInputSubmit {
 		margin-top: 20px;
-		background-color: darkgrey;
+
+		background-color: #a9a9a9;
+
 		color: #fff;
 	}
 
@@ -67,17 +75,21 @@
 	}
 
 	&-Start {
-		height: 300px;
 		width: 100%;
-		background: url(../../images/spies.jpg) no-repeat center;
-		background-size: cover;
+		height: 300px;
+
 		border-radius: 15px;
+
+		background: url('../../images/spies.jpg') no-repeat center;
+		background-size: cover;
 	}
 
 	&-StartHint {
 		position: relative;
+
 		display: flex;
 		justify-content: space-between;
+
 		margin: 40px auto 50px;
 		padding: 0 10px;
 	}
@@ -85,21 +97,29 @@
 	&-RoomId,
 	&-StartButton {
 		position: relative;
+
 		width: 32%;
+
 		border: none;
-		background-color: darkgrey;
+
+		background-color: #a9a9a9;
+
 		color: #fff;
+
 		cursor: pointer;
 
 		&:hover {
 			background-color: #fff;
-			color: darkgrey;
+
+			color: #a9a9a9;
 		}
 
 		&:disabled,
 		&:disabled:hover {
 			background-color: unset;
-			color: darkgrey;
+
+			color: #a9a9a9;
+
 			cursor: default;
 		}
 	}
@@ -115,13 +135,17 @@
 
 	&-GameEndButton {
 		display: block;
-		margin: 20px auto;
+
 		width: 40%;
-		background-color: rgba(255, 36, 0, 0.6);
+
+		margin: 20px auto;
+
+		background-color: rgba(255 36 0 / .6);
 	}
 
 	&-Faq {
 		display: block;
+
 		margin: 30px auto 0;
 	}
 }

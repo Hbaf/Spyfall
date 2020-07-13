@@ -9,7 +9,7 @@ module.exports.User = class {
 	update(patch) {
 		this._id = patch.id || this._id;
 		this._name = patch.name || this._name;
-		this._ready = patch.ready || (patch.ready === undefined && this._ready);
+		this._ready = patch.ready || (typeof patch.ready === 'undefined' && this._ready);
 
 		return this;
 	}
@@ -19,7 +19,7 @@ module.exports.User = class {
 	}
 
 	get id() {
-		return this._id
+		return this._id;
 	}
 
 	get name() {
@@ -29,4 +29,4 @@ module.exports.User = class {
 	get ready() {
 		return this._ready;
 	}
-}
+};

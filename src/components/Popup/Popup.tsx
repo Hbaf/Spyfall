@@ -7,21 +7,22 @@ import './Popup.scss';
 const cnPopup = cn('Popup');
 
 class Popup extends React.Component {
-	
-	popupClose() {
-		console.log('Click');
+	handleClose(): void {
+		return null;
 	}
 
-	clickPreventer(e: any) {
-		e.stopPropagation();
+	handleClickPreventer(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+		event.stopPropagation();
 	}
 
 	render() {
+		const { children } = this.props;
+
 		return (
 			<div className={cnPopup()}>
-				<div className={cnPopup('Paranja')} onClick={this.popupClose}>
-					<div className={cnPopup('Body')} onClick={this.clickPreventer}>
-						{this.props.children}
+				<div className={cnPopup('Paranja')} onClick={this.handleClose}>
+					<div className={cnPopup('Body')} onClick={this.handleClickPreventer}>
+						{children}
 					</div>
 				</div>
 			</div>

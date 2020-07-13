@@ -1,13 +1,14 @@
-import * as socketConfig from "configs/api/socketConfig.json";
+import * as socketConfig from 'configs/api/socketConfig.json';
 import * as roomActions from 'store/actions/room';
-import { roomDO } from "api/types/room";
+import { roomDO } from 'api/types/room';
 import { roomCreateDO, joinRoomDO, playerDO } from './types/room';
+import { Store } from 'redux';
 
 class RoomEndpointClass {
-	socket: any;
-	store: any;
+	socket: SocketIOClient.Socket;
+	store: Store;
 
-	constructor(socket: any, store: any) {
+	constructor(socket: SocketIOClient.Socket, store: Store) {
 		this.socket = socket;
 		this.store = store;
 		this.subscribe();
@@ -16,32 +17,31 @@ class RoomEndpointClass {
 	subscribe() {
 		this.socket.on(socketConfig.ROOM_CREATED, (data: roomDO) => {
 			this.store.dispatch(roomActions.createRoom(data));
-		})
+		});
 		this.socket.on(socketConfig.ROOM_CONNECTED, (data: roomDO) => {
 			this.store.dispatch(roomActions.joinRoom(data));
-		})
+		});
 		this.socket.on(socketConfig.ROOM_IS_FULL, () => {
-			this.store.dispatch();
-		})
+			// this.store.dispatch();
+		});
 		this.socket.on(socketConfig.ROOM_DOESNT_EXIST, () => {
-			console.log('Hi');
-			this.store.dispatch();
-		})
+			// this.store.dispatch();
+		});
 		this.socket.on(socketConfig.USER_JOINED, (data: playerDO) => {
 			this.store.dispatch(roomActions.addPlayer(data));
-		})
+		});
 		this.socket.on(socketConfig.USER_CAME_OUT, (data: playerDO) => {
 			this.store.dispatch(roomActions.removePlayer(data));
-		})
+		});
 		this.socket.on(socketConfig.USER_READY, (data: playerDO) => {
 			this.store.dispatch(roomActions.playerReady(data));
-		})
+		});
 		this.socket.on(socketConfig.USER_NOT_READY, (data: playerDO) => {
 			this.store.dispatch(roomActions.playerNotReady(data));
-		})
+		});
 		this.socket.on(socketConfig.NEW_GM, () => {
 			this.store.dispatch(roomActions.newGM());
-		})
+		});
 	}
 
 	createRoom(data: roomCreateDO) {

@@ -1,20 +1,26 @@
 .StoryCard {
-	height: 700px;
 	width: 450px;
-	border: 2px solid darkgrey;
+	height: 700px;
+
+	border: 2px solid #a9a9a9;
 	border-radius: 15px;
+
+	box-shadow: 0 10px 10px 2px rgba(0 0 0 / .2);
+
 	overflow: hidden;
-	box-shadow: 0 10px 10px 2px rgba(0, 0, 0, .2);
 
 	&-Header {
-		height: 35%;
-		display: flex;
-		flex-direction: column;
 		position: relative;
 
+		display: flex;
+		flex-direction: column;
+
+		height: 35%;
+
 		&Title {
-			margin: 25px 20px 0;
 			max-width: 250px;
+
+			margin: 25px 20px 0;
 		}
 	}
 
@@ -22,41 +28,48 @@
 		height: 50%;
 
 		.StoryCard-HeaderThumb {
-			height: 100%;
 			position: relative;
+
+			height: 100%;
 		}
 
 		.StoryCard-Role-Image {
-			height: 190px;
-			width: 120px;
 			position: absolute;
 			right: 10px;
 			bottom: -20px;
+
+			width: 120px;
+			height: 190px;
 		}
 	}
 
 	&-Location-Image {
 		position: absolute;
 		top: 0;
-		left: 0;
 		right: 0;
 		bottom: 0;
+		left: 0;
+
 		background-repeat: no-repeat, no-repeat;
 		background-position: 50%, 50%;
 		background-size: cover, cover;
 	}
 
 	&-Role-Image {
-		height: 230px;
-		width: 150px;
-		background-repeat: no-repeat, no-repeat;
-		background-position: 50%, 50%;
-		background-size: cover, cover;
 		position: absolute;
 		right: 20px;
 		bottom: 0;
+
+		width: 150px;
+		height: 230px;
+
 		border-radius: 5px;
-		box-shadow: 0 5px 5px 5px rgba(0, 0, 0, .5);
+
+		background-repeat: no-repeat, no-repeat;
+		background-position: 50%, 50%;
+		background-size: cover, cover;
+
+		box-shadow: 0 5px 5px 5px rgba(0 0 0 / .5);
 	}
 
 	&-Location {
@@ -69,6 +82,7 @@
 
 	&-Story {
 		margin: 30px 20px 40px;
+
 		font-size: 18px;
 	}
 }

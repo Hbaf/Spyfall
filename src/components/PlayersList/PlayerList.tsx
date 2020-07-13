@@ -19,18 +19,20 @@ interface IPlayerListProps extends IStatePropsRedux, IOwnProps {}
 
 const cnPlayerList = cn('PlayerList');
 
-const PlayerList: React.FC<IPlayerListProps> = ({ className, players = [] }) => {
-	return (
-		<div className={ cnPlayerList(null, [className]) }>
-			{ players.map((player, ind) => <div className={ cnPlayerList('Player', { ready: player.ready}) } key={ ind }>{ player.userName }</div>) }
-		</div>
-	)
-}
+const PlayerList: React.FC<IPlayerListProps> = ({ className, players = [] }) => (
+	<div className={cnPlayerList(null, [ className ])}>
+		{
+			players.map((playerItem, ind) => (
+				<div className={cnPlayerList('Player', { ready: playerItem.ready })} key={ind}>
+					{ playerItem.userName }
+				</div>
+			))
+		}
+	</div>
+);
 
 const mapStateToProps = (state: IState): IStatePropsRedux => (
-	{
-		players: state.room.players,
-	}
-)
+	{ players: state.room.players }
+);
 
 export default connect(mapStateToProps)(PlayerList);

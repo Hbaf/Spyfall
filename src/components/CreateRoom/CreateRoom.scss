@@ -2,15 +2,18 @@
 	width: 35vw;
 
 	&-Setting {
-		margin: 10px auto 0;
 		display: flex;
 		justify-content: space-between;
 
+		margin: 10px auto 0;
+
 		label {
 			width: 40%;
+
 			margin: 5px 0 0 5%;
-			line-height: 40px;
+
 			font-size: 24px;
+			line-height: 40px;
 		}
 
 		.Input {
@@ -23,9 +26,13 @@
 
 	&-Submit {
 		display: block;
+
 		width: 50%;
+
 		margin: 20px 25% 10px;
-		background-color: darkgrey;
+
+		background-color: #a9a9a9;
+
 		color: #fff;
 	}
 }

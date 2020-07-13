@@ -7,14 +7,10 @@ import CreateRoom from 'components/CreateRoom/CreateRoom';
 
 const cnCreateRoomPage = cn('CreateRoomPage');
 
-class CreateRoomPage extends React.Component {
-	render() {
-		return (
-			<div className={cnCreateRoomPage()}>
-				<CreateRoom />
-			</div>
-		)
-	}
-}
+const CreateRoomPage: React.FC = () => (
+	<div className={cnCreateRoomPage()}>
+		<CreateRoom />
+	</div>
+);
 
 export default CreateRoomPage;

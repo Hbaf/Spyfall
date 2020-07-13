@@ -1,4 +1,4 @@
-import { playerBaseDO, playerDO } from "./room";
+import { playerBaseDO, playerDO } from './room';
 
 export type appDO = playerBaseDO & playerDO &{
 	editions: editionDO[];

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { cn } from '@bem-react/classname';
 
 import { locationGroup, baseLocation, edition } from 'store/types/app';
-import { toggleLocation, toggleEdition} from 'store/actions/app';
+import { toggleLocation, toggleEdition } from 'store/actions/app';
 import IState from 'store/types';
 import { appEndpoint } from 'api';
 
@@ -20,8 +20,8 @@ interface IStatePropsRedux {
 }
 
 interface IDispatchPropsRedux {
-	onLocationClick: (e: any) => void;
-	onLocationGroupClick: (e: any) => void;
+	onLocationClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	onLocationGroupClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface IOwnProps {
@@ -34,68 +34,75 @@ interface IControlPanelProps extends IStatePropsRedux, IDispatchPropsRedux, IOwn
 const cnControlPanel = cn('ControlPanel');
 
 
-const ControlPanel: React.FC<IControlPanelProps> = (props) =>
-{
-	const { className, editions, groups, locations, onLocationClick, onLocationGroupClick } = props;
+const ControlPanel: React.FC<IControlPanelProps> = props => {
+	const { className, editions, locations, onLocationClick, onLocationGroupClick } = props;
 
 	return (
-		<div className={ cnControlPanel(null, [ className ]) }>
-			{ editions.map((edition: edition, index: number) => {
-				const { editionName, selected, locationIds } = edition;
-				return locationIds.length ? (
-					<div className={ cnControlPanel('Group') } key = { index } >
-						<div className={ cnControlPanel('GroupHeader')}>
-							<Input
-								className={ cnControlPanel('GroupCheck') }
-								type = "checkbox"
-								name = { index.toString() }
-								checked = { selected }
-								onChange = { onLocationGroupClick }
-							/>
-							<span className={cnControlPanel("GroupPlaceholder")}>{ editionName }</span>
-						</div>
-						<div className={ cnControlPanel('GroupBody') }>
-							{locationIds.map((locationId: number) => {
-								const { locName: locName, selected: locSelected } = locations[locationId];
+		<div className={cnControlPanel(null, [ className ])}>
+			{
+				editions.map((editionItem: edition, index: number) => {
+					const { editionName, selected, locationIds } = editionItem;
 
-								return (
-									<div className={ cnControlPanel('Location') } key = { locationId } >
-										<Input
-											className = { cnControlPanel('LocationCheck') }
-											type = "checkbox"
-											name = { locationId.toString() }
-											checked = { locSelected }
-											onChange = { onLocationClick }
-										/>
-										<span className={cnControlPanel("LocationPlaceholder")}>{ locName }</span>
-									</div>
-								)
-							})}
-						</div>
-					</div>)
-				:null;
-			})}
+					return locationIds.length ?
+						(
+							<div className={cnControlPanel('Group')} key={index} >
+								<div className={cnControlPanel('GroupHeader')}>
+									<Input
+										className={cnControlPanel('GroupCheck')}
+										type='checkbox'
+										name={index.toString()}
+										checked={selected}
+										onChange={onLocationGroupClick}
+									/>
+									<span className={cnControlPanel('GroupPlaceholder')}>
+										{ editionName }
+									</span>
+								</div>
+								<div className={cnControlPanel('GroupBody')}>
+									{
+										locationIds.map((locationId: number) => {
+											const { locName, selected: locSelected } = locations[locationId];
+
+											return (
+												<div className={cnControlPanel('Location')} key={locationId} >
+													<Input
+														className={cnControlPanel('LocationCheck')}
+														type='checkbox'
+														name={locationId.toString()}
+														checked={locSelected}
+														onChange={onLocationClick}
+													/>
+													<span className={cnControlPanel('LocationPlaceholder')}>
+														{ locName }
+													</span>
+												</div>
+											);
+										})
+									}
+								</div>
+							</div>
+						) :
+						null;
+				})
+			}
 		</div>
-	)
-}
+	);
+};
 
-const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return state.app;
-}
+const mapStateToProps = (state: IState): IStatePropsRedux => state.app;
 
-const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => {
-	return {
-	  	onLocationClick: (e:any) => {
-			const id = +e.target.name;
-			appEndpoint.toggleLocation({id});
-			dispatch(toggleLocation(id));
-		},
-		onLocationGroupClick: (e:any) => {
-			const id = +e.target.name;
-			appEndpoint.toggleEdition({id});
-			dispatch(toggleEdition(id));
-		},
-	}
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => ({
+	onLocationClick: (event: React.ChangeEvent<HTMLInputElement>) => {
+		const id = Number(event.target.name);
+		appEndpoint.toggleLocation({ id });
+		dispatch(toggleLocation(id));
+	},
+	onLocationGroupClick: (event: React.ChangeEvent<HTMLInputElement>) => {
+		const id = Number(event.target.name);
+		appEndpoint.toggleEdition({ id });
+		dispatch(toggleEdition(id));
+	},
+});
 
-export default connect<IStatePropsRedux,IDispatchPropsRedux,IOwnProps>(mapStateToProps, mapDispatchToProps)(ControlPanel);
+export default connect<IStatePropsRedux, IDispatchPropsRedux, IOwnProps>(mapStateToProps, mapDispatchToProps)(ControlPanel);

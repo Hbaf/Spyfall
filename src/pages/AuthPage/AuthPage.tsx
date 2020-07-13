@@ -8,14 +8,14 @@ export interface IAuthProps {
 	isUserLogged: boolean
 }
 
-class AuthPage extends React.Component<IAuthProps> {
-	render() {
-		const { isUserLogged } = this.props;
-		return (
-			isUserLogged ? <Redirect to="/"/> :
+const AuthPage: React.FC<IAuthProps> = props => {
+	const { isUserLogged } = props;
+
+	return (
+		isUserLogged ?
+			<Redirect to='/' /> :
 			<Auth />
-		);
-	}
-}
+	);
+};
 
 export default AuthPage;

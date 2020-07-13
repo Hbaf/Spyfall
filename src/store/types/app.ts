@@ -1,4 +1,4 @@
-import { roleDO, baseLocationDO, locationDO, locationGroupDO, appDO, editionDO } from "api/types/app"
+import { roleDO, baseLocationDO, locationDO, locationGroupDO, appDO, editionDO } from 'api/types/app';
 
 export type appState = appDO;
 

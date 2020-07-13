@@ -1,0 +1,16 @@
+node_modules/**
+back_stub/**
+
+server.js
+
+*config*
+
+*.md
+*.html
+*.scss
+*.png
+*.ico
+*.svg
+*.jpg
+*.woff
+*.json

@@ -1,8 +1,10 @@
 .Button {
 	height: 40px;
+
+	box-sizing: border-box;
 	border: none;
 	border-radius: 5px;
-	line-height: 40px;
+
 	font-size: 20px;
-	box-sizing: border-box;
+	line-height: 40px;
 }

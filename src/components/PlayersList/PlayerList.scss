@@ -3,13 +3,17 @@
 
 	&-Player {
 		width: 100%;
-		line-height: 30px;
-		font-size: 24px;
-		text-align: center;
-		border-bottom: 1px solid darkgrey;
-		border-radius: 5px;
-		background-color: darkgrey;
+
 		margin-bottom: 5px;
+
+		border-bottom: 1px solid #a9a9a9;
+		border-radius: 5px;
+
+		background-color: #a9a9a9;
+
+		font-size: 24px;
+		line-height: 30px;
+		text-align: center;
 
 		&_ready {
 			background-color: #2ecc71;

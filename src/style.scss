@@ -1,14 +1,16 @@
 @font-face {
-	font-family: "spy-agency";
-	src: url("./consts/fonts/spyagency/3_2ital.woff") format("woff");
+	font-family: 'spy-agency';
+	src: url('./consts/fonts/spyagency/3_2ital.woff') format('woff');
 }
 
 body {
 	margin: 0;
 	padding: 0;
-	font-family: "Open Sans";
+
 	background-color: #dcdde1;
+
 	color: #353b48;
+	font-family: 'Open Sans';
 
 	a,
 	a:visited {
@@ -17,21 +19,23 @@ body {
 
 	::-webkit-scrollbar {
 		width: 7px;
+
 		background-color: unset;
 	}
 
 	* {
-		scrollbar-color: darkgrey #dcdde1;
+		scrollbar-color: #a9a9a9 #dcdde1;
 		scrollbar-width: thin;
 	}
 
 	::-webkit-scrollbar-track {
-		border: solid 1px darkgrey;
+		border: solid 1px #a9a9a9;
 		border-radius: 10px;
 	}
 
 	::-webkit-scrollbar-thumb {
 		border-radius: 5px;
-		background-color: darkgrey;
+
+		background-color: #a9a9a9;
 	}
 }

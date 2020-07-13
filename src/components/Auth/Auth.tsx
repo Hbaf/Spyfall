@@ -24,10 +24,9 @@ interface IStatePropsRedux {
 	userName: string;
 }
 
-interface IAuthProps extends IStatePropsRedux {}
+type IAuthProps = IStatePropsRedux
 
 class Auth extends React.Component<IAuthProps, IOwnState> {
-
 	constructor(props: IAuthProps) {
 		super(props);
 		this.state = {
@@ -38,89 +37,100 @@ class Auth extends React.Component<IAuthProps, IOwnState> {
 			confirmEmail: '',
 			// TODO add display pass feature
 			displayPass: false,
-		}
+		};
 	}
+
 	render() {
+		const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+			this.setState({ login: event.target.name === 'in' });
+		};
 
-		const onChangeHandler = (e: any) => {
-			this.setState({ login: e.target.name === 'in' })
-		
-		}
+		const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+			event.preventDefault();
+		};
 
-		const onSubmit = (e: any) => {
-			e.preventDefault();
-		}
+		const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+			this.setState({ email: event.target.value });
+		};
 
-		const onEmailChange = (e: any) => {
-			this.setState({ email: e.target.value })
-		}
+		const onConfirmEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+			this.setState({ confirmEmail: event.target.value });
+		};
 
-		const onConfirmEmailChange = (e: any) => {
-			this.setState({ confirmEmail: e.target.value })
-		}
+		const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+			this.setState({ userName: event.target.value });
+		};
 
-		const onNameChange = (e: any) => {
-			this.setState({ userName: e.target.value });
-		}
-
-		const onPassChange = (e: any) => {
-			this.setState({ password: e.target.value });
-		}
+		const onPassChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+			this.setState({ password: event.target.value });
+		};
 
 		return (
 			<form className={cnAuth()} onSubmit={onSubmit}>
 				<div className={cnAuth('Tabs')}>
 					<div className={cnAuth('Tab')}>
-						<label className={cnAuth('TabPlaceholder')}>Sign In</label>
-						<Input className={cnAuth('TabContent')} type='radio' name='in' onChange={ onChangeHandler } checked={ this.state.login } />
+						<label className={cnAuth('TabPlaceholder')}>
+							Sign In
+						</label>
+						<Input className={cnAuth('TabContent')} type='radio' name='in' onChange={onChangeHandler} checked={this.state.login} />
 					</div>
 					<div className={cnAuth('Tab')}>
-						<label className={cnAuth('TabPlaceholder')}>Sign Up</label>
-						<Input className={cnAuth('TabContent')} type='radio' name='up' onChange={ onChangeHandler } checked={ !this.state.login } />
+						<label className={cnAuth('TabPlaceholder')}>
+							Sign Up
+						</label>
+						<Input className={cnAuth('TabContent')} type='radio' name='up' onChange={onChangeHandler} checked={!this.state.login} />
 					</div>
 				</div>
 				<div className={cnAuth('Body')}>
 					{
-						!this.state.login ?
-							<React.Fragment>
+						this.state.login ?
+							null :
+							<>
 								<div className={cnAuth('Input')}>
 									<Input
 										className={cnAuth('TextInput')}
-										mods={{type: 'email'}}
+										mods={{ type: 'email' }}
 										value={this.state.email}
 										onChange={onEmailChange}
 									/>
-									<span className={cnAuth('TextInputPlaceholder')}>Email</span>
+									<span className={cnAuth('TextInputPlaceholder')}>
+										Email
+									</span>
 								</div>
 								<div className={cnAuth('Input')}>
 									<Input
 										className={cnAuth('TextInput')}
-										mods={{type: 'email-repeat'}}
+										mods={{ type: 'email-repeat' }}
 										value={this.state.confirmEmail}
 										onChange={onConfirmEmailChange}
 									/>
-									<span className={cnAuth('TextInputPlaceholder')}>Repeat email</span>
+									<span className={cnAuth('TextInputPlaceholder')}>
+										Repeat email
+									</span>
 								</div>
-							</React.Fragment>
-						: null
+							</>
 					}
 					<div className={cnAuth('Input')}>
 						<Input
 							className={cnAuth('TextInput')}
-							mods={{type: 'username'}}
+							mods={{ type: 'username' }}
 							value={this.state.userName}
 							onChange={onNameChange}
 						/>
-						<span className={cnAuth('TextInputPlaceholder')}>Username</span>
+						<span className={cnAuth('TextInputPlaceholder')}>
+							Username
+						</span>
 					</div>
 					<div className={cnAuth('Input')}>
 						<Input
 							className={cnAuth('TextInput')}
-							type={ this.state.displayPass ? 'text' : 'password' }
+							type={this.state.displayPass ? 'text' : 'password'}
 							value={this.state.password}
 							onChange={onPassChange}
 						/>
-						<span className={cnAuth('TextInputPlaceholder')}>Password</span>
+						<span className={cnAuth('TextInputPlaceholder')}>
+							Password
+						</span>
 					</div>
 					<Button className={cnAuth('InputSubmit')} text='Submit' />
 				</div>
@@ -129,11 +139,9 @@ class Auth extends React.Component<IAuthProps, IOwnState> {
 	}
 }
 
-const mapStateToProps = (state: IState): IStatePropsRedux => {
-	console.log(state.app.userName);
-	return {
-		userName: state.app.userName,
-	}
-}
+const mapStateToProps = (state: IState): IStatePropsRedux => (
+	{ userName: state.app.userName }
+);
 
-export default connect<IStatePropsRedux, {}, {}>(mapStateToProps)(Auth);
+// eslint-disable-next-line
+export default connect<IStatePropsRedux, any, any>(mapStateToProps)(Auth);

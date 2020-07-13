@@ -9,31 +9,32 @@ const initState: gameState = {
 	role: '',
 	roleImgUrl: undefined,
 	story: '',
-}
+};
 
 export default function gameReducer(state: gameState = initState, action: actionType): gameState {
 	switch (action.type) {
-		case types.RESET_GAME: {
-			return {
-				...state,
-				gameStarted: false,
-				location: '',
-				locationImgUrl: undefined,
-				role: '',
-				roleImgUrl: undefined,
-				story: '',
-			}
-		}
+	case types.RESET_GAME: {
+		return {
+			...state,
+			gameStarted: false,
+			location: '',
+			locationImgUrl: undefined,
+			role: '',
+			roleImgUrl: undefined,
+			story: '',
+		};
+	}
 
-		case types.START_GAME: {
-			const data = action.payload;
-			return {
-				...state,
-				gameStarted: true,
-				...data,
-			}
-		}
+	case types.START_GAME: {
+		const data = action.payload;
 
-		default: return state
+		return {
+			...state,
+			gameStarted: true,
+			...data,
+		};
+	}
+
+	default: return state;
 	}
 }

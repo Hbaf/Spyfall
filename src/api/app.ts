@@ -1,12 +1,13 @@
-import * as socketConfig from "configs/api/socketConfig.json";
+import * as socketConfig from 'configs/api/socketConfig.json';
 import * as appAction from 'store/actions/app';
-import { appDO, locationToggleDO, editionToggleDO } from "./types/app";
+import { appDO, locationToggleDO, editionToggleDO } from './types/app';
+import { Store } from 'redux';
 
 class AppEndpointClass {
-	socket: any;
-	store: any;
+	socket: SocketIOClient.Socket;
+	store: Store;
 
-	constructor(socket: any, store: any) {
+	constructor(socket: SocketIOClient.Socket, store: Store) {
 		this.socket = socket;
 		this.store = store;
 		this.subscribe();
@@ -15,13 +16,13 @@ class AppEndpointClass {
 	subscribe() {
 		this.socket.on(socketConfig.APP_INITED, (data: appDO) => {
 			this.store.dispatch(appAction.appInited(data));
-		})
+		});
 		this.socket.on(socketConfig.TOGGLE_LOCATION, (data: locationToggleDO) => {
 			this.store.dispatch(appAction.toggleLocation(data.id));
-		})
+		});
 		this.socket.on(socketConfig.TOGGLE_ALL_LOCATIONS, (data: locationToggleDO) => {
 			this.store.dispatch(appAction.toggleEdition(data.id));
-		})
+		});
 	}
 
 	toggleLocation(data: locationToggleDO) {

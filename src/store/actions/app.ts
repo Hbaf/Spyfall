@@ -6,12 +6,12 @@ import { appState } from 'store/types/app';
 export const setName = (userName: string): actionType => ({
 	type: types.SET_NAME,
 	payload: userName,
-})
+});
 
 export const appInited = (data: appState): actionType => ({
 	type: types.APP_INITED,
 	payload: data,
-})
+});
 
 export const toggleLocation = (id: number): actionType => ({
 	type: types.TOGGLE_LOCATION,

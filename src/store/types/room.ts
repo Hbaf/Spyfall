@@ -1,4 +1,4 @@
-import { playerBaseDO, playerDO } from "api/types/room";
+import { playerBaseDO, playerDO } from 'api/types/room';
 
 export type player = playerBaseDO & playerDO & {
 	ready: boolean;

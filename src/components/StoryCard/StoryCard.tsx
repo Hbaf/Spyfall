@@ -6,7 +6,7 @@ import IState from 'store/types';
 import { gameState } from 'store/types/game';
 
 
-interface IStatePropsRedux extends gameState {}
+type IStatePropsRedux = gameState
 
 interface IOwnProps {
 	className: string;
@@ -15,27 +15,29 @@ interface IOwnProps {
 interface IStoryCardProps extends IStatePropsRedux, IOwnProps {}
 
 
-const cnStoryCard = cn('StoryCard')
-const StoryCard: React.FC<IStoryCardProps> = ({ className, location, locationImgUrl, role, roleImgUrl, story }) => {
-	return (
-		<div className={cnStoryCard(null, [ className ])}>
-			<div className={cnStoryCard('Header', { 'Image' : Boolean(locationImgUrl) })}>
-				<div className={cnStoryCard('HeaderThumb')}>
-					{ locationImgUrl ? <div className={cnStoryCard('Location-Image')} style={{ backgroundImage: "url('" + locationImgUrl + "')" }}/> : null }
-					{ roleImgUrl ? <div className={cnStoryCard('Role-Image')} style={{ backgroundImage: ("url('" + roleImgUrl + "')") }} /> : null }
+const cnStoryCard = cn('StoryCard');
+const StoryCard: React.FC<IStoryCardProps> = ({ className, location, locationImgUrl, role, roleImgUrl, story }) => (
+	<div className={cnStoryCard(null, [ className ])}>
+		<div className={cnStoryCard('Header', { Image: Boolean(locationImgUrl) })}>
+			<div className={cnStoryCard('HeaderThumb')}>
+				{ locationImgUrl ? <div className={cnStoryCard('Location-Image')} style={{ backgroundImage: `url('${ locationImgUrl }')` }} /> : null }
+				{ roleImgUrl ? <div className={cnStoryCard('Role-Image')} style={{ backgroundImage: (`url('${ roleImgUrl }')`) }} /> : null }
+			</div>
+			<div className={cnStoryCard('HeaderTitle')}>
+				<div className={cnStoryCard('Location')}>
+					{ location }
 				</div>
-				<div className={cnStoryCard('HeaderTitle')}>
-					<div className={cnStoryCard('Location')}>{ location }</div>
-					<div className={cnStoryCard('Role')}>{`You are ${role}` }</div>
+				<div className={cnStoryCard('Role')}>
+					{`You are ${ role }` }
 				</div>
 			</div>
-			<div className={cnStoryCard('Story')}>{ story }</div>
 		</div>
-	);
-};
+		<div className={cnStoryCard('Story')}>
+			{ story }
+		</div>
+	</div>
+);
 
-const mapStateToProps = (state: IState): IStatePropsRedux => {
-	return state.game;
-}
+const mapStateToProps = (state: IState): IStatePropsRedux => state.game;
 
 export default connect(mapStateToProps)(StoryCard);

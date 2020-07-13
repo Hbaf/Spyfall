@@ -1,11 +1,12 @@
 import { roomState } from './room';
-import { gameState } from "./game";
-import { appState } from "./app";
+import { gameState } from './game';
+import { appState } from './app';
 
 export type actionType = {
 	type: string;
+	// eslint-disable-next-line
 	payload?: any;
-	meta?: any;
+	meta?: string;
 }
 
 type IState = {
