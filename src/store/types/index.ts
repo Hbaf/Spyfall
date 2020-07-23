@@ -4,7 +4,7 @@ import { appState } from './app';
 
 export type actionType = {
 	type: string;
-	// eslint-disable-next-line
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	payload?: any;
 	meta?: string;
 }

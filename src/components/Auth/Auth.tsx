@@ -143,5 +143,5 @@ const mapStateToProps = (state: IState): IStatePropsRedux => (
 	{ userName: state.app.userName }
 );
 
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default connect<IStatePropsRedux, any, any>(mapStateToProps)(Auth);

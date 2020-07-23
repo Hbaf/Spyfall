@@ -17,7 +17,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './dist/index.html',
-			favicon: './src/images/Spy_favicon.ico',
+			favicon: './src/media/images/Spy_favicon.ico',
 		}),
 	],
 	module: {

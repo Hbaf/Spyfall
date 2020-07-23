@@ -141,7 +141,7 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			try {
 				document.execCommand('copy');
 			} catch (err) {
-				// eslint-disable-next-line
+				// eslint-disable-next-line no-console
 				console.error('Copy error');
 			}
 

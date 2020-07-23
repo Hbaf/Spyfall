@@ -27,7 +27,7 @@ interface IStatePropsRedux {
 }
 
 interface IOwnProps {
-	// eslint-disable-next-line
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	history: any;
 }
 
@@ -84,10 +84,11 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 					<span>
 						Max players
 					</span>
+					{ /* eslint-disable-next-line jsx-a11y/no-onchange */}
 					<select
 						className={cn('Input')({ type: 'text' })}
 						value={this.state.maxPlayers}
-						onBlur={
+						onChange={
 							(event: React.ChangeEvent<HTMLSelectElement>) => {
 								this.setState({ maxPlayers: Number(event.target.value) });
 							}

@@ -34,7 +34,11 @@
 			border-bottom: 1px solid #a9a9a9;
 
 			cursor: pointer;
+			/* stylelint-disable */
+			-moz-appearance: none;
+			-webkit-appearance: none;
 			appearance: none;
+			/* stylelint-enable */
 
 			&:checked {
 				border-bottom: 2px solid #000;

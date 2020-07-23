@@ -13,6 +13,7 @@ const Footer: React.FC = () => (
 		</a>
 		{' '}
 		designed by Alexandr Ushan, published by
+		{' '}
 		<a href='https://hwint.ru/' target='_blank' rel='noopener noreferrer'>
 			Hobby World
 		</a>

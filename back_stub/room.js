@@ -2,7 +2,6 @@ module.exports.Room = class {
 	constructor(id, user, data, locations, editions, groups) {
 		this._id = id;
 		this._users = [ user ];
-		// eslint-disable-next-line
 		this._GM = user.name,
 		this._maxPlayers = data.maxPlayers,
 		this._password = data.password,
