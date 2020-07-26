@@ -1,6 +1,37 @@
-.MainPage-Game {
+.MainPage {
 
-	&.GameField {
+	&-Game {
 		margin: 0 auto;
+	}
+
+	&-Control {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		width: 450px;
+
+		margin: 0 auto;
+	}
+
+	&-Hint {
+		font-size: 26px;
+		line-height: 50px;
+		text-align: center;
+	}
+
+	&-JoinButtonContainer,
+	&-CreateButtonContainer,
+	&-JoinButton,
+	&-CreateButton {
+		width: 250px;
+	}
+
+	&-JoinButtonContainer {
+		margin-top: 85px;
+	}
+
+	&-CreateButtonContainer {
+		margin-top: 65px;
 	}
 }

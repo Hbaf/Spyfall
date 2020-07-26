@@ -28,6 +28,10 @@ body {
 	* {
 		scrollbar-color: #a9a9a9 #dcdde1;
 		scrollbar-width: thin;
+
+		outline: none;
+
+		font-family: 'Open Sans';
 	}
 
 	::-webkit-scrollbar-track {

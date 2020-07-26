@@ -16,6 +16,7 @@
 		"sourceType": "module"
 	},
 	"plugins": [
+		"import",
 		"react",
 		"@typescript-eslint",
 		"jsx-a11y"
@@ -424,6 +425,22 @@
 		"import/no-unresolved": "off",
 		"import/extensions": "off",
 
+		"import/order": [
+			"error",
+			{
+				"newlines-between": "always",
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					"parent",
+					"sibling",
+					"index",
+					"object"
+				]
+			}
+		],
+
 		"react/boolean-prop-naming": 0,
 		"react/button-has-type": 2,
 		"react/default-props-match-prop-types": 0,
@@ -574,6 +591,7 @@
 		"react/jsx-uses-vars": 2,
 		"react/jsx-wrap-multilines": 2,
 		"@typescript-eslint/no-explicit-any": "error",
+		"@typescript-eslint/no-empty-interface": "off",
 		"@typescript-eslint/explicit-module-boundary-types": "off",
 		"jsx-a11y/no-noninteractive-element-interactions": "off"
 	},

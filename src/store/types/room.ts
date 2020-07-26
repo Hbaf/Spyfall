@@ -4,8 +4,11 @@ export type player = playerBaseDO & playerDO & {
 	ready: boolean;
 }
 
-export type roomState = {
+export type roomBase = {
 	roomId: string;
+}
+
+export type roomState = roomBase & {
     isGM: boolean;
     players: player[];
     maxPlayers: number;

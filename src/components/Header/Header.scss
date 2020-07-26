@@ -6,8 +6,6 @@
 
 	padding: 10px 10px 0;
 
-	font-family: 'spy-agency';
-
 	&-Logo {
 		display: flex;
 
@@ -25,6 +23,7 @@
 	}
 
 	&-Title {
+		font-family: 'spy-agency';
 		font-size: 36px;
 		line-height: 50px;
 	}
@@ -41,6 +40,7 @@
 	&-SignOut {
 		margin: 0 20px;
 
+		font-family: 'spy-agency';
 		font-size: 24px;
 		line-height: 50px;
 		text-decoration: none;

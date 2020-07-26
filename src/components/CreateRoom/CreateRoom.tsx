@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-
+import { withRouter, Link } from 'react-router-dom';
+import { Dispatch } from 'redux';
 import { cn } from '@bem-react/classname';
-
-import './CreateRoom.scss';
 
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
@@ -13,7 +11,9 @@ import { roomCreateDO } from 'api/types/room';
 import { roomEndpoint } from 'api';
 import { setName } from 'store/actions/room';
 import IState from 'store/types';
-import { Dispatch } from 'redux';
+
+
+import './CreateRoom.scss';
 
 type IOwnState = roomCreateDO;
 
@@ -68,57 +68,56 @@ class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
 
 	render() {
 		return (
-			<form className={cnCreateRoom()} onSubmit={this.handleRoomCreate}>
-				<div className={cnCreateRoom('Setting', { type: 'name' })}>
-					<span>
-						Your name
-					</span>
+			<div className={cnCreateRoom()}>
+				<span className={cnCreateRoom('Title')}>
+					Create room
+				</span>
+				<form className={cnCreateRoom('Form')} onSubmit={this.handleRoomCreate}>
 					<Input
-						className={cn('Input')({ type: 'text' })}
+						className={cnCreateRoom('InputItem')}
 						value={this.state.userName}
+						placeholder='Your name'
 						onChange={this.handleNameEnter}
 						required
 					/>
-				</div>
-				<div className={cnCreateRoom('Setting', { type: 'players-amount' })}>
-					<span>
-						Max players
-					</span>
-					{ /* eslint-disable-next-line jsx-a11y/no-onchange */}
-					<select
-						className={cn('Input')({ type: 'text' })}
-						value={this.state.maxPlayers}
-						onChange={
-							(event: React.ChangeEvent<HTMLSelectElement>) => {
-								this.setState({ maxPlayers: Number(event.target.value) });
+					<div className={cnCreateRoom('InputItem')}>
+						<span className={cnCreateRoom('InputTitle')}>
+							Max players
+						</span>
+						{ /* eslint-disable-next-line jsx-a11y/no-onchange */}
+						<select
+							className={cn('Input')({ type: 'text' })}
+							value={this.state.maxPlayers}
+							onChange={
+								(event: React.ChangeEvent<HTMLSelectElement>) => {
+									this.setState({ maxPlayers: Number(event.target.value) });
+								}
 							}
-						}
-					>
-						{
-							Array(maxUserAmount - minUserAmount + 1).fill(0)
-								.map(
-									(item, index) => (
-										<option key={index}>
-											{minUserAmount + index}
-										</option>
-									),
-								)
-						}
-					</select>
-				</div>
-				<div className={cnCreateRoom('Setting', { type: 'password' })}>
-					<span>
-						Password (Not required)
-					</span>
+						>
+							{
+								Array(maxUserAmount - minUserAmount + 1).fill(0)
+									.map(
+										(item, index) => (
+											<option key={index}>
+												{minUserAmount + index}
+											</option>
+										),
+									)
+							}
+						</select>
+					</div>
 					<Input
-						className={cn('Input')({ type: 'text' })}
-						type='text'
+						className={cnCreateRoom('InputItem')}
 						value={this.state.password}
+						placeholder='Password'
 						onChange={this.handlePassEnter}
 					/>
-				</div>
-				<Button className={cnCreateRoom('Submit')} text='Create room' />
-			</form>
+					<Button className={cnCreateRoom('InputSubmit')} text='Create room' />
+				</form>
+				<Link className={cnCreateRoom('RedirectButtonContainer')} to='/join'>
+					<Button className={cnCreateRoom('RedirectButton')} text='Join room' />
+				</Link>
+			</div>
 		);
 	}
 }

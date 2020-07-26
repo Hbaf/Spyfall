@@ -7,10 +7,9 @@ import { locationGroup, baseLocation, edition } from 'store/types/app';
 import { toggleLocation, toggleEdition } from 'store/actions/app';
 import IState from 'store/types';
 import { appEndpoint } from 'api';
-
-import './ControlPanel.scss';
-
 import Input from 'components/Input/Input';
+
+import './LocationsChecker.scss';
 
 
 interface IStatePropsRedux {
@@ -28,51 +27,51 @@ interface IOwnProps {
 	className: string;
 }
 
-interface IControlPanelProps extends IStatePropsRedux, IDispatchPropsRedux, IOwnProps {}
+interface ILocationsCheckerProps extends IStatePropsRedux, IDispatchPropsRedux, IOwnProps {}
 
 
-const cnControlPanel = cn('ControlPanel');
+const cnLocationsChecker = cn('LocationsChecker');
 
 
-const ControlPanel: React.FC<IControlPanelProps> = props => {
+const LocationsChecker: React.FC<ILocationsCheckerProps> = props => {
 	const { className, editions, locations, onLocationClick, onLocationGroupClick } = props;
 
 	return (
-		<div className={cnControlPanel(null, [ className ])}>
+		<div className={cnLocationsChecker(null, [ className ])}>
 			{
 				editions.map((editionItem: edition, index: number) => {
 					const { editionName, selected, locationIds } = editionItem;
 
 					return locationIds.length ?
 						(
-							<div className={cnControlPanel('Group')} key={index} >
-								<div className={cnControlPanel('GroupHeader')}>
+							<div className={cnLocationsChecker('Group')} key={index} >
+								<div className={cnLocationsChecker('GroupHeader')}>
 									<Input
-										className={cnControlPanel('GroupCheck')}
+										className={cnLocationsChecker('GroupCheck')}
 										type='checkbox'
 										name={index.toString()}
 										checked={selected}
 										onChange={onLocationGroupClick}
 									/>
-									<span className={cnControlPanel('GroupPlaceholder')}>
+									<span className={cnLocationsChecker('GroupPlaceholder')}>
 										{ editionName }
 									</span>
 								</div>
-								<div className={cnControlPanel('GroupBody')}>
+								<div className={cnLocationsChecker('GroupBody')}>
 									{
 										locationIds.map((locationId: number) => {
 											const { locName, selected: locSelected } = locations[locationId];
 
 											return (
-												<div className={cnControlPanel('Location')} key={locationId} >
+												<div className={cnLocationsChecker('Location')} key={locationId} >
 													<Input
-														className={cnControlPanel('LocationCheck')}
+														className={cnLocationsChecker('LocationCheck')}
 														type='checkbox'
 														name={locationId.toString()}
 														checked={locSelected}
 														onChange={onLocationClick}
 													/>
-													<span className={cnControlPanel('LocationPlaceholder')}>
+													<span className={cnLocationsChecker('LocationPlaceholder')}>
 														{ locName }
 													</span>
 												</div>
@@ -105,4 +104,4 @@ const mapDispatchToProps = (dispatch: any): IDispatchPropsRedux => ({
 	},
 });
 
-export default connect<IStatePropsRedux, IDispatchPropsRedux, IOwnProps>(mapStateToProps, mapDispatchToProps)(ControlPanel);
+export default connect<IStatePropsRedux, IDispatchPropsRedux, IOwnProps>(mapStateToProps, mapDispatchToProps)(LocationsChecker);
