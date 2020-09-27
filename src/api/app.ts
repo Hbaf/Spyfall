@@ -1,7 +1,9 @@
+import { Store } from 'redux';
+
 import * as socketConfig from 'configs/api/socketConfig.json';
 import * as appAction from 'store/actions/app';
+
 import { appDO, locationToggleDO, editionToggleDO } from './types/app';
-import { Store } from 'redux';
 
 class AppEndpointClass {
 	socket: SocketIOClient.Socket;

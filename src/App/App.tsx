@@ -16,14 +16,14 @@ const App: React.FC = () => (
 		<Header isUserLogged={false} />
 		<div className='AppContainer'>
 			<Switch>
-				<Route path='/' exact component={MainPage}			/>
-				<Route path='/profile' component={ProfilePage}		/>
-				<Route path='/auth' component={AuthPage}			/>
-				<Route path='/create' component={CreateRoomPage}	/>
-				<Route path='/join' component={JoinRoomPage}			/>
-				<Route path='/credits' component={MainPage}			/>
-				<Route path='/settings' component={MainPage}		/>
-				<Route path='/faq' component={MainPage}				/>
+				<Route path='/' exact component={MainPage} />
+				<Route path='/profile' component={ProfilePage} />
+				<Route path='/auth' component={AuthPage} />
+				<Route path='/create' component={CreateRoomPage} />
+				<Route path='/join' component={JoinRoomPage} />
+				<Route path='/credits' component={MainPage}	/>
+				<Route path='/settings' component={MainPage} />
+				<Route path='/faq' component={MainPage}	/>
 				<Redirect to='/' />
 			</Switch>
 		</div>

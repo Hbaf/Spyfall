@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-
 import { cn } from '@bem-react/classname';
 
 import './Auth.scss';

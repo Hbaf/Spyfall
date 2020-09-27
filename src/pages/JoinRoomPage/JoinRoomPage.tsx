@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
 
-import JoinRoom from 'components/JoinRoom/JoinRoom';
+import JoinRoom from 'pages/JoinRoomPage/components/JoinRoom/JoinRoom';
 
 import './JoinRoomPage.scss';
 

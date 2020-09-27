@@ -126,11 +126,7 @@ module.exports = {
 			},
 			{
 				emptyLineBefore: 'always',
-				properties: ['display', 'visibility', 'float', 'clear', 'flex', 'flex-basis', 'flex-direction', 'flex-flow', 'flex-grow', 'flex-shrink', 'flex-wrap', 'align-content', 'align-items', 'align-self', 'justify-content', 'order'],
-			},
-			{
-				emptyLineBefore: 'always',
-				properties: ['grid', 'grid-after', 'grid-area', 'grid-auto-columns', 'grid-auto-flow', 'grid-auto-rows', 'grid-before', 'grid-column', 'grid-column-end', 'grid-column-gap', 'grid-column-start', 'grid-columns', 'grid-end', 'grid-gap', 'grid-row', 'grid-row-end', 'grid-row-gap', 'grid-row-start', 'grid-rows', 'grid-start', 'grid-template', 'grid-template-areas', 'grid-template-columns', 'grid-template-rows'],
+				properties: ['display', 'visibility', 'float', 'clear', 'flex', 'flex-basis', 'flex-direction', 'flex-flow', 'flex-grow', 'flex-shrink', 'flex-wrap', 'align-content', 'align-items', 'align-self', 'justify-content', 'order', 'grid', 'grid-after', 'grid-area', 'grid-auto-columns', 'grid-auto-flow', 'grid-auto-rows', 'grid-before', 'grid-column', 'grid-column-end', 'grid-column-gap', 'grid-column-start', 'grid-columns', 'grid-end', 'grid-gap', 'grid-row', 'grid-row-end', 'grid-row-gap', 'grid-row-start', 'grid-rows', 'grid-start', 'grid-template', 'grid-template-areas', 'grid-template-columns', 'grid-template-rows'],
 			},
 			{
 				emptyLineBefore: 'always',

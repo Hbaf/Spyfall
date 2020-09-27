@@ -1,0 +1,17 @@
+{
+	"editor.codeActionsOnSave": [
+		"source.fixAll.eslint",
+		"source.fixAll.stylelint"
+	],
+	"editor.detectIndentation": false,
+	"editor.fontSize": 12,
+	"editor.insertSpaces": false,
+	"eslint.format.enable": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"terminal.integrated.fontSize": 12,
+	"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+	"workbench.list.openMode": "doubleClick",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+}

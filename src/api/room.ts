@@ -1,8 +1,10 @@
+import { Store } from 'redux';
+
 import * as socketConfig from 'configs/api/socketConfig.json';
 import * as roomActions from 'store/actions/room';
 import { roomDO } from 'api/types/room';
+
 import { roomCreateDO, joinRoomDO, playerDO } from './types/room';
-import { Store } from 'redux';
 
 class RoomEndpointClass {
 	socket: SocketIOClient.Socket;
@@ -22,10 +24,10 @@ class RoomEndpointClass {
 			this.store.dispatch(roomActions.joinRoom(data));
 		});
 		this.socket.on(socketConfig.ROOM_IS_FULL, () => {
-			// this.store.dispatch();
+			// This.store.dispatch();
 		});
 		this.socket.on(socketConfig.ROOM_DOESNT_EXIST, () => {
-			// this.store.dispatch();
+			// This.store.dispatch();
 		});
 		this.socket.on(socketConfig.USER_JOINED, (data: playerDO) => {
 			this.store.dispatch(roomActions.addPlayer(data));

@@ -2,8 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { cn } from '@bem-react/classname';
 
-import './GameField.scss';
-
 import IState from 'store/types';
 import { roomState, player } from 'store/types/room';
 import { baseLocation } from 'store/types/app';
@@ -12,11 +10,14 @@ import { roomEndpoint, gameEndpoint } from 'api';
 import { minLocationsAmount, minUserAmount } from 'consts/consts';
 import Button from 'components/Button/Button';
 import Tooltip from 'components/Tooltip/Tooltip';
-import StoryCard from 'components/StoryCard/StoryCard';
-import PlayerList from 'components/PlayersList/PlayerList';
-import LocationsChecker from 'components/LocationsChecker/LocationsChecker';
-import LocationsList from 'components/LocationsList/LocationsList';
-import LocationsFlipper from 'components/LocationsFlipper/LocationsFlipper';
+
+import StoryCard from '../StoryCard/StoryCard';
+import PlayerList from '../PlayersList/PlayerList';
+import LocationsChecker from '../LocationsChecker/LocationsChecker';
+import LocationsList from '../LocationsList/LocationsList';
+import LocationsFlipper from '../LocationsFlipper/LocationsFlipper';
+
+import './GameField.scss';
 
 interface IStatePropsRedux extends roomState {
 	gameStarted: boolean;

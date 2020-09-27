@@ -1,8 +1,10 @@
+import { Store } from 'redux';
+
 import * as socketConfig from 'configs/api/socketConfig.json';
 import * as gameActions from 'store/actions/game';
 import { gameDO } from 'api/types/game';
+
 import { startGameDO } from './types/game';
-import { Store } from 'redux';
 
 class GameEndpointClass {
 	socket: SocketIOClient.Socket;

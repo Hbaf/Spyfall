@@ -6,7 +6,6 @@ import { cn } from '@bem-react/classname';
 import IState from 'store/types';
 import { setName } from 'store/actions/room';
 import { roomEndpoint } from 'api';
-
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 

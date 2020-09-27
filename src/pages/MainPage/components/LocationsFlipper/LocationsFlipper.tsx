@@ -2,10 +2,12 @@ import * as React from 'react';
 import { cn } from '@bem-react/classname';
 import { connect } from 'react-redux';
 
-import './LocationsFlipper.scss';
-import LocationCard from 'components/LocationCard/LocationCard';
 import { baseLocation } from 'store/types/app';
 import IState from 'store/types';
+
+import LocationCard from '../LocationCard/LocationCard';
+
+import './LocationsFlipper.scss';
 
 interface IStatePropsRedux {
 	locations: baseLocation[];
@@ -21,7 +23,7 @@ const cnLocationsFlipper = cn('LocationsFlipper');
 
 const LocationsFlipper: React.FC<ILocationsFlipperProps> = (props: ILocationsFlipperProps) => (
 	<div className={cnLocationsFlipper()}>
-		{ props.locations.map((loc, index) => <LocationCard title={loc.locName} key={index} />) }
+		{ props.locations.filter(loc => loc.selected).map((loc, index) => <LocationCard title={loc.locName} key={index} />) }
 	</div>
 );
 

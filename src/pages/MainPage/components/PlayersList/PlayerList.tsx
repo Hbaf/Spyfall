@@ -1,11 +1,11 @@
 import * as React from 'react';
-
+import { connect } from 'react-redux';
 import { cn } from '@bem-react/classname';
 
 import './PlayerList.scss';
+
 import { player } from 'store/types/room';
 import IState from 'store/types';
-import { connect } from 'react-redux';
 
 interface IStatePropsRedux {
 	players: player[];

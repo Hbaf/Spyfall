@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 
 import IState from 'store/types';
-import GameField from 'components/GameField/GameField';
 import Button from 'components/Button/Button';
 import { roomBase } from 'store/types/room';
+
+import GameField from './components/GameField/GameField';
 
 import './MainPage.scss';
 

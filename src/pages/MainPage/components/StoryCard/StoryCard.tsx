@@ -2,6 +2,7 @@ import * as React from 'react';
 import { cn } from '@bem-react/classname';
 import './StoryCard.scss';
 import { connect } from 'react-redux';
+
 import IState from 'store/types';
 import { gameState } from 'store/types/game';
 

@@ -28,11 +28,10 @@ const LocationsList: React.FC<ILocationsListProps> = props => {
 	return (
 		<div className={cnLocationsList(null, [ className ])}>
 			{
-				locations.map((location, index) => location.selected ?
+				locations.filter(loc => loc.selected).map((location, index) => (
 					<div className={cnLocationsList('Location')} key={index}>
 						{location.locName}
-					</div> :
-					null)
+					</div>))
 			}
 		</div>
 	);

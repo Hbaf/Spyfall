@@ -24,8 +24,7 @@
 	"extends": [
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:jsx-a11y/recommended",
-		"plugin:compat/recommended"
+		"plugin:jsx-a11y/recommended"
 	],
 	"rules": {
 		"for-direction": "error",
@@ -434,9 +433,7 @@
 					"external",
 					"internal",
 					"parent",
-					"sibling",
-					"index",
-					"object"
+					"sibling"
 				]
 			}
 		],
