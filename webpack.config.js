@@ -7,7 +7,7 @@ module.exports = (env, argv) => {
 	return {
 		mode: isProduction ? 'production' : 'development',
 		entry: './src/index.tsx',
-		devtool: isProduction ? 'source-map' : 'inline-source-map',
+		devtool: isProduction ? undefined : 'inline-source-map',
 		output: {
 			path: path.resolve(__dirname, 'dist'),
 			filename: 'bundle.js',
@@ -38,7 +38,7 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.s[ac]ss$/i,
-					use: ['style-loader', 'css-loader', 'sass-loader'],
+					use: ['style-loader', 'css-loader', { loader: 'sass-loader', options: { api: 'modern' } }],
 				},
 				{
 					test: /\.(png|svg|jpg|gif)$/,

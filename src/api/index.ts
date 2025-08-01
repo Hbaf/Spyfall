@@ -1,4 +1,4 @@
-import * as io from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 import * as config from 'configs/api/config.json';
 import store from 'store/store';

@@ -13,7 +13,6 @@ jobs:
       IMAGE_NAME: spyfall
       REGISTRY: ${{ secrets.REGISTRY }}
       TAG: latest
-      SSL_CERT_DIR: /etc/ssl/certs
 
     steps:
       - name: Checkout repository
