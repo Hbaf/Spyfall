@@ -7,7 +7,7 @@ import GameEndpointClass from './game';
 import RoomEndpointClass from './room';
 import AppEndpointClass from './app';
 
-const url = `${ config.PROTOCOL }://${ config.HOST }:${ config.PORT }`;
+const url = `${ config.PROTOCOL }://${ config.HOST }`;
 const socket = io(url);
 
 export const appEndpoint = new AppEndpointClass(socket, store);
