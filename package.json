@@ -4,7 +4,8 @@
 	"description": "",
 	"private": true,
 	"scripts": {
-		"start": "node server.js",
+		"start": "http-server ./dist -p 8080",
+		"build": "webpack --mode production",
 		"demo": "concurrently \"webpack-dev-server --open\" \"node ./back_stub/server.js\"",
 		"eslint": "eslint ./**",
 		"stylelint": "npx stylelint \"**/*.scss\""
@@ -26,7 +27,7 @@
 		"concurrently": "^5.2.0",
 		"css-loader": "^3.5.3",
 		"dart-sass": "^1.25.0",
-		"eslint": "^7.4.0",
+		"eslint": "^6.4.0",
 		"eslint-import-resolver-webpack": "^0.12.1",
 		"eslint-module-utils": "^2.6.0",
 		"eslint-plugin-compat": "^3.8.0",
@@ -37,6 +38,7 @@
 		"express": "^4.17.1",
 		"file-loader": "^6.0.0",
 		"html-webpack-plugin": "^4.3.0",
+		"http-server": "^14.1.1",
 		"sass": "^1.26.7",
 		"sass-loader": "^8.0.2",
 		"socket.io": "^2.3.0",
