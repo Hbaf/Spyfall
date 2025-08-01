@@ -23,5 +23,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t $IMAGE_NAME:$TAG .
+          docker build -t $REGISTRY/$IMAGE_NAME:$TAG .
           docker push $REGISTRY/$IMAGE_NAME:$TAG
