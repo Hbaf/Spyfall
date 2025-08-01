@@ -1,8 +1,13 @@
 module.exports = {
-	plugins: [ 'stylelint-order' ],
+	plugins: [ 'stylelint-order', 'stylelint-scss' ],
+	"overrides": [
+		{
+			"files": ["*.scss", "**/*.scss"],
+			"customSyntax": "postcss-scss"
+		}
+	],
 	rules: {
 		'color-no-invalid-hex': true,
-		'function-calc-no-invalid': true,
 		'function-calc-no-unspaced-operator': true,
 		'function-linear-gradient-no-nonstandard-direction': true,
 		'string-no-newline': true,
