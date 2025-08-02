@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { cn } from '@bem-react/classname';
 
@@ -26,101 +26,92 @@ interface IStatePropsRedux {
 	maxPlayers: number;
 }
 
-interface IOwnProps {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	history: any;
-}
-
-interface ICreateRoomProps extends IStatePropsRedux, IDispatchPropsRedux, IOwnProps {}
+interface ICreateRoomProps extends IStatePropsRedux, IDispatchPropsRedux {}
 
 const cnCreateRoom = cn('CreateRoom');
 
-class CreateRoom extends React.Component<ICreateRoomProps, IOwnState> {
-	constructor(props: ICreateRoomProps) {
-		super(props);
-		this.state = {
-			userName: props.userName,
-			maxPlayers: props.maxPlayers,
-			password: '',
-		};
-	}
+const CreateRoom: React.FC<ICreateRoomProps> = (props) => {
+	const navigate = useNavigate();
+	const [state, setState] = React.useState<IOwnState>({
+		userName: props.userName,
+		maxPlayers: props.maxPlayers,
+		password: '',
+	});
 
-	handleRoomCreate = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleRoomCreate = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const data = this.state;
+		const data = state;
 
 		roomEndpoint.createRoom(data);
 		const { userName } = data;
-		if (this.props.userName !== userName) {
-			this.props.onSetName(userName);
+		if (props.userName !== userName) {
+			props.onSetName(userName);
 			localStorage.setItem('userName', userName);
 		}
-		this.props.history.push('/');
+		navigate('/');
 	}
 
-	handleNameEnter = (event: React.ChangeEvent<HTMLInputElement>) => {
-		this.setState({ userName: event.target.value });
+	const handleNameEnter = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setState(prev => ({ ...prev, userName: event.target.value }));
 	}
 
-	handlePassEnter = (event: React.ChangeEvent<HTMLInputElement>) => {
-		this.setState({ password: event.target.value });
+	const handlePassEnter = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setState(prev => ({ ...prev, password: event.target.value }));
 	}
 
-	render() {
-		return (
-			<form className={cnCreateRoom()} onSubmit={this.handleRoomCreate}>
-				<div className={cnCreateRoom('Setting', { type: 'name' })}>
-					<span>
-						Your name
-					</span>
-					<Input
-						className={cn('Input')({ type: 'text' })}
-						value={this.state.userName}
-						onChange={this.handleNameEnter}
-						required
-					/>
-				</div>
-				<div className={cnCreateRoom('Setting', { type: 'players-amount' })}>
-					<span>
-						Max players
-					</span>
-					{ /* eslint-disable-next-line jsx-a11y/no-onchange */}
-					<select
-						className={cn('Input')({ type: 'text' })}
-						value={this.state.maxPlayers}
-						onChange={
-							(event: React.ChangeEvent<HTMLSelectElement>) => {
-								this.setState({ maxPlayers: Number(event.target.value) });
-							}
-						}
-					>
-						{
-							Array(maxUserAmount - minUserAmount + 1).fill(0)
-								.map(
-									(item, index) => (
-										<option key={index}>
-											{minUserAmount + index}
-										</option>
-									),
-								)
-						}
-					</select>
-				</div>
-				<div className={cnCreateRoom('Setting', { type: 'password' })}>
-					<span>
-						Password (Not required)
-					</span>
-					<Input
-						className={cn('Input')({ type: 'text' })}
-						type='text'
-						value={this.state.password}
-						onChange={this.handlePassEnter}
-					/>
-				</div>
-				<Button className={cnCreateRoom('Submit')} text='Create room' />
-			</form>
-		);
+	const handleMaxPlayersChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		setState(prev => ({ ...prev, maxPlayers: Number(event.target.value) }));
 	}
+
+	return (
+		<form className={cnCreateRoom()} onSubmit={handleRoomCreate}>
+			<div className={cnCreateRoom('Setting', { type: 'name' })}>
+				<span>
+					Your name
+				</span>
+				<Input
+					className={cn('Input')({ type: 'text' })}
+					value={state.userName}
+					onChange={handleNameEnter}
+					required
+				/>
+			</div>
+			<div className={cnCreateRoom('Setting', { type: 'players-amount' })}>
+				<span>
+					Max players
+				</span>
+				{ /* eslint-disable-next-line jsx-a11y/no-onchange */}
+				<select
+					className={cn('Input')({ type: 'text' })}
+					value={state.maxPlayers}
+					onChange={handleMaxPlayersChange}
+				>
+					{
+						Array(maxUserAmount - minUserAmount + 1).fill(0)
+							.map(
+								(item, index) => (
+									<option key={index}>
+										{minUserAmount + index}
+									</option>
+								),
+							)
+					}
+				</select>
+			</div>
+			<div className={cnCreateRoom('Setting', { type: 'password' })}>
+				<span>
+					Password (Not required)
+				</span>
+				<Input
+					className={cn('Input')({ type: 'text' })}
+					type='text'
+					value={state.password}
+					onChange={handlePassEnter}
+				/>
+			</div>
+			<Button className={cnCreateRoom('Submit')} text='Create room' />
+		</form>
+	);
 }
 
 const mapStateToProps = (state: IState): IStatePropsRedux => ({
@@ -134,4 +125,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IDispatchPropsRedux => ({
 	},
 });
 
-export default withRouter(connect<IStatePropsRedux, IDispatchPropsRedux, IOwnProps>(mapStateToProps, mapDispatchToProps)(CreateRoom));
+export default connect<IStatePropsRedux, IDispatchPropsRedux, ICreateRoomProps>(mapStateToProps, mapDispatchToProps)(CreateRoom);

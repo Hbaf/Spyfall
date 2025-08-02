@@ -8,6 +8,7 @@ interface ITooltipProps {
 	mods?: Record<string, string | number | boolean>;
 	text?: string[];
 	type?: string;
+	children?: React.ReactNode;
 }
 
 const cnTooltip = cn('Tooltip');

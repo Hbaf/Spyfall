@@ -10,17 +10,16 @@ interface IButtonProps {
 	disabled?: boolean;
 	value?: string;
 	text?: string;
-	onClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
-	onSubmit?: (e: React.FormEvent<HTMLInputElement>) => void;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	onSubmit?: React.MouseEventHandler<HTMLButtonElement>;
+	children?: React.ReactNode;
 }
 
 const cnButton = cn('Button');
 
 const Button: React.FC<IButtonProps> = ({ name, className, mods, disabled, value, text, onClick, onSubmit, children }) => (
 	<button className={cnButton({ ...mods }, [ className ])} type='submit' name={name} value={value} disabled={disabled} onClick={onClick} onSubmit={onSubmit}>
-		<span>
-			{ text }
-		</span>
+		<span>{ text }</span>
 		{ children }
 	</button>
 );

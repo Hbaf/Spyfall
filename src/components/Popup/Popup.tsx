@@ -6,7 +6,7 @@ import './Popup.scss';
 
 const cnPopup = cn('Popup');
 
-class Popup extends React.Component {
+class Popup extends React.Component<{ children: React.ReactNode }> {
 	handleClose(): void {
 		return null;
 	}

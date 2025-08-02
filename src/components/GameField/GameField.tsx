@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { cn } from '@bem-react/classname';
 
@@ -126,8 +126,8 @@ class GameField extends React.Component<IGameFieldProps, IOwnState> {
 			event.preventDefault();
 			const { userName, roomId, password } = this.state;
 			if (this.props.userName !== userName) {
-				this.props.onSetName(name);
-				localStorage.setItem('userName', name);
+				this.props.onSetName(userName);
+				localStorage.setItem('userName', userName);
 			}
 			roomEndpoint.joinRoom({ roomId, userName, password });
 		};
