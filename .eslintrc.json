@@ -175,7 +175,7 @@
 		"capitalized-comments": "warn",
 		"comma-dangle": [
 			"error",
-			"always-multiline"
+			"only-multiline"
 		],
 		"comma-spacing": "error",
 		"comma-style": "error",
