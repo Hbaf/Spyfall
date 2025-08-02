@@ -3,12 +3,13 @@ import * as roomActions from 'store/actions/room';
 import { roomDO } from 'api/types/room';
 import { roomCreateDO, joinRoomDO, playerDO } from './types/room';
 import { Store } from 'redux';
+import { Socket } from 'socket.io-client';
 
 class RoomEndpointClass {
-	socket: SocketIOClient.Socket;
+	socket: Socket;
 	store: Store;
 
-	constructor(socket: SocketIOClient.Socket, store: Store) {
+	constructor(socket: Socket, store: Store) {
 		this.socket = socket;
 		this.store = store;
 		this.subscribe();

@@ -3,12 +3,13 @@ import * as gameActions from 'store/actions/game';
 import { gameDO } from 'api/types/game';
 import { startGameDO } from './types/game';
 import { Store } from 'redux';
+import { Socket } from 'socket.io-client';
 
 class GameEndpointClass {
-	socket: SocketIOClient.Socket;
+	socket: Socket;
 	store: Store;
 
-	constructor(socket: SocketIOClient.Socket, store: Store) {
+	constructor(socket: Socket, store: Store) {
 		this.socket = socket;
 		this.store = store;
 		this.subscribe();

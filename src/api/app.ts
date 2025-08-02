@@ -2,12 +2,13 @@ import * as socketConfig from 'configs/api/socketConfig.json';
 import * as appAction from 'store/actions/app';
 import { appDO, locationToggleDO, editionToggleDO } from './types/app';
 import { Store } from 'redux';
+import { Socket } from 'socket.io-client';
 
 class AppEndpointClass {
-	socket: SocketIOClient.Socket;
+	socket: Socket;
 	store: Store;
 
-	constructor(socket: SocketIOClient.Socket, store: Store) {
+	constructor(socket: Socket, store: Store) {
 		this.socket = socket;
 		this.store = store;
 		this.subscribe();
